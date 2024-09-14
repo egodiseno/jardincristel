@@ -1,686 +1,75 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jardín Cristel | Jardín para eventos familiares</title>
-    <link rel="icon" type="image/x-icon" href="images/flower.svg">
-    <meta name="theme-color" content="#394A55"/>
-    <link rel="preload" href="fonts/BertholdScript.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="fonts/ChampagneLimousines.ttf" as="font" type="font/ttf" crossorigin>
-    <link href="css/style.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jardín Cristel | Jardín para Eventos en Tepotzotlán, Estado de México</title>
+    <!-- Favicon básico (.ico) -->
+    <link rel="icon" href="./icons/favicon.ico" type="image/x-icon">
 
-    <!-- META TAGS -->
-    <meta name="title" content="Jardín Cristel">
-    <meta name="description" content="Jardín Cristel Elegancia natural en el corazón de Tepotzotlán, espacio único para celebraciones memorables.">
-    <meta name="keywords" content="Tepotzotlán, Jardín de eventos, Boda, XV años, Bautizo, Celebracion">
+    <!-- Favicon para navegadores en formato PNG -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
+
+    <!-- Favicon para Apple Touch (iOS) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+
+    <!-- Favicon para dispositivos Android y Chrome -->
+    <link rel="icon" sizes="192x192" href="./icons/android-chrome-192x192.png">
+    <link rel="icon" sizes="512x512" href="./icons/android-chrome-512x512.png">
+
+    <link rel="manifest" href="./manifest.json">
+    <link rel="mask-icon" href="./icons/safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="description" content="Jardín Cristel ofrece un entorno mágico y elegante en Tepotzotlán, Estado de México, para bodas, fiestas y eventos corporativos. Disfruta de amplios jardines, arquitectura tradicional mexicana, y servicios completos para hacer tu celebración inolvidable. Contáctanos para tu cotización.">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "EventVenue",
+        "name": "Jardín Cristel",
+        "description": "Jardín Cristel ofrece un entorno mágico y tradicional en Tepotzotlán, Estado de México, ideal para bodas, fiestas y eventos corporativos.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Lic. Benito Juárez 24",
+          "addressLocality": "San Martin, Tepotzotlán",
+          "addressRegion": "Estado de México",
+          "postalCode": "54600",
+          "addressCountry": "MX"
+        },
+        "telephone": "+52 55 3647 6032",
+        "url": "https://www.jardincristel.mx"
+      }
+      </script>      
+    <meta property="og:title" content="Jardín Cristel | Elegante Lugar para Eventos en Tepotzotlán">
+    <meta property="og:description" content="Descubre Jardín Cristel en Tepotzotlán, un espacio perfecto para bodas y eventos. Amplios jardines, arquitectura tradicional mexicana y servicios completos para una celebración inolvidable.">
+    <meta property="og:image" content="https://www.jardincristel.mx/images/meta.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:url" content="https://www.jardincristel.mx">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Jardín Cristel">
+    <meta property="og:locale" content="es_MX">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jardín Cristel | Elegante Lugar para Eventos en Tepotzotlán">
+    <meta name="twitter:description" content="Descubre Jardín Cristel en Tepotzotlán, un espacio perfecto para bodas y eventos. Amplios jardines, arquitectura tradicional mexicana y servicios completos para una celebración inolvidable.">
+    <meta name="twitter:image" content="https://www.jardincristel.mx/images/x.jpg">
+    <meta name="twitter:image:alt" content="Imagen de un evento en Jardín Cristel">
+    <meta name="twitter:url" content="https://www.jardincristel.mx">
+
     <meta name="robots" content="index, follow">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="language" content="Spanish">
-    <meta name="revisit-after" content="90 days">
-    <meta name="author" content="www.egodiseno.com">
-    <!-- Primary Meta Tags -->
-    
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://jardincristel.mx/" />
-    <meta property="og:title" content="Jardín Cristel" />
-    <meta property="og:description" content="Jardín Cristel Elegancia natural en el corazón de Tepotzotlán, espacio único para celebraciones memorables." />
-    <meta property="og:image" content="https://jardincristel.mx/images/bgmain.jpg" />
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://jardincristel.mx/" />
-    <meta property="twitter:title" content="Jardín Cristel" />
-    <meta property="twitter:description" content="Jardín Cristel Elegancia natural en el corazón de Tepotzotlán, espacio único para celebraciones memorables." />
-    <meta property="twitter:image" content="https://jardincristel.mx/images/bgmain.jpg" />
-    </head>
-  
+    <meta name="keywords" content="jardín para eventos, bodas en Tepotzotlán, eventos corporativos, Jardín Cristel">
+    <meta name="author" content="Jardín Cristel">
+    <meta name="referrer" content="no-referrer">
+    <meta name="format-detection" content="telephone=no">
+      
+    <script type="module" crossorigin src="./assets/main-EryhWf0N.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/main-DQhGpjij.css">
+  </head>
   <body>
-    <!-- Tepotzotlán, Jardín de eventos, Boda, XV años, Bautizo, Celebracion -->
-    <main class="pagewrapper">
-    <!-- MEDIAQUERY -->
-    <!-- <div class="mediaquery">
-    <div class="container-sm d-none d-sm-block d-md-none d-lg-none d-xl-none d-xxl-none">sm</div>
-    <div class="container-md d-none d-sm-none d-md-block d-lg-none d-xl-none d-xxl-none">md</div>
-    <div class="container-lg d-none d-sm-none d-md-none d-lg-block d-xl-none d-xxl-none">lg</div>
-    <div class="container-xl d-none d-sm-none d-md-none d-lg-none d-xl-block d-xxl-none">xl</div>
-    <div class="container-xxl d-none d-sm-none d-md-none d-lg-none d-xl-none d-xxl-block">xxl</div>
-    </div> -->
-    <!-- MEDIAQUERY -->
-      <nav class="navbar border-bottom border-body navbar-expand-lg bg-body-tertiary fixed-top" data-bs-theme="light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Jardín Cristel</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#inicio">Inicio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#eventos">Eventos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#galeria">Galería</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#contacto">Contacto</a>
-              </li>
-            </ul>
-            <span class="navbar-text">
-              <div class="d-flex justify-content-start">
-                <div class="pe-2"><a href="https://www.facebook.com/JardinCristel" target="_blank" aria-label="Facebook Jardín Cristel"><i class="bi bi-facebook"></i></a></div>
-                <div class="px-2"><a href="https://api.whatsapp.com/send?phone=525536476032&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20Jardin." target="_blank" aria-label="WhatsApp Jardín Cristel"><i class="bi bi-whatsapp"></i></a></div>
-              </div>
-            </span>
-          </div>
-        </div>
-      </nav>
-      <header id="inicio" class="hero-wrap align-items-center">
-        <div class="container text-center">
-          <div class="row vertical-center mx-auto my-auto">
-            <div class="col">
-                <h1 class="g-0 m-0 p-0">Jardín Cristel</h1>
-                <img src="images/detail.webp" class=" g-0 m-0 p-0" alt="Jardín Cristel Tepotzotlán">
-                <h2 class="g-0 m-0 p-0">Jardín para eventos familiares</h2>
-            </div>
-          </div>
-        </div>
-      </header>
-      <section id="eventos">
-        <div class="container-fluid">
-          <div class="row pt-4 justify-content-center">
-            <div class="col-12 my-5 text-center">
-              <h3>Nuestros eventos</h3>
-            </div>
-          </div>
-          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <div class="col">
-              <div class="card h-100">
-                <img src="images/bautizo.webp" class="card-img-top" alt="Bautizo familiar en Jardín Cristel Tepotzotlán">
-                <div class="card-body">
-                  <h5 class="card-title">Bautizo</h5>
-                  <p class="card-text"><strong>¡Celebra un día especial!</strong> Disfruta de un hermoso bautizo en nuestro encantador jardín de eventos. Espacio amplio, catering exquisito y personal atento para hacer de este día inolvidable. <strong>¡Reserva ahora y crea recuerdos inolvidables con tus seres queridos!</strong></p>
-                </div>
-                <div class="card-footer text-center">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bautizo"
-                          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                    Más información
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card h-100">
-                <img src="images/xv.webp" class="card-img-top" alt="XV Años en Jardín Cristel Tepotzotlán">
-                <div class="card-body">
-                  <h5 class="card-title">XV Años</h5>
-                  <p class="card-text"><strong>¡Celebra tus XV años en grande!</strong> Nuestro hermoso jardín de eventos es el lugar perfecto para hacer realidad tus sueños. Desde una decoración elegante hasta un exquisito menú personalizado, nuestro equipo se encargará de cada detalle para que disfrutes al máximo de esta ocasión especial. <strong>¡Reserva ahora y haz de tus XV años un día inolvidable!</strong></p>
-                </div>
-                <div class="card-footer text-center">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#xvanios"
-                          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                    Más información
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card h-100">
-                <img src="images/boda.webp" class="card-img-top" alt="Todo para tu boda en Jardín Cristel Tepotzotlán">
-                <div class="card-body">
-                  <h5 class="card-title">Boda</h5>
-                  <p class="card-text">Descubre la perfección en tu gran día. Nuestro jardín de eventos en el centro de Tepotzotlán brinda el escenario ideal para tu boda de ensueño. Con servicios personalizados, entorno pintoresco y una atención excepcional, garantizamos que tu día especial sea inolvidable. <strong>¡Reserva ahora y haz realidad tus sueños!</strong></p>
-                </div>
-                <div class="card-footer text-center">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#boda"
-                          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                    Más información
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card h-100">
-                <img src="images/comunion.webp" class="card-img-top" alt="1a Comunión en Jardín Cristel Tepotzotlán">
-                <div class="card-body">
-                  <h5 class="card-title">1a Comunión</h5>
-                  <p class="card-text">¡Celebra la Primera Comunión en el corazón de Tepotzotlán! Nuestro encantador jardín de eventos ofrece el entorno ideal para este día especial. Con un entorno pintoresco, catering exquisito y un servicio impecable, garantizamos una experiencia inolvidable para ti y tus seres queridos. <strong>¡Reserva ahora y crea recuerdos inolvidables en el centro de Tepotzotlán!</strong></p>
-                </div>
-                <div class="card-footer text-center">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#comunion"
-                          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                    Más información
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card h-100">
-                <img src="images/graduacion.webp" class="card-img-top" alt="Graduación en Jardín Cristel Tepotzotlán">
-                <div class="card-body">
-                  <h5 class="card-title">Graduación</h5>
-                  <p class="card-text">¡Celebra tu graduación en el corazón de Tepotzotlán! Nuestro hermoso jardín de eventos te brinda el escenario perfecto para festejar este logro tan especial. Con un ambiente acogedor, deliciosa gastronomía y un equipo atento, aseguramos que tu día sea inolvidable. <strong>¡Reserva ahora y marca este hito con estilo en el centro de Tepotzotlán!</strong></p>
-                </div>
-                <div class="card-footer text-center">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#graduacion"
-                          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                    Más información
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card h-100">
-                <img src="images/eventos02.webp" class="card-img-top" alt="Evento Empresarial en Jardín Cristel Tepotzotlán">
-                <div class="card-body">
-                  <h5 class="card-title">Empresarial</h5>
-                  <p class="card-text">¡Impulsa tu empresa con estilo en Tepotzotlán! Nuestro jardín de eventos céntrico ofrece el ambiente ideal para reuniones y celebraciones corporativas. Espacios versátiles, comodidades de primer nivel y un entorno encantador garantizan el éxito de tu evento. <strong>¡Reserva ahora y brinda a tu equipo una experiencia memorable!</strong></p>
-                </div>
-                <div class="card-footer text-center">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#empresarial"
-                          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                    Más información
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section id="galeria">
-        <div class="container-fluid">
-          <div class="row justify-content-center">
-            <div class="col-12 pt-5 my-5 text-center">
-              <h3>Galería</h3>
-            </div>
-          </div>
-          <div class="row mb-5">
-            <!-- Gallery -->
-            <div class="row mx-auto">
-              <div class="col-md-12 col-lg-4 col-md-12 mb-4 mb-lg-0">
-                <img
-                  src="images/01.webp" class="w-100 shadow-1-strong rounded mb-4" alt="Jardín Cristel Tepotzotlán"
-                />
-
-                <img
-                  src="images/02.webp" class="w-100 shadow-1-strong rounded mb-4" alt="Jardín Cristel Tepotzotlán"
-                />
-              </div>
-
-              <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
-                <img
-                  src="images/03.webp" class="w-100 shadow-1-strong rounded mb-4" alt="Jardín Cristel Tepotzotlán"
-                />
-
-                <img
-                  src="images/04.webp" class="w-100 shadow-1-strong rounded mb-4" alt="Jardín Cristel Tepotzotlán"
-                />
-              </div>
-
-              <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
-                <img
-                  src="images/05.webp" class="w-100 shadow-1-strong rounded mb-4" alt="Jardín Cristel Tepotzotlán"
-                />
-
-                <img
-                  src="images/06.webp" class="w-100 shadow-1-strong rounded mb-4" alt="Jardín Cristel Tepotzotlán"
-                />
-              </div>
-            </div>
-              </div>
-            </div>
-            <!-- Gallery -->
-      </section>
-
-      <section id="contacto" class="py-5">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="d-flex flex-row justify-content-between mb-3">
-              <div class="p-2 col-6 col-md-6 offset-md-2 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4 col-xxl-4 offset-xxl-4">
-                <div class="row">
-                  <p>Av. Lic. Benito Juárez 24, San Martin, 54600 Tepotzotlán, México.</p>
-                </div>
-                <div class="row">
-                  <p>
-                    <a href="tel:+525536476032"><i class="bi bi-telephone-fill"></i><span>55 3647 6032</span></a>
-                  </p>
-                </div>
-                <div class="row">
-                  <div class="d-flex justify-content-start"> 
-                    <div class="pe-2"><a href="https://www.facebook.com/JardinCristel" target="_blank" aria-label="Facebook Jardín Cristel"><i class="bi bi-facebook"></i></a></div>
-                    <div class="px-2"><a href="https://api.whatsapp.com/send?phone=525536476032&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20Jardin." target="_blank" aria-label="whatsapp Jardín Cristel"><i class="bi bi-whatsapp"></i></a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="p-2 col-6 col-md-4 col-lg-3 offset-lg-1 col-xl-3 offset-xl-1 col-xxl-3 offset-xxl-1 map mx-auto my-auto">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3755.948184952162!2d-99.22794592398853!3d19.71483003160559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d22028f9a61185%3A0x2ada445d959de084!2sJard%C3%ADn%20Cristel!5e0!3m2!1sen!2smx!4v1697963063202!5m2!1sen!2smx" class="maps col-12" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <footer>
-        <div class="container-fluid">
-          <div class="row mt-2">
-            <div class="col-12 text-center ">
-              <p>&reg;2023 - 2027 Jardín Cristel </p>
-            </div>
-          </div>
-        </div>
-      </footer>
-        <a href="https://api.whatsapp.com/send?phone=525536476032&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20Jardin." class="float" target="_blank" aria-label="whatsapp Jardín Cristel">
-        <i class="bi bi-whatsapp my-float"></i>
-        </a>
-    </main>
-
-    <!-- Bautizo -->
-    <div class="modal fade" id="bautizo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Bautizo</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4">
-                <p class="event-txt">Más que un evento religioso, el bautizo representa la fusión de tradiciones ancestrales y valores familiares arraigados en la sociedad mexicana. <strong>¡Celebra este hermoso ritual en nuestro jardín de eventos, y déjanos ayudarte a preservar y compartir esta herencia cultural con tu familia y seres queridos!</strong></p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 text-center mb-5"><img src="images/detail.webp" class="img-fluid"></div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4 text-center">
-                <p>
-                  <strong>Paquete completo</strong><br>
-                  Mínimo de personas: <strong>70</strong><br>
-                  Máximo de personas: <strong>150</strong><br>
-                  (de 120 a 150 personas costo extra<br>
-                  para carpa y pista de baile)
-                </p>
-              </div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4 mt-xxl-4">
-                <ul>
-                  <li>Jardín por 6 hrs <span>(más media hora de entrada y media hora de salida)</span></li>
-                  <li>Mesas cuadradas vestidas <span>(cubre mantel color a su elección)</span></li>
-                  <li>Sillas tiffany color chocolate</li>
-                  <li>1 arreglo floral por mesa <span>(participantes)</span></li>
-                  <li>Meseros</li>
-                  <li>DJ profesional 6 hrs</li>
-                  <li>Vajilla y cristalería</li>
-                  <li>Cubiertos</li>
-                  <li>Hielo y refresco todo el evento <span>(coca-cola, squirt, sidral mundet, agua mineral)</span></li>
-                  <li>2 garrafones de agua <span>(jamaica)</span></li>
-                  <li>Platos y cucharas desechables para pastel</li>
-                  <li>Inflable</li>
-                  <li>Descorche libre</li>
-                </ul>
-              </div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4">
-                <ol>
-                  <p class="mt-2 mb-0 menu"><strong>Menú a elegir:</strong></p>
-                  <strong><li>Taquiza</li></strong>
-                  
-                  <strong><li>Tres tiempos</li></strong>
-                  
-                </ol>
-              </div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4">
-                <p class="mt-2 mb-0 menu"><strong>Servicios adicionales:</strong></p>
-                <ul>
-                  <li>Nieve de sabores 20 lt <span>(10 lt de cada sabor)</span></li>
-                Sabores a elegir:
-                Agua: fresa, guayaba, mango, guanabana, maracuyá, limón, tequila.
-                Leche: queso, fresas con crema, mango, frutos rojos, arroz con leche,
-                nuez, galleta oreo, coco.
-                  <li>Puesto de elotes y esquites</li>
-                  <li>Tornafiesta <span>(tamales y café de olla)</span></li>
-                  <li>Letras gigantes</li>
-                  <li>Arco de globos</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-closedown" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-success" onclick="window.open('https://api.whatsapp.com/send?phone=525536476032&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20Jardin.', '_blank');"><i class="bi bi-whatsapp"></i> Contactanos</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- XV Años -->
-    <div class="modal fade" id="xvanios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">XV Años</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4">
-                <p class="event-txt">Los XV años en México son un hito emocional y cultural. Representan el tránsito a la madurez, con fuertes lazos familiares y simbolismo tradicional. Es un momento de empoderamiento y belleza, marcando el inicio de una nueva etapa llena de esperanzas y sueños.</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 text-center mb-5"><img src="images/detail.webp" class="img-fluid"></div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4 text-center">
-                <p>
-                  <strong>Paquete completo</strong><br>
-                  Mínimo de personas: <strong>70</strong><br>
-                  Máximo de personas: <strong>150</strong><br>
-                  (de 120 a 150 personas costo extra<br>
-                  para carpa y pista de baile)
-                </p>
-              </div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4 mt-xxl-4">
-                <ul>
-                  <li>Jardín por 6 hrs <span>(más media hora de entrada y media hora de salida)</span></li>
-                  <li>Mesas cuadradas vestidas <span>(cubre mantel color a su elección)</span></li>
-                  <li>Sillas tiffany color chocolate</li>
-                  <li>1 arreglo floral por mesa <span>(participantes)</span></li>
-                  <li>Meseros</li>
-                  <li>DJ profesional 6 hrs</li>
-                  <li>Vajilla y cristalería</li>
-                  <li>Cubiertos</li>
-                  <li>Hielo y refresco todo el evento <span>(coca-cola, squirt, sidral mundet, agua mineral)</span></li>
-                  <li>2 garrafones de agua <span>(jamaica)</span></li>
-                  <li>Platos y cucharas desechables para pastel</li>
-                  <li>Inflable</li>
-                  <li>Descorche libre</li>
-                </ul>
-              </div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4">
-                <ol>
-                  <p class="mt-2 mb-0 menu"><strong>Menú a elegir:</strong></p>
-                  <strong><li>Taquiza</li></strong>
-                  
-                  <strong><li>Tres tiempos</li></strong>
-                  
-                </ol>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-closedown" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-success" onclick="window.open('https://api.whatsapp.com/send?phone=525536476032&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20Jardin.', '_blank');"><i class="bi bi-whatsapp"></i> Contactanos</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Boda -->
-    <div class="modal fade" id="boda" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Boda</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4">
-                <p class="event-txt">¡Celebra el amor en nuestro encantador jardín de eventos en el corazón de Tepotzotlán! Descubre la perfección de tu boda en un entorno natural y romántico. Con servicios personalizados y una atmósfera mágica, crea recuerdos inolvidables. <strong>¡Haz que tu día especial sea aún más extraordinario con nosotros!</strong></p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 text-center mb-5"><img src="images/detail.webp" class="img-fluid"></div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4 text-center">
-                <p>
-                  <strong>Paquete completo</strong><br>
-                  Mínimo de personas: <strong>70</strong><br>
-                  Máximo de personas: <strong>150</strong><br>
-                  (de 120 a 150 personas costo extra<br>
-                  para carpa y pista de baile)
-                </p>
-              </div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4 mt-xxl-4">
-                <ul>
-                  <li>Jardín por 6 hrs <span>(más media hora de entrada y media hora de salida)</span></li>
-                  <li>Mesas cuadradas vestidas <span>(cubre mantel color a su elección)</span></li>
-                  <li>Sillas tiffany color chocolate</li>
-                  <li>1 arreglo floral por mesa <span>(participantes)</span></li>
-                  <li>Meseros</li>
-                  <li>DJ profesional 6 hrs</li>
-                  <li>Vajilla y cristalería</li>
-                  <li>Cubiertos</li>
-                  <li>Hielo y refresco todo el evento <span>(coca-cola, squirt, sidral mundet, agua mineral)</span></li>
-                  <li>2 garrafones de agua <span>(jamaica)</span></li>
-                  <li>Platos y cucharas desechables para pastel</li>
-                  <li>Inflable</li>
-                  <li>Descorche libre</li>
-                </ul>
-              </div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4">
-                <ol>
-                  <p class="mt-2 mb-0 menu"><strong>Menú a elegir:</strong></p>
-                  <strong><li>Taquiza</li></strong>
-                  
-                  <strong><li>Tres tiempos</li></strong>
-                  
-                </ol>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-closedown" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-success" onclick="window.open('https://api.whatsapp.com/send?phone=525536476032&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20Jardin.', '_blank');"><i class="bi bi-whatsapp"></i> Contactanos</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 1a comunion -->
-    <div class="modal fade" id="comunion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">1a comunión</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4">
-                <p class="event-txt">Conmemora un día especial con nosotros en el centro de Tepotzotlán. Nuestro jardín de eventos ofrece el escenario perfecto para celebrar la Primera Comunión de tu ser querido. Disfruta de un entorno tranquilo y acogedor, con opciones personalizadas y atención dedicada. <strong>¡Crea recuerdos eternos en un lugar mágico para esta ocasión única</strong></p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 text-center mb-5"><img src="images/detail.webp" class="img-fluid"></div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4 text-center">
-                <p>
-                  <strong>Paquete completo</strong><br>
-                  Mínimo de personas: <strong>70</strong><br>
-                  Máximo de personas: <strong>150</strong><br>
-                  (de 120 a 150 personas costo extra<br>
-                  para carpa y pista de baile)
-                </p>
-              </div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4 mt-xxl-4">
-                <ul>
-                  <li>Jardín por 6 hrs <span>(más media hora de entrada y media hora de salida)</span></li>
-                  <li>Mesas cuadradas vestidas <span>(cubre mantel color a su elección)</span></li>
-                  <li>Sillas tiffany color chocolate</li>
-                  <li>1 arreglo floral por mesa <span>(participantes)</span></li>
-                  <li>Meseros</li>
-                  <li>DJ profesional 6 hrs</li>
-                  <li>Vajilla y cristalería</li>
-                  <li>Cubiertos</li>
-                  <li>Hielo y refresco todo el evento <span>(coca-cola, squirt, sidral mundet, agua mineral)</span></li>
-                  <li>2 garrafones de agua <span>(jamaica)</span></li>
-                  <li>Platos y cucharas desechables para pastel</li>
-                  <li>Inflable</li>
-                  <li>Descorche libre</li>
-                </ul>
-              </div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4">
-                <ol>
-                  <p class="mt-2 mb-0 menu"><strong>Menú a elegir:</strong></p>
-                  <strong><li>Taquiza</li></strong>
-                  
-                  <strong><li>Tres tiempos</li></strong>
-                  
-                </ol>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-closedown" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-success" onclick="window.open('https://api.whatsapp.com/send?phone=525536476032&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20Jardin.', '_blank');"><i class="bi bi-whatsapp"></i> Contactanos</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Graduacion -->
-    <div class="modal fade" id="graduacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Graduación</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4">
-                <p class="event-txt">¡Celebra tu logro en nuestro exquisito jardín de eventos en el corazón de Tepotzotlán! Disfruta de una graduación inolvidable en un entorno elegante y acogedor. Brindamos servicios personalizados y espacios versátiles para hacer de tu evento un éxito rotundo. <strong>¡Celebra tu esfuerzo y éxito con nosotros en un ambiente inigualable!</strong></p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 text-center mb-5"><img src="images/detail.webp" class="img-fluid"></div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4 text-center">
-                <p>
-                  <strong>Paquete completo</strong><br>
-                  Mínimo de personas: <strong>70</strong><br>
-                  Máximo de personas: <strong>150</strong><br>
-                  (de 120 a 150 personas costo extra<br>
-                  para carpa y pista de baile)
-                </p>
-              </div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4 mt-xxl-4">
-                <ul>
-                  <li>Jardín por 6 hrs <span>(más media hora de entrada y media hora de salida)</span></li>
-                  <li>Mesas cuadradas vestidas <span>(cubre mantel color a su elección)</span></li>
-                  <li>Sillas tiffany color chocolate</li>
-                  <li>1 arreglo floral por mesa <span>(participantes)</span></li>
-                  <li>Meseros</li>
-                  <li>DJ profesional 6 hrs</li>
-                  <li>Vajilla y cristalería</li>
-                  <li>Cubiertos</li>
-                  <li>Hielo y refresco todo el evento <span>(coca-cola, squirt, sidral mundet, agua mineral)</span></li>
-                  <li>2 garrafones de agua <span>(jamaica)</span></li>
-                  <li>Platos y cucharas desechables para pastel</li>
-                  <li>Inflable</li>
-                  <li>Descorche libre</li>
-                </ul>
-              </div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4">
-                <ol>
-                  <p class="mt-2 mb-0 menu"><strong>Menú a elegir:</strong></p>
-                  <strong><li>Taquiza</li></strong>
-                  
-                  <strong><li>Tres tiempos</li></strong>
-                  
-                </ol>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-closedown" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-success" onclick="window.open('https://api.whatsapp.com/send?phone=525536476032&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20Jardin.', '_blank');"><i class="bi bi-whatsapp"></i> Contactanos</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Empresarial -->
-    <div class="modal fade" id="empresarial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Empresarial</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4">
-                <p class="event-txt">Impulsa el éxito de tu empresa en nuestro amplio jardín de eventos. Ofrecemos un entorno inspirador y servicios profesionales para tu reunión empresarial. Desde conferencias hasta actividades de team building, nuestro espacio versátil y servicios de primera clase garantizan una experiencia productiva y gratificante. <strong>¡Reserva ahora y lleva tu empresa al siguiente nivel!</strong></p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 text-center mb-5"><img src="images/detail.webp" class="img-fluid"></div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4 text-center">
-                <p>
-                  <strong>Paquete completo</strong><br>
-                  Mínimo de personas: <strong>70</strong><br>
-                  Máximo de personas: <strong>150</strong><br>
-                  (de 120 a 150 personas costo extra<br>
-                  para carpa y pista de baile)
-                </p>
-              </div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4 mt-xxl-4">
-                <ul>
-                  <li>Jardín por 6 hrs <span>(más media hora de entrada y media hora de salida)</span></li>
-                  <li>Mesas cuadradas vestidas <span>(cubre mantel color a su elección)</span></li>
-                  <li>Sillas tiffany color chocolate</li>
-                  <li>1 arreglo floral por mesa <span>(participantes)</span></li>
-                  <li>Meseros</li>
-                  <li>DJ profesional 6 hrs</li>
-                  <li>Vajilla y cristalería</li>
-                  <li>Cubiertos</li>
-                  <li>Hielo y refresco todo el evento <span>(coca-cola, squirt, sidral mundet, agua mineral)</span></li>
-                  <li>2 garrafones de agua <span>(jamaica)</span></li>
-                  <li>Platos y cucharas desechables para pastel</li>
-                  <li>Inflable</li>
-                  <li>Descorche libre</li>
-                </ul>
-              </div>
-              <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xxl-4 offset-xxl-4">
-                <ol>
-                  <p class="mt-2 mb-0 menu"><strong>Menú a elegir:</strong></p>
-                  <strong><li>Taquiza</li></strong>
-                  
-                  <strong><li>Tres tiempos</li></strong>
-                  
-                </ol>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-closedown" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-success" onclick="window.open('https://api.whatsapp.com/send?phone=525536476032&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20Jardin.', '_blank');"><i class="bi bi-whatsapp"></i> Contactanos</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-96163448-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-96163448-1');
-    </script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DNF30KJ0Y7"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-DNF30KJ0Y7');
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <div id="app"></div>
   </body>
 </html>
