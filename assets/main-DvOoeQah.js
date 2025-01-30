@@ -78,7 +78,7 @@
 
 <!-- Inicio -->
 <section id="inicio" class="w-full h-screen bg-cover bg-center flex items-center justify-center text-center bg-no-repeat"
-  style="background-image: url('/images/hero.webp');" aria-labelledby="inicio-heading">
+  style="background-image: url('./images/hero.webp');" aria-labelledby="inicio-heading">
   <div class="container mx-auto px-4">
     <!-- Título -->
     <h2 id="inicio-heading" class="font-berthold-script text-marfil-50 text-6xl md:text-6xl mb-4" role="heading" aria-level="1">
@@ -86,7 +86,7 @@
     </h2>
 
     <!-- Imagen debajo del título -->
-    <img width="552" height="72" src="/images/detail.webp" loading="lazy" alt="Imagen decorativa con detalles del jardín" class="mx-auto mb-4 w-6/12 lg:w-2/12" />
+    <img width="552" height="72" src="./images/detail.webp" loading="lazy" alt="Imagen decorativa con detalles del jardín" class="mx-auto mb-4 w-6/12 lg:w-2/12" />
 
     <!-- Texto descriptivo -->
     <h5 class="text-marfil-50 text-base md:text-lg">
@@ -117,7 +117,7 @@
   <div class="container mx-auto flex flex-col lg:flex-row items-center justify-center text-center lg:text-left">
     <!-- Imagen ajustada para móvil y desktop -->
     <div class="hidden lg:block lg:w-1/2 p-4 lg:p-10">
-      <img width="549" height="577" src="/images/nosotros.webp" alt="Grupo de personas disfrutando un evento en Jardín Cristel" class="rounded-t-full lg:rounded-t-[117px] border-8 border-malva-900 w-full h-full mb-4 lg:mb-0">
+      <img width="549" height="577" src="./images/nosotros.webp" alt="Grupo de personas disfrutando un evento en Jardín Cristel" class="rounded-t-full lg:rounded-t-[117px] border-8 border-malva-900 w-full h-full mb-4 lg:mb-0">
     </div>
 
     <!-- Contenido de texto ajustado para móvil y desktop -->
@@ -130,10 +130,10 @@
       </h3>
 
       <div class="lg:hidden lg:w-1/2 p-4 lg:p-10">
-        <img width="549" height="577" src="/images/nosotros.webp" alt="Grupo de personas disfrutando un evento en Jardín Cristel" class="rounded-t-[117px] lg:rounded-lg border-8 border-malva-900 w-full h-full mb-4 lg:mb-0">
+        <img width="549" height="577" src="./images/nosotros.webp" alt="Grupo de personas disfrutando un evento en Jardín Cristel" class="rounded-t-[117px] lg:rounded-lg border-8 border-malva-900 w-full h-full mb-4 lg:mb-0">
       </div>
 
-      <img width="552" height="72" src="/images/detail.webp" loading="lazy" alt="Detalle decorativo del Jardín Cristel" class="mx-auto mb-4 w-7/12 lg:w-4/12">
+      <img width="552" height="72" src="./images/detail.webp" loading="lazy" alt="Detalle decorativo del Jardín Cristel" class="mx-auto mb-4 w-7/12 lg:w-4/12">
 
       <p class="text-base mb-16 text-left lg:text-left">
         Ubicado en el pueblo mágico de Tepotzotlán, nuestro jardín ofrece un ambiente tradicional y acogedor, perfecto para bodas, XV años, bautizos, primeras comuniones, cumpleaños y graduaciones.
@@ -174,7 +174,7 @@
     <!-- 01 Componente Contenedor de Información -->
     <div class="bg-malva-50 border-oliva-900 border-8 rounded-t-[117px] pb-16 max-w-lg mx-auto flex flex-col justify-between h-full">
       <!-- Imagen -->
-      <img width="530" height="386" src="/images/bautizo.webp" alt="Decoración de bautizo con flores y velas" class="w-full h-auto rounded-t-[109px]" loading="lazy">
+      <img width="530" height="386" src="./images/bautizo.webp" alt="Decoración de bautizo con flores y velas" class="w-full h-auto rounded-t-[109px]" loading="lazy">
 
       <!-- Contenedor del Texto y Botón -->
       <div class="flex-grow">
@@ -201,7 +201,7 @@
     <!-- 02 Componente Contenedor de Información -->
     <div class="bg-malva-50 border-oliva-900 border-8 rounded-t-[117px] pb-16 max-w-lg mx-auto flex flex-col justify-between h-full">
       <!-- Imagen -->
-      <img width="530" height="386" src="/images/comunion.webp" alt="Celebración de Primera Comunión con decoración religiosa" class="w-full h-auto rounded-t-[109px]" loading="lazy">
+      <img width="530" height="386" src="./images/comunion.webp" alt="Celebración de Primera Comunión con decoración religiosa" class="w-full h-auto rounded-t-[109px]" loading="lazy">
       <!-- Contenedor del Texto y Botón -->
       <div class="flex-grow">
         <!-- Título -->
@@ -225,7 +225,7 @@
     <!-- 03 Componente Contenedor de Información -->
     <div class="bg-malva-50 border-oliva-900 border-8 rounded-t-[117px] pb-16 max-w-lg mx-auto flex flex-col justify-between h-full">
       <!-- Imagen -->
-      <img width="530" height="386" src="/images/xv.webp" alt="Decoración de fiesta de XV años con luces y flores" class="w-full h-auto rounded-t-[109px]" loading="lazy">
+      <img width="530" height="386" src="./images/xv.webp" alt="Decoración de fiesta de XV años con luces y flores" class="w-full h-auto rounded-t-[109px]" loading="lazy">
       <!-- Contenedor del Texto y Botón -->
       <div class="flex-grow">
         <!-- Título -->
@@ -252,7 +252,7 @@
     <!-- 04 Componente Contenedor de Información -->
 <div class="bg-malva-50 border-oliva-900 border-8 rounded-t-[117px] pb-16 max-w-lg mx-auto flex flex-col justify-between h-full">
   <!-- Imagen -->
-  <img width="530" height="386" src="/images/boda.webp" alt="Decoración de boda con flores y velas" class="w-full h-auto rounded-t-[109px]" loading="lazy">
+  <img width="530" height="386" src="./images/boda.webp" alt="Decoración de boda con flores y velas" class="w-full h-auto rounded-t-[109px]" loading="lazy">
   <!-- Contenedor del Texto y Botón -->
   <div class="flex-grow">
     <!-- Título -->
@@ -279,7 +279,7 @@
 <!-- 05 Componente Contenedor de Información -->
 <div class="bg-malva-50 border-oliva-900 border-8 rounded-t-[117px] pb-16 max-w-lg mx-auto flex flex-col justify-between h-full">
   <!-- Imagen -->
-  <img width="530" height="386" src="/images/graduacion.webp" alt="Celebración de graduación con decoración festiva" class="w-full h-auto rounded-t-[109px]" loading="lazy">
+  <img width="530" height="386" src="./images/graduacion.webp" alt="Celebración de graduación con decoración festiva" class="w-full h-auto rounded-t-[109px]" loading="lazy">
   <!-- Contenedor del Texto y Botón -->
   <div class="flex-grow">
     <!-- Título -->
@@ -303,7 +303,7 @@
 <!-- 06 Componente Contenedor de Información -->
 <div class="bg-malva-50 border-oliva-900 border-8 rounded-t-[117px] pb-16 max-w-lg mx-auto flex flex-col justify-between h-full">
   <!-- Imagen -->
-  <img width="530" height="386" src="/images/empresarial.webp" alt="Decoración para evento empresarial con carreta de flores en Jardín Cristel" class="w-full h-auto rounded-t-[109px]" loading="lazy">
+  <img width="530" height="386" src="./images/empresarial.webp" alt="Decoración para evento empresarial con carreta de flores en Jardín Cristel" class="w-full h-auto rounded-t-[109px]" loading="lazy">
   <!-- Contenedor del Texto y Botón -->
   <div class="flex-grow">
     <!-- Título -->
@@ -339,27 +339,27 @@
   <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
     <!-- Imagen 1 -->
     <div class="overflow-hidden shadow-lg border-oliva-900 border-8 rounded-tl-[0px] rounded-tr-[40px] md:rounded-tr-[117px] rounded-bl-[40px] md:rounded-bl-[117px] rounded-br-[0px]">
-      <img width="530" height="386" src="/images/galeria01.webp" alt="Vista del Jardín Cristel con decoración floral" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy">
+      <img width="530" height="386" src="./images/galeria01.webp" alt="Vista del Jardín Cristel con decoración floral" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy">
     </div>
     <!-- Imagen 2 -->
     <div class="overflow-hidden shadow-lg border-oliva-900 border-8 rounded-tl-[0px] rounded-tr-[40px] md:rounded-tr-[117px] rounded-bl-[40px] md:rounded-bl-[117px] rounded-br-[0px]">
-      <img width="530" height="386" src="/images/galeria02.webp" alt="Configuración de mesas en Jardín Cristel para un evento" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy">
+      <img width="530" height="386" src="./images/galeria02.webp" alt="Configuración de mesas en Jardín Cristel para un evento" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy">
     </div>
     <!-- Imagen 3 -->
     <div class="overflow-hidden shadow-lg border-oliva-900 border-8 rounded-tl-[0px] rounded-tr-[40px] md:rounded-tr-[117px] rounded-bl-[40px] md:rounded-bl-[117px] rounded-br-[0px]">
-      <img width="530" height="386" src="/images/galeria03.webp" alt="Espacio al aire libre en Jardín Cristel decorado para una celebración" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy">
+      <img width="530" height="386" src="./images/galeria03.webp" alt="Espacio al aire libre en Jardín Cristel decorado para una celebración" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy">
     </div>
     <!-- Imagen 4 -->
     <div class="overflow-hidden shadow-lg border-oliva-900 border-8 rounded-tl-[0px] rounded-tr-[40px] md:rounded-tr-[117px] rounded-bl-[40px] md:rounded-bl-[117px] rounded-br-[0px]">
-      <img width="530" height="386" src="/images/galeria04.webp" alt="Vista panorámica del Jardín Cristel durante un evento" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy">
+      <img width="530" height="386" src="./images/galeria04.webp" alt="Vista panorámica del Jardín Cristel durante un evento" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy">
     </div>
     <!-- Imagen 5 -->
     <div class="overflow-hidden shadow-lg border-oliva-900 border-8 rounded-tl-[0px] rounded-tr-[40px] md:rounded-tr-[117px] rounded-bl-[40px] md:rounded-bl-[117px] rounded-br-[0px]">
-      <img width="530" height="386" src="/images/galeria05.webp" alt="Decoración elegante en el Jardín Cristel para una boda" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy">
+      <img width="530" height="386" src="./images/galeria05.webp" alt="Decoración elegante en el Jardín Cristel para una boda" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy">
     </div>
     <!-- Imagen 6 -->
     <div class="overflow-hidden shadow-lg border-oliva-900 border-8 rounded-tl-[0px] rounded-tr-[40px] md:rounded-tr-[117px] rounded-bl-[40px] md:rounded-bl-[117px] rounded-br-[0px]">
-      <img width="530" height="386" src="/images/galeria06.webp" alt="Ambiente festivo en Jardín Cristel durante una graduación" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy">
+      <img width="530" height="386" src="./images/galeria06.webp" alt="Ambiente festivo en Jardín Cristel durante una graduación" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy">
     </div>
   </div>
   <!-- Botón para versión desktop -->
@@ -446,7 +446,7 @@
       <!-- Mapa de Google Maps -->
       <div class="border-malva-900 border-8 rounded-tl-[0px] rounded-tr-[117px] rounded-bl-[117px] rounded-br-[0px] overflow-hidden w-8/12   mx-auto">
         <a href="https://maps.app.goo.gl/GREPvSYNPcgL9c8D8" target="_blank" rel="noopener noreferrer">
-          <img width="530" height="386" src="/images/maps.webp" alt="Abre el Google Maps a Jardín Cristel" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy">
+          <img width="530" height="386" src="./images/maps.webp" alt="Abre el Google Maps a Jardín Cristel" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy">
         </a>
       </div>
     </div>
@@ -661,4 +661,4 @@
 
 
   </div>
-`;document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll('a[href^="#"]').forEach(t=>{t.addEventListener("click",function(l){l.preventDefault();const n=this.getAttribute("href").substring(1),a=document.getElementById(n);a&&window.scrollTo({top:a.offsetTop,behavior:"smooth"})})})});document.addEventListener("DOMContentLoaded",()=>{const e=document.getElementById("menu-toggle"),t=document.getElementById("mobile-menu"),l=document.getElementById("close-menu");e.addEventListener("click",()=>{t.classList.toggle("-translate-y-full")}),l.addEventListener("click",()=>{t.classList.add("-translate-y-full")}),document.querySelectorAll("#mobile-menu a").forEach(n=>{n.addEventListener("click",()=>{t.classList.add("-translate-y-full")})})});const x=document.querySelectorAll("nav a"),g=document.querySelectorAll("section");function b(){let e=g.length;for(;--e&&window.scrollY+50<g[e].offsetTop;);x.forEach(t=>t.classList.remove("active")),x[e].classList.add("active")}window.addEventListener("scroll",b);b();const w=document.querySelectorAll("#galeria img"),c=Array.from(w),d=document.getElementById("lightbox"),y=document.getElementById("lightbox-img"),C=document.getElementById("close-lightbox"),L=document.getElementById("prev"),k=document.getElementById("next");let i=0;function p(e){y.src=c[e].src,d.classList.remove("hidden"),i=e}c.forEach((e,t)=>{e.addEventListener("click",()=>{p(t)})});C.addEventListener("click",()=>{d.classList.add("hidden")});d.addEventListener("click",e=>{e.target===d&&d.classList.add("hidden")});L.addEventListener("click",()=>{i>0?i--:i=c.length-1,p(i)});k.addEventListener("click",()=>{i<c.length-1?i++:i=0,p(i)});document.addEventListener("DOMContentLoaded",()=>{const e=document.getElementById("cta"),t=document.getElementById("contacto");e.classList.add("hidden");let l=!1,n=!1;function a(){const u=window.scrollY||document.documentElement.scrollTop;!n&&u>0&&(e.classList.remove("hidden","slide-down"),e.classList.add("slide-up"),n=!0),s(t)?(e.classList.add("slide-down"),e.classList.remove("slide-up"),setTimeout(()=>{e.classList.add("hidden")},800)):n&&(e.classList.remove("hidden","slide-down"),e.classList.add("slide-up")),l=!1}function o(){l||(window.requestAnimationFrame(()=>{a()}),l=!0)}function s(u){const v=u.getBoundingClientRect();return v.top<(window.innerHeight||document.documentElement.clientHeight)&&v.bottom>=0}window.addEventListener("scroll",o)});const m=document.querySelector("#cta-button");let h=!1;function z(){m.classList.add("glowing")}function M(){setTimeout(()=>{m.classList.remove("glowing"),m.classList.add("fade-out")},5e3)}function f(){!h&&window.scrollY>100&&(z(),M(),h=!0,window.removeEventListener("scroll",f))}window.addEventListener("scroll",f);const r=document.getElementById("modal"),B=document.querySelectorAll('a[href="#"]'),E=document.getElementById("closeModal");B.forEach(e=>{e.addEventListener("click",t=>{t.preventDefault(),r.classList.remove("hidden"),r.classList.add("flex");const l=r.querySelector("div");l.classList.remove("modal-exit-active"),l.classList.add("modal-enter"),setTimeout(()=>{l.classList.remove("modal-enter"),l.classList.add("modal-enter-active")},50),document.body.classList.add("overflow-hidden")})});E.addEventListener("click",()=>{const e=r.querySelector("div");e.classList.remove("modal-enter-active"),e.classList.add("modal-exit-active"),setTimeout(()=>{r.classList.add("hidden"),r.classList.remove("flex"),e.classList.remove("modal-exit-active"),document.body.classList.remove("overflow-hidden")},300)});document.addEventListener("DOMContentLoaded",function(){const e=document.getElementById("modal"),t=document.getElementById("title-modal"),l=document.getElementById("closeModal");document.querySelectorAll(".open-modal").forEach(a=>{a.addEventListener("click",function(){console.log("Botón clicado");const o=this.getAttribute("data-title");console.log("Título del evento: ",o),o&&(t.textContent=o),e.classList.remove("hidden"),e.classList.add("flex"),e.querySelector("div").classList.remove("scale-0"),e.querySelector("div").classList.add("scale-100")})}),l.addEventListener("click",function(){e.classList.add("hidden"),e.classList.remove("flex"),e.querySelector("div").classList.add("scale-0"),e.querySelector("div").classList.remove("scale-100")})});
+`;"serviceWorker"in navigator&&navigator.serviceWorker.register("/sw.js").then(e=>console.log("Service Worker registrado:",e)).catch(e=>console.error("Error registrando Service Worker:",e));document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll('a[href^="#"]').forEach(t=>{t.addEventListener("click",function(l){l.preventDefault();const n=this.getAttribute("href").substring(1),a=document.getElementById(n);a&&window.scrollTo({top:a.offsetTop,behavior:"smooth"})})})});document.addEventListener("DOMContentLoaded",()=>{const e=document.getElementById("menu-toggle"),t=document.getElementById("mobile-menu"),l=document.getElementById("close-menu");e.addEventListener("click",()=>{t.classList.toggle("-translate-y-full")}),l.addEventListener("click",()=>{t.classList.add("-translate-y-full")}),document.querySelectorAll("#mobile-menu a").forEach(n=>{n.addEventListener("click",()=>{t.classList.add("-translate-y-full")})})});const x=document.querySelectorAll("nav a"),g=document.querySelectorAll("section");function b(){let e=g.length;for(;--e&&window.scrollY+50<g[e].offsetTop;);x.forEach(t=>t.classList.remove("active")),x[e].classList.add("active")}window.addEventListener("scroll",b);b();const w=document.querySelectorAll("#galeria img"),c=Array.from(w),d=document.getElementById("lightbox"),y=document.getElementById("lightbox-img"),C=document.getElementById("close-lightbox"),L=document.getElementById("prev"),k=document.getElementById("next");let r=0;function p(e){y.src=c[e].src,d.classList.remove("hidden"),r=e}c.forEach((e,t)=>{e.addEventListener("click",()=>{p(t)})});C.addEventListener("click",()=>{d.classList.add("hidden")});d.addEventListener("click",e=>{e.target===d&&d.classList.add("hidden")});L.addEventListener("click",()=>{r>0?r--:r=c.length-1,p(r)});k.addEventListener("click",()=>{r<c.length-1?r++:r=0,p(r)});document.addEventListener("DOMContentLoaded",()=>{const e=document.getElementById("cta"),t=document.getElementById("contacto");e.classList.add("hidden");let l=!1,n=!1;function a(){const u=window.scrollY||document.documentElement.scrollTop;!n&&u>0&&(e.classList.remove("hidden","slide-down"),e.classList.add("slide-up"),n=!0),s(t)?(e.classList.add("slide-down"),e.classList.remove("slide-up"),setTimeout(()=>{e.classList.add("hidden")},800)):n&&(e.classList.remove("hidden","slide-down"),e.classList.add("slide-up")),l=!1}function o(){l||(window.requestAnimationFrame(()=>{a()}),l=!0)}function s(u){const v=u.getBoundingClientRect();return v.top<(window.innerHeight||document.documentElement.clientHeight)&&v.bottom>=0}window.addEventListener("scroll",o)});const m=document.querySelector("#cta-button");let h=!1;function z(){m.classList.add("glowing")}function M(){setTimeout(()=>{m.classList.remove("glowing"),m.classList.add("fade-out")},5e3)}function f(){!h&&window.scrollY>100&&(z(),M(),h=!0,window.removeEventListener("scroll",f))}window.addEventListener("scroll",f);const i=document.getElementById("modal"),B=document.querySelectorAll('a[href="#"]'),E=document.getElementById("closeModal");B.forEach(e=>{e.addEventListener("click",t=>{t.preventDefault(),i.classList.remove("hidden"),i.classList.add("flex");const l=i.querySelector("div");l.classList.remove("modal-exit-active"),l.classList.add("modal-enter"),setTimeout(()=>{l.classList.remove("modal-enter"),l.classList.add("modal-enter-active")},50),document.body.classList.add("overflow-hidden")})});E.addEventListener("click",()=>{const e=i.querySelector("div");e.classList.remove("modal-enter-active"),e.classList.add("modal-exit-active"),setTimeout(()=>{i.classList.add("hidden"),i.classList.remove("flex"),e.classList.remove("modal-exit-active"),document.body.classList.remove("overflow-hidden")},300)});document.addEventListener("DOMContentLoaded",function(){const e=document.getElementById("modal"),t=document.getElementById("title-modal"),l=document.getElementById("closeModal");document.querySelectorAll(".open-modal").forEach(a=>{a.addEventListener("click",function(){console.log("Botón clicado");const o=this.getAttribute("data-title");console.log("Título del evento: ",o),o&&(t.textContent=o),e.classList.remove("hidden"),e.classList.add("flex"),e.querySelector("div").classList.remove("scale-0"),e.querySelector("div").classList.add("scale-100")})}),l.addEventListener("click",function(){e.classList.add("hidden"),e.classList.remove("flex"),e.querySelector("div").classList.add("scale-0"),e.querySelector("div").classList.remove("scale-100")})});

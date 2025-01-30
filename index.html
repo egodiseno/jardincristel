@@ -66,20 +66,12 @@
     <meta name="referrer" content="no-referrer">
     <meta name="format-detection" content="telephone=no">
       
-    <script type="module" crossorigin src="./assets/main-shlu6XIV.js"></script>
+    <script type="module" crossorigin src="./assets/main-DvOoeQah.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/main-oHxwuJhl.css">
   </head>
   <body>
     <div id="app"></div>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-96163448-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-96163448-1');
-    </script>
+    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DNF30KJ0Y7"></script>
     <script>
@@ -88,6 +80,25 @@
       gtag('js', new Date());
 
       gtag('config', 'G-DNF30KJ0Y7');
+    </script>
+    <script>
+      // Función para rastrear clics en botones
+      function trackButtonClick(buttonText) {
+        gtag('event', 'click', {
+          'event_category': 'Botón',
+          'event_label': buttonText
+        });
+      }
+    
+      // Asignar eventos a los botones
+      document.querySelectorAll('a, button').forEach(button => {
+        button.addEventListener('click', () => {
+          const buttonText = button.innerText || button.getAttribute('aria-label') || button.getAttribute('data-title');
+          if (buttonText) {
+            trackButtonClick(buttonText);
+          }
+        });
+      });
     </script>
   </body>
 </html>
