@@ -10,9 +10,10 @@ Es una landing de una sola página con secciones ancla: `#inicio`, `#nosotros`, 
 
 ## Stack
 
-- Sitio estático servido desde la raíz del repo (`index.html`).
-- `assets/main-*.js` y `assets/main-*.css` son **artefactos compilados** (aparentemente Vite + Tailwind, con hash en el nombre). El código fuente original **no está en este repo**; el HTML de la página se genera desde el JS.
-- Imágenes en `images/` (WebP, salvo `meta.jpg` y `x.jpg` para redes), fuentes locales TTF en `fonts/` (Berthold Script, Merriweather), iconos y favicons en `icons/`.
+- Sitio estático servido desde la raíz del repo (`netlify.toml`, sin build). Destino: HTML semántico + `css/` + `js/` + `img/` + `fonts/` en la raíz; hoy `index.html` es provisional.
+- **`referencia/`** contiene el build anterior (`index.html`, `assets/main-*.js|css` compilados con Vite + Tailwind, `images/`, `fonts/`, `icons/`, `manifest.json`), funcional y `noindex`. Es solo referencia de diseño y contenido; el código fuente original no existe en el repo. No se borra nada de ahí sin aprobación.
+- **Identidad:** se conserva y se optimiza (paleta malva/lavanda/marfil, Berthold Script en logo y título, acuarelas florales y arcos). Ver `docs/diseno.md`.
+- Fuentes de referencia: Berthold Script (licencia web pendiente, decisión #10) y Merriweather (OFL).
 - Analítica: Google Tag Manager / gtag (`G-DNF30KJ0Y7`), cargado desde `index.html`.
 - Sin build, sin `package.json`. Para revisar localmente basta un servidor estático (p. ej. `npx serve .`).
 
@@ -29,6 +30,7 @@ Es una landing de una sola página con secciones ancla: `#inicio`, `#nosotros`, 
 - Commits pequeños y en español, con prefijo: `feat:`, `fix:`, `perf:`, `docs:`, `style:`.
 - **No borrar assets sin preguntar primero** (imágenes, fuentes, iconos, etc.).
 - Hook de git: `.githooks/post-commit` agrega cada commit al "Registro de commits" de `docs/BITACORA.md`. Se activa con `git config core.hooksPath .githooks` (la config no se versiona; ejecutarla tras clonar).
+- **Sin frameworks CSS ni bundlers.** Todo cambio al sitio se hace desde Claude Code en terminal.
 - Al terminar cada tarea, agrega una entrada en docs/BITACORA.md con fecha, qué se hizo, por qué, archivos tocados, decisiones y pendientes.
 
 ## Documentación
@@ -36,3 +38,9 @@ Es una landing de una sola página con secciones ancla: `#inicio`, `#nosotros`, 
 - `docs/BITACORA.md`: bitácora de entradas por tarea + registro automático de commits.
 - `docs/benchmark/baseline/`: reportes Lighthouse (HTML/JSON) del estado inicial.
 - `docs/benchmark/hallazgos.md`: hallazgos priorizados (matriz impacto/esfuerzo).
+- `docs/benchmark/competencia.md`: benchmark competitivo.
+- `docs/inventario.md`: textos, imágenes, paleta, tipografías, enlaces y analítica del sitio de referencia.
+- `docs/propuesta.md`: arquitectura, plan por bloques, hallazgos, experiencia por dispositivo y decisiones.
+- `docs/diseno.md`: sistema de diseño optimizado (tokens, imágenes, sin modales, acuarelas, imágenes IA).
+- `docs/imagenes.md`: catálogo de cada imagen de `referencia/` con el cambio propuesto.
+- `tools/contraste.mjs`: verifica los contrastes WCAG de la paleta (`node tools/contraste.mjs`).

@@ -104,6 +104,35 @@ A: 93 / 100 / 100 (LCP 2.9 s, CLS 0.052) · B: 95 / 100 / 100 (LCP 2.8 s, CLS 0.
 - Orden de foco de “Cotizar” en tablet/desktop (se reordena con `order`); decidir solución en el sitio real.
 - Originales de fotos, logo vectorial y resto de decisiones del cliente (#1, #2, #3, #5, #7, #8, #10 ya resuelta, #11, #20).
 
+### 2026-10-20 — Cambio de dirección: optimizar la identidad de referencia
+
+**Qué se hizo**
+- **Cambio de dirección:** se descarta el rediseño de identidad. Se conserva y se optimiza el branding de `referencia/` (paleta malva/lavanda/marfil, Berthold Script en logo y título, acuarelas y arcos), sin Tailwind ni Vite.
+- `docs/propuesta.md`: el principio de identidad vuelve a “conservar y optimizar”; las decisiones #9 (logo vectorial) y #10 (licencia web de Berthold Script: licencia web, compra o contornos SVG solo para logo y H1) y #11 revertidas a pendientes; **§11 marcada como descartada** (las tres direcciones se sentían plantilla y perdían el branding); §10 se mantiene aplicada al estilo de referencia, con el nuevo apartado §10.8 (sin modales); H3, N3, N4, el plan (bloque 5) y el mapa de secciones actualizados.
+- **Eliminados** `prototipo/` y `docs/prototipo/` con `git rm`. **Recuperables en el commit `f14d291`**: `git show f14d291:prototipo/a.html` o `git checkout f14d291 -- prototipo docs/prototipo`.
+- **`docs/diseno.md`** (nuevo): tokens de color (malva-400 solo títulos ≥ 24 px y decorativo; malva-500 para fondos con texto marfil; malva-600 hover y enlaces; lavanda-700/800/900; foco de 2 px) con **tabla de contraste verificada por script (25 pares, 0 fallos)**; imágenes sin borde oliva, sombra lavanda, arco proporcional con `cqw`, zoom lento dentro de la máscara y `prefers-reduced-motion`; **sin modales** (sección “Qué incluye tu evento” con 4 categorías, `<details>` en móvil; CTA “Cotizar mi <evento>” con WhatsApp prellenado por evento y enlace “Ver qué incluye”; galería en página con carrusel scroll-snap y contador en móvil e imagen principal + miniaturas en desktop); composición de acuarelas por sección con meta de peso; reglas de dirección de arte para imágenes de eventos con IA.
+- **`docs/imagenes.md`** (nuevo): catálogo de las 36 imágenes de `referencia/images/`, los 11 iconos y los iconos SVG en línea, con comportamiento actual (sección, tamaño, peso, radio, borde, hover, lightbox, duplicados, fondo/contenido), **cambio propuesto** y la columna vacía **Notas de Emmanuel**.
+- `tools/contraste.mjs` (nuevo): calcula los contrastes WCAG de los tokens y falla si alguno no cumple.
+- `CLAUDE.md`: regla “Sin frameworks CSS ni bundlers. Todo cambio al sitio se hace desde Claude Code en terminal.”, `referencia/` y la identidad conservada descritas, y documentación enlazada.
+
+**Por qué**
+Las tres direcciones del prototipo perdían el branding del cliente. Es mejor optimizar lo que ya es suyo (identidad) mejorando contraste, interacción, peso e imágenes.
+
+**Archivos tocados**
+`docs/propuesta.md`, `docs/diseno.md`, `docs/imagenes.md`, `docs/BITACORA.md`, `CLAUDE.md`, `tools/contraste.mjs`; eliminados `prototipo/**` y `docs/prototipo/**`.
+
+**Decisiones y hallazgos**
+- Las acuarelas son lienzos casi vacíos (la pintura cubre del 2.9 % al 17.6 % del área); recortarlas y reducir piezas es la mayor palanca de peso: 953 KiB en escritorio y 275 KiB en móvil hoy, con metas de ≤ 250 KiB y ≤ 70 KiB (sujetas a validación al generarlas).
+- Los alt actuales no coinciden con varias fotos (nosotros, bautizo, boda, galería); se corrigen en la implementación.
+- `malva-400` como texto solo cumple AA para texto grande (3.4–3.8:1): por eso se restringe a títulos ≥ 24 px.
+- `bg-modal.webp`, `bg-modal-mobile.webp` y las acuarelas sustituidas no se borran sin aprobación (regla de trabajo).
+- Conflicto resuelto: §10 original usaba `<dialog>` para paquete y visor; ahora rige “sin modales” (§10.8 y `docs/diseno.md` §3).
+
+**Pendientes**
+- Emmanuel: aprobar `docs/diseno.md` (desbloquea los bloques 1 y 3–6), llenar la columna “Notas de Emmanuel” de `docs/imagenes.md` y resolver #1, #2, #3, #5, #7, #8, #9, #10 y #11 (y #20).
+- Confirmar si `empresarial.webp` es foto real del jardín (se conservaría).
+- Licencia web de Berthold Script antes de publicar.
+
 ## Registro de commits
 
 - 2026-10-20 12:17 `a19da90` docs: configuración inicial, bitácora, baseline Lighthouse y hallazgos
@@ -112,3 +141,4 @@ A: 93 / 100 / 100 (LCP 2.9 s, CLS 0.052) · B: 95 / 100 / 100 (LCP 2.8 s, CLS 0.
 - 2026-10-20 12:39 `c695786` feat: esqueleto de carpetas, index provisional y netlify.toml (bloque 0)
 - 2026-10-20 12:40 `4e2aa1f` docs: sección 10 de experiencia por dispositivo y decisiones aprobadas
 - 2026-10-20 14:03 `21cf65d` docs: benchmark competitivo
+- 2026-10-20 14:19 `f14d291` feat: prototipo de tres direcciones visuales (A, B, C)
