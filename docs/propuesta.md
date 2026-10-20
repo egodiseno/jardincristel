@@ -4,7 +4,7 @@ Decisión tomada: reconstruir como **HTML semántico estático**, sin build ni f
 
 **Objetivos medibles (móvil, Lighthouse):** Performance ≥ 95, LCP ≤ 2.0 s (hoy 4.9 s), CLS ≤ 0.02, TBT ≤ 50 ms, Accessibility 100, Best Practices 100, SEO 100; peso inicial de la página ≤ 300 KiB (hoy 902 KiB).
 
-**Principio de identidad:** se conserva la identidad visual actual (paleta malva/marfil/lavanda, Berthold Script + Merriweather, esquinas en arco, bordes oliva). Lo que cambia es la construcción, no la marca. Único ajuste de color: oscurecer el malva para cumplir contraste AA (ver H3).
+**Principio de identidad (actualizado):** **rediseño completo de la identidad**; se conserva únicamente el nombre “Jardín Cristel”. Paleta, tipografías, formas y fondos del sitio anterior (malva/marfil/lavanda, Berthold Script, Merriweather, arcos con borde oliva) **no se reutilizan**. La dirección visual se elige entre tres prototipos (`prototipo/`, ver §11) antes de empezar los bloques 1 y 3–6. Solo se usarán **fuentes OFL autohospedadas** (WOFF2, subset latino, sin CDN).
 
 ---
 
@@ -19,9 +19,9 @@ Decisión tomada: reconstruir como **HTML semántico estático**, sin build ni f
 ├── js/
 │   └── main.js                 # menú móvil, scrollspy, lightbox, tracking (≈ 3–4 KB sin minificar)
 ├── fonts/
-│   ├── berthold-script-400.woff2     # subset latino
-│   ├── merriweather-400.woff2
-│   └── merriweather-700.woff2
+│   ├── <display>.woff2         # fuente OFL de la dirección elegida (subset latino)
+│   ├── <texto>-400.woff2       # fuente de texto OFL (subset latino)
+│   └── <texto>-700.woff2       # peso adicional solo si se necesita
 ├── img/
 │   ├── hero/        hero-480.avif|webp, hero-960.avif|webp, hero-1600.avif|webp
 │   ├── eventos/     bautizo-{400,800}.{avif,webp} …
@@ -94,7 +94,7 @@ Mobile First: el CSS base es el de 360 px; `@media (min-width: 48em)` (768) y `(
 |---|---|---|
 | H1 | www vs sin www | Dominio canónico `https://jardincristel.mx`: `<link rel="canonical">`, `og:url`, `og:image`, JSON-LD `url`/`@id`, `Sitemap:` y `<loc>` sin `www`. Ver §6. |
 | H2 | `sw.js` 404 | No se registra service worker. Se elimina la llamada. (PWA offline no aporta a un sitio de cotización; reevaluable.) |
-| H3 | Contraste AA | Nuevo token `--malva-600: #9c5460` (contraste 5.4:1 sobre marfil-50, 4.9:1 sobre malva-50) para fondos con texto marfil y para títulos; `#b76e79` solo como decorativo. Verificar con axe/Lighthouse. |
+| H3 | Contraste AA | ~~Token `--malva-600: #9c5460`~~ **superado por el rediseño**: la paleta nueva de la dirección elegida se valida con AA (texto normal ≥ 4.5:1, texto grande y componentes ≥ 3:1) con una tabla de contrastes en cada prototipo. Los colores solo decorativos no llevan texto. Verificar con axe/Lighthouse. |
 | H4 | Jerarquía de encabezados | Un solo h1, sin saltos, logo no es encabezado, sin `role="heading"`/`aria-level`. Ver §2. |
 | H5 | Render solo en cliente | Todo el contenido está en `index.html`; JS solo mejora (menú, lightbox, tracking). Funciona sin JS. |
 | H6 | Fuentes | Tres WOFF2 con subset latino (≈ 20–30 KB c/u en lugar de 140–190 KB), `preload` de las críticas, `font-display`, fallback con métricas ajustadas. Ver §4. |
@@ -215,7 +215,7 @@ Detalles: los eventos de teléfono y WhatsApp son los de negocio; los `data-*` h
 |---|---|---|
 | — | **Dependientes de la aprobación de la dirección visual: bloques 1 y 3–6** (ver §10). Los bloques 0, 2 y 7–10 no dependen de ella. | |
 | 0 ✅ | Mover el build actual a `referencia/` (sin borrar) y dejar listo el esqueleto (`index.html` provisional, `netlify.toml`, carpetas) — **hecho** | `docs: mover build actual a referencia…` · `feat: esqueleto…` |
-| 1 ⚑ | `css/styles.css`: tokens (`--malva-600`, etc.), reset mínimo, tipografía, utilidades; fuentes WOFF2 subset y `@font-face` | `feat: tokens de diseño y fuentes WOFF2` |
+| 1 ⚑ | `css/styles.css`: tokens de la dirección elegida, reset mínimo, tipografía, utilidades; fuentes WOFF2 subset y `@font-face` | `feat: tokens de diseño y fuentes WOFF2` |
 | 2 | `<head>` completo: metas, canonical, OG/Twitter, JSON-LD, iconos, manifest, preloads | `feat: head, SEO y datos estructurados` |
 | 3 ⚑ | Header + navegación (móvil con `<button>`/`hidden`, desktop horizontal) + hero con `<picture>` y fetchpriority | `feat: header y hero con contenido en HTML` |
 | 4 ⚑ | Nosotros + Eventos (6 `<article>`), imágenes responsivas | `feat: secciones nosotros y eventos` |
@@ -248,9 +248,9 @@ Estado: ✅ aprobada · ⏳ pendiente del cliente. Resumen: **aprobadas** #4, #6
 
 **Material gráfico**
 8. ⏳ **Originales en alta resolución** de las fotos (las actuales son de 530 px); ¿hay más fotos o video? Imagen para `og:image` con logo.
-9. ⏳ **Logo vectorial** (SVG/AI/PDF) para favicon y header; hoy el favicon es un PNG incrustado.
-10. ⏳ **Tipografía:** ¿licencia de Berthold Script BQ (comercial) para web? Si no, buscar una script libre equivalente.
-11. ⏳ **Fondos decorativos:** ¿son parte esencial de la identidad o se pueden simplificar en móvil?
+9. ⏳ **Wordmark nuevo, pendiente de aprobación del cliente:** cada prototipo propone un wordmark tipográfico propio (solo texto “Jardín Cristel”); el cliente aprueba el de la dirección elegida. Si tiene un logo vectorial propio, se evalúa; el favicon y los iconos se rehacen a partir del wordmark aprobado.
+10. ✅ **Tipografía:** ~~licencia de Berthold Script BQ~~ **superada**: solo se usarán fuentes con licencia OFL, autohospedadas en WOFF2 (Fraunces/Instrument Sans, Bricolage Grotesque/Figtree o Gloock/Manrope según la dirección elegida). Ya no se usa Berthold Script ni Merriweather.
+11. ⏳ **Fondos decorativos:** ¿son parte esencial de la identidad o se pueden simplificar en móvil? *(Superada en parte: los fondos del sitio anterior no se reutilizan; el motivo gráfico lo define la dirección elegida.)*
 
 **UX / funcionalidad (propuestas, nada se implementa sin su OK)**
 12. ✅ **Botón flotante de WhatsApp** persistente (hoy hay barra solo en móvil): ¿barra inferior, botón circular, o ambos?
@@ -287,7 +287,7 @@ Estado: ✅ aprobada · ⏳ pendiente del cliente. Resumen: **aprobadas** #4, #6
 
 **Un solo HTML y tres layouts por CSS.** No hay sitios separados, ni detección de user-agent, ni contenido duplicado oculto: el mismo DOM se presenta como app web en móvil, como sitio compacto en tablet y como sitio editorial en desktop. Todo lo que cambia entre layouts son reglas CSS (y, para los paneles, qué método del `<dialog>` se invoca).
 
-> **Estado: propuesta de dirección visual, pendiente de aprobación.** Los bloques 1 y 3–6 del plan (§8) dependen de ella y no se empiezan hasta que se apruebe. Se conserva la identidad de marca (paleta, tipografías, arcos); lo que se define aquí es la estructura de interacción por dispositivo.
+> **Estado: propuesta de dirección visual, pendiente de aprobación.** Los bloques 1 y 3–6 del plan (§8) dependen de ella y no se empiezan hasta que se apruebe. La identidad visual es nueva (ver principio de identidad y §11); lo que se define aquí es la estructura de interacción por dispositivo, común a las tres direcciones.
 
 ### 10.1 Criterio de selección: media queries combinadas
 
@@ -370,7 +370,7 @@ Notas de implementación:
 ### 10.5 Desktop (≥75em con `hover: hover` y `pointer: fine`)
 
 - **Menú horizontal** en el header (logo · enlaces · “Cotizar”), con `scroll-margin-top` en las secciones para compensar el header fijo y subrayado animado del enlace activo.
-- **Rejilla editorial de 3 columnas**: tarjetas de eventos con desplazamientos verticales alternos, Nosotros a dos columnas con foto en arco grande, galería asimétrica (una foto destacada + cinco). Aquí viven los **fondos decorativos** de ≥ 75em (cargados solo en este layout, ver §5).
+- **Rejilla editorial de 3 columnas**: tarjetas de eventos con desplazamientos verticales alternos, Nosotros a dos columnas con foto grande, galería asimétrica (una foto destacada + cinco). Aquí viven los **fondos decorativos** de ≥ 75em (cargados solo en este layout, ver §5).
 - **Paquete visible como sección** (`#paquete`): el `<dialog>` se muestra estático (`display: block; position: static`) sin `showModal()`; los botones “Ver paquete” se ocultan y el menú enlaza a la sección.
 - **Estados hover** (y `:focus-visible` siempre): tarjetas que suben 4 px, zoom 1.03 en galería, botones con tono más oscuro, flechas de lightbox con fondo. Lightbox con ← / → / Esc.
 - Tracking idéntico en los tres layouts (misma delegación, `data-track-location` distinto: `nav-inferior`, `nav-superior`, `header`).
@@ -388,6 +388,25 @@ Notas de implementación:
 
 - **Barra inferior en iOS/Android**: barras dinámicas del navegador y teclado; se usa `dvh`, `env(safe-area-inset-bottom)` y se prueba en Safari iOS y Chrome Android reales.
 - **Híbridos y ventanas redimensionadas**: probar rotación de tablet, ventana de laptop de 1100 px, monitor táctil grande, y cambio de puntero (conectar mouse a un iPad).
-- **Accesibilidad**: foco atrapado y restaurado en los tres `<dialog>`, `aria-current`, contraste AA (token `--malva-600`), objetivos táctiles ≥ 44 px, `prefers-reduced-motion`, orden de lectura coherente (el DOM es el mismo en los tres layouts).
+- **Accesibilidad**: foco atrapado y restaurado en los tres `<dialog>`, `aria-current`, contraste AA (tabla de contrastes de la paleta elegida), objetivos táctiles ≥ 44 px, `prefers-reduced-motion`, orden de lectura coherente (el DOM es el mismo en los tres layouts).
 - **Pruebas**: Lighthouse móvil y desktop por separado (metas: objetivos al inicio de este documento), DevTools con emulación táctil y 3 anchos de referencia (390, 820, 1440 px), más dispositivos reales: iPhone (Safari), Android (Chrome), iPad y laptop.
 - **Una versión, un mantenimiento**: añadir un evento o una foto es editar el HTML una vez; los tres layouts lo reflejan.
+
+---
+
+## 11. Prototipo de direcciones visuales
+
+Antes de los bloques 1 y 3–6 se construyó un prototipo con tres direcciones para elegir una (detalle, contrastes, capturas y Lighthouse en `docs/prototipo/README.md`; versión navegable en `prototipo/index.html`).
+
+| | A · Herrería y jardín | B · Fiesta de pueblo | C · Editorial cálido |
+|---|---|---|---|
+| Motivo | Celosía y arcos de herrería blanca de la entrada | Papel picado como geometría constructiva | Fotografía protagonista, filetes finos, un solo acento |
+| Paleta | `#2F4A3A` `#FAF6EE` `#A9502E` · `#E8C9C0` decorativo | `#2B3A8C` `#C2185B` `#F2A81D` `#2E6B47` `#FFF8EC` `#1E1B2E` | `#2A2522` `#F6F1EA` `#8E4F3A` · `#8A9A8B` decorativo |
+| Fuentes (OFL, WOFF2) | Fraunces + Instrument Sans (93 KB) | Bricolage Grotesque + Figtree (67 KB) | Gloock + Manrope (55 KB) |
+| Wordmark | Arco + “Jardín” cursiva / “CRISTEL” espaciado | Dos etiquetas de papel (mostaza y azul) | “Jardín” + “Cristel” en acento subrayado |
+| Lighthouse móvil (Perf / A11y / BP) | 93 / 100 / 100 | 95 / 100 / 100 | 95 / 100 / 100 |
+
+- Las tres respetan la sección 10 (barra inferior con “Cotizar” en móvil, carril con scroll-snap, paquete en `<dialog>` como sheet / panel / sección, menú con hover en desktop) y comparten un mismo HTML; solo cambia el CSS.
+- La elección es del cliente. Hasta entonces los bloques 1 y 3–6 siguen bloqueados (⚑ en §8).
+- Una vez elegida, el wordmark (decisión #9) se aprueba y se rehace como vector junto con favicon e iconos; los demás prototipos se archivan o se eliminan con aprobación.
+- Reglas que se mantienen: solo fuentes OFL autohospedadas, sin CDN, sin GA en el prototipo, contraste AA, foco visible y áreas táctiles ≥ 44 px.
