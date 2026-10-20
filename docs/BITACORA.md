@@ -80,3 +80,4 @@ Movidos a `referencia/`; nuevos: `index.html` (provisional), `netlify.toml`, `cs
 - 2026-10-20 12:26 `f09956c` docs: inventario del sitio actual y propuesta de reconstrucción
 - 2026-10-20 12:39 `e03c554` docs: mover build actual a referencia y dejar esqueleto (bloque 0)
 - 2026-10-20 12:39 `c695786` feat: esqueleto de carpetas, index provisional y netlify.toml (bloque 0)
+- 2026-10-20 12:40 `4e2aa1f` docs: sección 10 de experiencia por dispositivo y decisiones aprobadas
