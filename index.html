@@ -2,12 +2,216 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Jardín Cristel | Jardín para eventos en Tepotzotlán</title>
+  <meta name="description" content="Jardín para bodas, XV años, bautizos, comuniones, graduaciones y eventos empresariales en Tepotzotlán, Estado de México. Cotiza por WhatsApp.">
+  <link rel="canonical" href="https://jardincristel.mx/">
+  <!-- PILOTO: noindex hasta el merge (bloque 2 define el head/SEO definitivo). Quitar esta etiqueta al publicar. -->
   <meta name="robots" content="noindex">
-  <title>Jardín Cristel — sitio en reconstrucción</title>
+  <meta name="theme-color" content="#a0505c">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+
+  <!-- LCP: imagen del hero (AVIF, según el ancho) y fuentes críticas -->
+  <link rel="preload" as="image" type="image/avif" media="(max-width: 47.99em)" imagesrcset="img/hero/hero-m-480.avif 480w, img/hero/hero-m-800.avif 800w" imagesizes="100vw" fetchpriority="high">
+  <link rel="preload" as="image" type="image/avif" media="(min-width: 48em)" imagesrcset="img/hero/hero-d-960.avif 960w, img/hero/hero-d-1600.avif 1600w" imagesizes="100vw" fetchpriority="high">
+  <link rel="preload" as="font" type="font/woff2" href="fonts/pinyon-script-400.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="fonts/merriweather-400.woff2" crossorigin>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js" defer></script>
 </head>
 <body>
-  <h1>Jardín Cristel</h1>
-  <p>Sitio en reconstrucción (rama <code>modernizacion</code>). Versión anterior de referencia: <a href="/referencia/">/referencia/</a>.</p>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+
+  <header class="top sobre-malva">
+    <a class="logo" href="#inicio"><img src="img/logo.svg" alt="Jardín Cristel" width="40" height="40"></a>
+    <nav class="nav sobre-malva" aria-label="Principal">
+      <ul class="nav__lista">
+        <li><a class="nav__enlace" href="#inicio"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 11.5 12 4l9 7.5M5.5 10v9.5h13V10"/></svg><span>Inicio</span></a></li>
+        <li><a class="nav__enlace" href="#eventos"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>Eventos</span></a></li>
+        <li class="nav__cta"><a class="btn btn--primario nav__cotizar" href="https://wa.me/5215536476032?text=Hola%2C%20quiero%20informaci%C3%B3n%20y%20fechas%20disponibles%20para%20un%20evento%20en%20Jard%C3%ADn%20Cristel.%20%C2%A1Gracias!" target="_blank" rel="noopener noreferrer" aria-label="Cotizar por WhatsApp" data-track="whatsapp" data-track-location="barra-movil" data-event-type="general"><svg class="ico" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/></svg><span>Cotizar</span></a></li>
+        <li><a class="nav__enlace" href="#incluye"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg><span>Qué incluye</span></a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--primario top__cotizar" href="https://wa.me/5215536476032?text=Hola%2C%20quiero%20informaci%C3%B3n%20y%20fechas%20disponibles%20para%20un%20evento%20en%20Jard%C3%ADn%20Cristel.%20%C2%A1Gracias!" target="_blank" rel="noopener noreferrer" aria-label="Cotizar por WhatsApp" data-track="whatsapp" data-track-location="header" data-event-type="general">Cotizar</a>
+  </header>
+
+  <main id="contenido">
+
+    <section id="inicio" class="hero" aria-labelledby="t-inicio">
+      <div class="hero__foto">
+        <picture>
+          <source media="(max-width: 47.99em)" type="image/avif" srcset="img/hero/hero-m-480.avif 480w, img/hero/hero-m-800.avif 800w" sizes="100vw">
+          <source media="(max-width: 47.99em)" type="image/webp" srcset="img/hero/hero-m-480.webp 480w, img/hero/hero-m-800.webp 800w" sizes="100vw">
+          <source type="image/avif" srcset="img/hero/hero-d-960.avif 960w, img/hero/hero-d-1600.avif 1600w" sizes="100vw">
+          <source type="image/webp" srcset="img/hero/hero-d-960.webp 960w, img/hero/hero-d-1600.webp 1600w" sizes="100vw">
+          <img src="img/hero/hero-d-960.webp" width="1600" height="1000" alt="Pérgola de herrería blanca con flores, frente a la escalinata y el jardín de Jardín Cristel" fetchpriority="high" decoding="async">
+        </picture>
+      </div>
+      <div class="hero__contenido">
+        <img class="hero__logo" src="img/logo.svg" alt="" width="80" height="80">
+        <p class="kicker">Jardín para eventos en Tepotzotlán</p>
+        <h1 id="t-inicio">Jardín Cristel</h1>
+        <p class="hero__texto">Haz que tus celebraciones sean verdaderamente memorables en nuestro encantador jardín en Tepotzotlán. Desde bodas hasta cumpleaños, estamos listos para hacer cada detalle perfecto.</p>
+        <p class="hero__acciones">
+          <a class="btn btn--primario" href="https://wa.me/5215536476032?text=Hola%2C%20quiero%20informaci%C3%B3n%20y%20fechas%20disponibles%20para%20un%20evento%20en%20Jard%C3%ADn%20Cristel.%20%C2%A1Gracias!" target="_blank" rel="noopener noreferrer" data-track="whatsapp" data-track-location="hero" data-event-type="general">Cotizar por WhatsApp</a>
+          <a class="btn btn--secundario" href="#eventos">Conoce nuestros eventos</a>
+        </p>
+      </div>
+    </section>
+
+    <section id="eventos" class="seccion eventos" aria-labelledby="t-eventos">
+      <header class="seccion__cab">
+        <h2 id="t-eventos">Nuestros eventos</h2>
+      </header>
+      <div class="eventos__carril" role="region" aria-label="Eventos (desliza para ver más)" tabindex="0">
+        <ul class="eventos__lista">
+          <li>
+            <article class="evento marco">
+              <div class="marco__forma evento__forma">
+                <div class="evento__foto"><img src="img/eventos/bautizo.webp" width="530" height="386" alt="Manos de un adulto sostienen los pies de un bebé" loading="lazy" decoding="async"></div>
+                <div class="evento__cuerpo">
+                  <h3>Bautizo</h3>
+                  <p><strong>Celebra un día especial.</strong> Disfruta de un hermoso bautizo en nuestro encantador jardín de eventos. Espacio amplio, catering exquisito y personal atento para hacer de este día inolvidable.</p>
+                  <div class="evento__acciones">
+                    <a class="btn btn--primario" href="https://wa.me/5215536476032?text=Hola%2C%20quiero%20cotizar%20un%20bautizo%20en%20Jard%C3%ADn%20Cristel.%20%C2%BFMe%20pueden%20dar%20informaci%C3%B3n%20y%20fechas%20disponibles%3F%20%C2%A1Gracias!" target="_blank" rel="noopener noreferrer" aria-label="Cotizar mi bautizo por WhatsApp" data-track="whatsapp" data-track-location="tarjeta" data-event-type="bautizo">Cotizar mi bautizo</a>
+                    <a class="enlace" href="#incluye" aria-label="Ver qué incluye para mi bautizo">Ver qué incluye</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="evento marco">
+              <div class="marco__forma evento__forma">
+                <div class="evento__foto"><img src="img/eventos/comunion.webp" width="530" height="386" alt="Manos sostienen un libro de oración y un rosario" loading="lazy" decoding="async"></div>
+                <div class="evento__cuerpo">
+                  <h3>1a Comunión</h3>
+                  <p><strong>Celebra la Primera Comunión en el corazón de Tepotzotlán.</strong> Un entorno pintoresco, catering exquisito y un servicio impecable para una experiencia inolvidable para ti y tus seres queridos.</p>
+                  <div class="evento__acciones">
+                    <a class="btn btn--primario" href="https://wa.me/5215536476032?text=Hola%2C%20quiero%20cotizar%20una%20primera%20comuni%C3%B3n%20en%20Jard%C3%ADn%20Cristel.%20%C2%BFMe%20pueden%20dar%20informaci%C3%B3n%20y%20fechas%20disponibles%3F%20%C2%A1Gracias!" target="_blank" rel="noopener noreferrer" aria-label="Cotizar mi comunión por WhatsApp" data-track="whatsapp" data-track-location="tarjeta" data-event-type="comunion">Cotizar mi comunión</a>
+                    <a class="enlace" href="#incluye" aria-label="Ver qué incluye para mi comunión">Ver qué incluye</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="evento marco">
+              <div class="marco__forma evento__forma">
+                <div class="evento__foto"><img src="img/eventos/xv.webp" width="530" height="386" alt="Letras luminosas XV sobre un fondo color durazno" loading="lazy" decoding="async"></div>
+                <div class="evento__cuerpo">
+                  <h3>XV Años</h3>
+                  <p><strong>Celebra tus XV años en grande.</strong> Desde una decoración elegante hasta un exquisito menú personalizado, nuestro equipo se encarga de cada detalle para que disfrutes esta ocasión especial.</p>
+                  <div class="evento__acciones">
+                    <a class="btn btn--primario" href="https://wa.me/5215536476032?text=Hola%2C%20quiero%20cotizar%20mis%20XV%20a%C3%B1os%20en%20Jard%C3%ADn%20Cristel.%20%C2%BFMe%20pueden%20dar%20informaci%C3%B3n%20y%20fechas%20disponibles%3F%20%C2%A1Gracias!" target="_blank" rel="noopener noreferrer" aria-label="Cotizar mis XV años por WhatsApp" data-track="whatsapp" data-track-location="tarjeta" data-event-type="xv">Cotizar mis XV años</a>
+                    <a class="enlace" href="#incluye" aria-label="Ver qué incluye para mis XV años">Ver qué incluye</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="evento marco">
+              <div class="marco__forma evento__forma">
+                <div class="evento__foto"><img src="img/eventos/boda.webp" width="530" height="386" alt="Dos anillos de boda sobre flores rosas" loading="lazy" decoding="async"></div>
+                <div class="evento__cuerpo">
+                  <h3>Boda</h3>
+                  <p><strong>Descubre la perfección en tu gran día.</strong> Servicios personalizados, entorno pintoresco y una atención excepcional para que tu día especial sea inolvidable.</p>
+                  <div class="evento__acciones">
+                    <a class="btn btn--primario" href="https://wa.me/5215536476032?text=Hola%2C%20quiero%20cotizar%20una%20boda%20en%20Jard%C3%ADn%20Cristel.%20%C2%BFMe%20pueden%20dar%20informaci%C3%B3n%20y%20fechas%20disponibles%3F%20%C2%A1Gracias!" target="_blank" rel="noopener noreferrer" aria-label="Cotizar mi boda por WhatsApp" data-track="whatsapp" data-track-location="tarjeta" data-event-type="boda">Cotizar mi boda</a>
+                    <a class="enlace" href="#incluye" aria-label="Ver qué incluye para mi boda">Ver qué incluye</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="evento marco">
+              <div class="marco__forma evento__forma">
+                <div class="evento__foto"><img src="img/eventos/graduacion.webp" width="530" height="386" alt="Manos con un diploma enrollado y un birrete a contraluz" loading="lazy" decoding="async"></div>
+                <div class="evento__cuerpo">
+                  <h3>Graduación</h3>
+                  <p><strong>Celebra tu graduación en el corazón de Tepotzotlán.</strong> Un ambiente acogedor, deliciosa gastronomía y un equipo atento para festejar este logro tan especial.</p>
+                  <div class="evento__acciones">
+                    <a class="btn btn--primario" href="https://wa.me/5215536476032?text=Hola%2C%20quiero%20cotizar%20una%20graduaci%C3%B3n%20en%20Jard%C3%ADn%20Cristel.%20%C2%BFMe%20pueden%20dar%20informaci%C3%B3n%20y%20fechas%20disponibles%3F%20%C2%A1Gracias!" target="_blank" rel="noopener noreferrer" aria-label="Cotizar mi graduación por WhatsApp" data-track="whatsapp" data-track-location="tarjeta" data-event-type="graduacion">Cotizar mi graduación</a>
+                    <a class="enlace" href="#incluye" aria-label="Ver qué incluye para mi graduación">Ver qué incluye</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="evento marco">
+              <div class="marco__forma evento__forma">
+                <div class="evento__foto"><img src="img/eventos/empresarial.webp" width="530" height="386" alt="Carreta de madera con flores sobre el pasto de un jardín" loading="lazy" decoding="async"></div>
+                <div class="evento__cuerpo">
+                  <h3>Empresarial</h3>
+                  <p><strong>Impulsa tu empresa con estilo en Tepotzotlán.</strong> Espacios versátiles, comodidades de primer nivel y un entorno encantador para reuniones y celebraciones corporativas.</p>
+                  <div class="evento__acciones">
+                    <a class="btn btn--primario" href="https://wa.me/5215536476032?text=Hola%2C%20quiero%20cotizar%20un%20evento%20empresarial%20en%20Jard%C3%ADn%20Cristel.%20%C2%BFMe%20pueden%20dar%20informaci%C3%B3n%20y%20fechas%20disponibles%3F%20%C2%A1Gracias!" target="_blank" rel="noopener noreferrer" aria-label="Cotizar mi evento empresarial por WhatsApp" data-track="whatsapp" data-track-location="tarjeta" data-event-type="empresarial">Cotizar mi evento empresarial</a>
+                    <a class="enlace" href="#incluye" aria-label="Ver qué incluye para mi evento empresarial">Ver qué incluye</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="incluye" class="seccion incluye" aria-labelledby="t-incluye">
+      <header class="seccion__cab">
+        <h2 id="t-incluye">Qué incluye tu evento</h2>
+        <p class="seccion__intro">Mínimo 70 y máximo 150 personas. De 120 a 150, costo extra por carpa y pista de baile.</p>
+      </header>
+      <div class="incluye__grupos">
+        <details class="grupo" data-categoria="espacio-y-tiempo" open>
+          <summary><h3>Espacio y tiempo</h3></summary>
+          <ul>
+            <li>Jardín por 6 hrs (más media hora de entrada y media hora de salida)</li>
+            <li>Capacidad: mínimo 70 y máximo 150 personas (de 120 a 150, costo extra para carpa y pista de baile)</li>
+            <li>Inflable</li>
+          </ul>
+        </details>
+        <details class="grupo" data-categoria="mobiliario-y-decoracion" open>
+          <summary><h3>Mobiliario y decoración</h3></summary>
+          <ul>
+            <li>Mesas cuadradas vestidas (cubre mantel color a su elección)</li>
+            <li>Sillas tiffany color chocolate</li>
+            <li>1 arreglo floral por mesa (participantes)</li>
+          </ul>
+        </details>
+        <details class="grupo" data-categoria="servicio-y-musica" open>
+          <summary><h3>Servicio y música</h3></summary>
+          <ul>
+            <li>Meseros</li>
+            <li>DJ profesional 6 hrs</li>
+          </ul>
+        </details>
+        <details class="grupo" data-categoria="banquete-y-bebidas" open>
+          <summary><h3>Banquete y bebidas</h3></summary>
+          <ul>
+            <li>Vajilla y cristalería</li>
+            <li>Cubiertos</li>
+            <li>Hielo y refresco todo el evento (coca-cola, squirt, sidral mundet, agua mineral)</li>
+            <li>2 garrafones de agua (jamaica)</li>
+            <li>Platos y cucharas desechables para pastel</li>
+            <li>Descorche libre</li>
+            <li><strong>Menú a elegir:</strong> taquiza o tres tiempos</li>
+          </ul>
+        </details>
+      </div>
+      <p class="incluye__cta">
+        <a class="btn btn--primario" href="https://wa.me/5215536476032?text=Hola%2C%20quiero%20informaci%C3%B3n%20y%20fechas%20disponibles%20para%20un%20evento%20en%20Jard%C3%ADn%20Cristel.%20%C2%A1Gracias!" target="_blank" rel="noopener noreferrer" data-track="whatsapp" data-track-location="que-incluye" data-event-type="general">Cotizar mi evento</a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="pie sobre-malva">
+    <p>© 2026 Jardín Cristel. Todos los derechos reservados.</p>
+    <p>Versión piloto: faltan galería, contacto y mapa.</p>
+  </footer>
 </body>
 </html>
