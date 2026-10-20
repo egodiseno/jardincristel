@@ -1,0 +1,9 @@
+# Sitio estático: se publica la raíz del repo, sin build.
+[build]
+  publish = "."
+
+# La copia del sitio anterior (referencia/) no debe indexarse nunca.
+[[headers]]
+  for = "/referencia/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
