@@ -17,7 +17,7 @@ Decisión tomada: reconstruir como **HTML semántico estático**, sin build ni f
 ├── css/
 │   └── styles.css              # tokens (custom properties) + base + componentes + utilidades mínimas
 ├── js/
-│   └── main.js                 # menú móvil, scrollspy, lightbox, tracking (≈ 3–4 KB sin minificar)
+│   └── main.js                 # <details> de “Qué incluye”, galería, scrollspy, tracking GA4 + Clarity diferido (≈ 4–5 KB sin minificar)
 ├── fonts/
 │   ├── berthold-script-400.woff2     # solo logo y H1; sujeto a licencia web (decisión #10); subset latino
 │   ├── merriweather-400.woff2        # OFL; subset latino
@@ -169,6 +169,8 @@ Verificación: Search Console con la propiedad de dominio, inspección de URL y 
 
 ## 7. Tracking GA4 con delegación de eventos
 
+> **Plan vigente: `docs/medicion.md`** (GA4, Microsoft Clarity, Search Console, Business Profile, aviso de privacidad, tablero y checklist). Esta sección conserva el razonamiento original; **si difiere, manda `docs/medicion.md`**. Diferencias principales: los eventos de clic son `click_whatsapp` (con `link_location` y `event_type`), `click_phone`, `click_maps` y `click_facebook`; se agregan `view_que_incluye`, `open_categoria_incluye` y `gallery_navigate`; desaparecen `click_cta` y `select_event_type`; el tracking solo corre en `jardincristel.mx`.
+
 **Problema actual:** el script de `index.html` enlaza `click` a cada `a, button` *antes* de que el JS genere la página, así que probablemente no registra nada.
 
 **Solución:** un único listener en `document` (`click`, fase de captura), independiente del momento en que se pinte el DOM, leyendo atributos `data-*` del HTML:
@@ -203,7 +205,7 @@ Con `window.dataLayer` y un stub `gtag()` en el `<head>` para que el evento nunc
 | `evento` | `select_event_type` | `event_type` (boda, xv…) | si se mantiene botón por evento |
 | (auto) | `view_item_list`/`scroll`/`page_view` | — | los estándar de GA4 |
 
-Detalles: los eventos de teléfono y WhatsApp son los de negocio; los `data-*` hacen que añadir un enlace nuevo no requiera tocar JS; se documentan en `docs/tracking.md` (nombres, parámetros, dimensiones personalizadas a registrar en GA4). Verificación: DebugView + `Tag Assistant`; prueba manual móvil. Consentimiento (aviso de privacidad / Consent Mode v2) queda como decisión pendiente.
+Detalles: los eventos de teléfono y WhatsApp son los de negocio; los `data-*` hacen que añadir un enlace nuevo no requiera tocar JS; se documentan en `docs/medicion.md` (nombres, parámetros, dimensiones personalizadas a registrar en GA4). Verificación: DebugView + `Tag Assistant`; prueba manual móvil. Consentimiento (aviso de privacidad / Consent Mode v2) queda como decisión pendiente.
 
 ---
 
@@ -221,7 +223,7 @@ Detalles: los eventos de teléfono y WhatsApp son los de negocio; los `data-*` h
 | 4 ⚑ | Nosotros + Eventos (6 `<article>`), imágenes responsivas | `feat: secciones nosotros y eventos` |
 | 5 ⚑ | Sección “Qué incluye tu evento” (sin modal) + galería en página (carrusel / principal + miniaturas) | `feat: qué incluye y galería en página` |
 | 6 ⚑ | Contacto, mapa, footer, botón flotante de WhatsApp | `feat: contacto, footer y CTA flotante` |
-| 7 | `js/main.js`: menú, scrollspy, lightbox, **tracking delegado**; `docs/tracking.md` | `feat: JS mínimo y tracking GA4 por delegación` |
+| 7 | `js/main.js`: `<details>` de “Qué incluye”, galería, scrollspy, **tracking GA4 por delegación con `data-*`** y **Microsoft Clarity** diferido (`load` + `requestIdleCallback`, marcador `CLARITY_ID`); dimensiones personalizadas, eventos clave, Search Console, UTM de Business Profile/Facebook, aviso de privacidad y checklist de verificación según **`docs/medicion.md`** | `feat: JS mínimo, tracking GA4 por delegación y Clarity diferido` |
 | 8 | `tools/optimize-images.mjs` + derivados AVIF/WebP + fondos aligerados + favicons reales | `perf: imágenes responsivas AVIF/WebP y fondos ligeros` |
 | 9 | `robots.txt`, `sitemap.xml`, `_headers`/`netlify.toml`, `404.html` | `feat: robots, sitemap, caché y 404` |
 | 10 | QA: Lighthouse (móvil/desktop), axe, teclado, lector de pantalla, Rich Results, W3C validator, prueba sin JS, tabla comparativa vs `baseline/` | `docs: benchmark posterior y QA` |
@@ -233,7 +235,7 @@ Criterio de “hecho” por bloque: validación HTML, sin errores en consola, si
 
 ## 9. Decisiones para Emmanuel
 
-Estado: ✅ aprobada · ⏳ pendiente del cliente. Resumen: **aprobadas** #4, #6, #12–#15, #16–#19, #21–#24; **pendientes del cliente** #1, #2, #3, #5, #7, #8, #9, #10, #11, #20 (bloquean contenido, no la estructura).
+Estado: ✅ aprobada · ⏳ pendiente del cliente. Resumen: **aprobadas** #4, #6, #12–#15, #16–#19, #21–#24; **pendientes del cliente** #1, #2, #3, #5, #7, #8, #9, **#10 (prioridad alta)**, #11, #20 (bloquean contenido, no la estructura).
 
 **Contenido**
 1. ⏳ **Paquete por evento:** ¿el “Paquete completo” (70–150 personas, 6 hrs, DJ, inflable, etc.) aplica igual a bautizo, boda, graduación y empresarial? ¿Hay paquetes distintos? ¿Se muestran precios o “desde $X”?
@@ -249,7 +251,7 @@ Estado: ✅ aprobada · ⏳ pendiente del cliente. Resumen: **aprobadas** #4, #6
 **Material gráfico**
 8. ⏳ **Originales en alta resolución** de las fotos (las actuales son de 530 px); ¿hay más fotos o video? Imagen para `og:image` con logo.
 9. ⏳ **Logo vectorial** (SVG/AI/PDF) para favicon y header; hoy el favicon es un PNG incrustado en un `.svg` de 428 KB. *(Revertida a pendiente: se conserva el logo de referencia, es decir, “Jardín Cristel” en Berthold Script; el wordmark nuevo del prototipo queda descartado.)*
-10. ⏳ **Licencia web de Berthold Script BQ:** el sitio actual ya sirve el TTF (188 KB), pero no consta con qué licencia se obtuvo. Opciones: **(a)** licencia web del titular, **(b)** compra, **(c)** convertir a **contornos SVG solo el logo y el H1** si la licencia lo permite (texto real siempre en el HTML, p. ej. `<title>` del SVG o texto oculto accesible). Merriweather es OFL y no tiene este problema. Mientras no se resuelva, no se agregan nuevos usos de Berthold. *(Revertida a pendiente: se conserva Berthold Script.)*
+10. 🔴 **PRIORIDAD ALTA — Licencia web de Berthold Script BQ:** el TTF (188 KB) **ya se sirve públicamente**: desde producción (`https://jardincristel.mx/fonts/Berthold-Script.ttf`, verificado: responde 200) y desde `referencia/fonts/` en esta rama y sus deploys (y en producción si `referencia/` llega a `main`). No consta con qué licencia se obtuvo; hay que confirmarlo con quien lo adquirió (proveedor, factura o contrato) **cuanto antes**, antes del merge y de cualquier uso nuevo. Opciones: **(a)** licencia web del titular, **(b)** compra, **(c)** convertir a **contornos SVG solo el logo y el H1** si la licencia lo permite (texto real siempre en el HTML, p. ej. `<title>` del SVG o texto oculto accesible). Merriweather es OFL y no tiene este problema. Mientras no se resuelva: **no se agregan nuevos usos** de Berthold, y antes del merge a `main` hay que decidir (con tu aprobación, porque implica no incluir un archivo) si `referencia/fonts/Berthold-Script.ttf` se excluye del despliegue. El bloque 3 (logo y H1) depende de esta decisión; el bloque 1 puede avanzar con Merriweather. *No es asesoría legal: confirmar el alcance de la licencia con quien la emitió.*
 11. ⏳ **Fondos decorativos (acuarelas):** ¿son parte esencial de la identidad o se pueden simplificar en móvil? Propuesta de composición, menos piezas y meta de peso en `docs/diseno.md` §4.
 
 **UX / funcionalidad (propuestas, nada se implementa sin su OK)**
@@ -269,7 +271,7 @@ Estado: ✅ aprobada · ⏳ pendiente del cliente. Resumen: **aprobadas** #4, #6
    - *Aprobada: **imagen enlazada** a Google Maps (sin iframe).*
 19. ✅ **Video corto** del jardín en el hero o la galería (peso/LCP: solo con póster ligero y carga bajo demanda).
    - *Aprobada: **solo en la galería y bajo demanda** (póster ligero; el video no carga hasta que se pide).*
-20. ⏳ **Analítica:** ¿se mantiene GA4 `G-DNF30KJ0Y7`? ¿Quién accede al panel para marcar `click_whatsapp` y `click_phone` como eventos clave? ¿Consent Mode v2?
+20. ⏳ **Analítica:** ¿se mantiene GA4 `G-DNF30KJ0Y7`? ¿Quién accede al panel para registrar las dimensiones (`link_location`, `event_type`, `categoria`) y marcar `click_whatsapp` y `click_phone` como eventos clave? ¿Consentimiento: aviso informativo (A) o Consent Mode v2 con banner (B)? Se suma **Microsoft Clarity** (Emmanuel crea el proyecto y pasa el ID) y la verificación de Search Console; detalle en `docs/medicion.md`.
 
 **Técnicas / operación**
 21. ✅ **Dominio:** confirmar que el canónico es **`jardincristel.mx` sin www** (así responde hoy) y que no se quiere el contrario.

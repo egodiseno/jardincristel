@@ -301,7 +301,7 @@ Las sugerencias son punto de partida; Emmanuel puede preferir otros símbolos.
 
 ## 6. Decisiones y dependencias
 
-- **#8 (originales de fotos), #9 (logo vectorial) y #10 (licencia web de Berthold Script):** pendientes del cliente. Opciones para #10: licencia web, compra, o contornos SVG solo para logo y H1 si la licencia lo permite. Merriweather es OFL.
+- **#8 (originales de fotos), #9 (logo vectorial) y #10 (licencia web de Berthold Script):** pendientes del cliente; **#10 es de prioridad alta** (el TTF ya se sirve públicamente en producción y desde `referencia/`). Opciones para #10: licencia web, compra, o contornos SVG solo para logo y H1 si la licencia lo permite. Merriweather es OFL.
 - **#1 (paquete por evento):** si el paquete cambia por evento, la sección “Qué incluye tu evento” se parametriza por evento; mientras tanto es única.
 - **Aprobación de este documento** desbloquea los bloques 1 y 3–6 (`docs/propuesta.md` §8).
 - **Retiro de `bg-modal*.webp`** y de las acuarelas sustituidas: no se borra nada sin aprobación (regla de trabajo); la limpieza de `referencia/` se hace dos semanas después del merge (decisión #22).

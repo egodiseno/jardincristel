@@ -13,7 +13,7 @@ Es una landing de una sola página con secciones ancla: `#inicio`, `#nosotros`, 
 - Sitio estático servido desde la raíz del repo (`netlify.toml`, sin build). Destino: HTML semántico + `css/` + `js/` + `img/` + `fonts/` en la raíz; hoy `index.html` es provisional.
 - **`referencia/`** contiene el build anterior (`index.html`, `assets/main-*.js|css` compilados con Vite + Tailwind, `images/`, `fonts/`, `icons/`, `manifest.json`), funcional y `noindex`. Es solo referencia de diseño y contenido; el código fuente original no existe en el repo. No se borra nada de ahí sin aprobación.
 - **Identidad:** se conserva y se optimiza (paleta malva/lavanda/marfil, Berthold Script en logo y título, acuarelas florales y arcos). Ver `docs/diseno.md`.
-- Fuentes de referencia: Berthold Script (licencia web pendiente, decisión #10) y Merriweather (OFL).
+- Fuentes de referencia: Berthold Script (licencia web pendiente, **decisión #10, prioridad alta**: el TTF ya se sirve públicamente) y Merriweather (OFL).
 - Analítica: Google Tag Manager / gtag (`G-DNF30KJ0Y7`), cargado desde `index.html`.
 - Sin build, sin `package.json`. Para revisar localmente basta un servidor estático (p. ej. `npx serve .`).
 
@@ -41,6 +41,7 @@ Es una landing de una sola página con secciones ancla: `#inicio`, `#nosotros`, 
 - `docs/benchmark/competencia.md`: benchmark competitivo.
 - `docs/inventario.md`: textos, imágenes, paleta, tipografías, enlaces y analítica del sitio de referencia.
 - `docs/propuesta.md`: arquitectura, plan por bloques, hallazgos, experiencia por dispositivo y decisiones.
+- `docs/medicion.md`: plan de medición (GA4, Clarity, Search Console, UTM, aviso de privacidad); se integra en el bloque 7.
 - `docs/diseno.md`: sistema de diseño optimizado (tokens, imágenes, sin modales, acuarelas, imágenes IA).
 - `docs/imagenes.md`: catálogo de cada imagen de `referencia/` con el cambio propuesto.
 - `tools/contraste.mjs`: verifica los contrastes WCAG de la paleta (`node tools/contraste.mjs`).

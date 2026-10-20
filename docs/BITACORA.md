@@ -133,6 +133,32 @@ Las tres direcciones del prototipo perdían el branding del cliente. Es mejor op
 - Confirmar si `empresarial.webp` es foto real del jardín (se conservaría).
 - Licencia web de Berthold Script antes de publicar.
 
+### 2026-10-20 — Plan de medición (solo documentación) y prioridad de la licencia de Berthold Script
+
+**Qué se hizo**
+- `docs/medicion.md` (nuevo), para integrarse en el **bloque 7**; no se implementó nada:
+  - **GA4 (`G-DNF30KJ0Y7`)** con tracking por delegación y atributos `data-*` (`data-track`, `data-track-location`, `data-event-type`, `data-categoria`): `click_whatsapp` (con `link_location`: hero, tarjeta, que-incluye, barra-movil, header, contacto; y `event_type`: boda, xv, bautizo, comunion, graduacion, empresarial, general), `click_phone`, `click_maps`, `click_facebook`, `view_que_incluye` (una vez por visita), `open_categoria_incluye` (al abrir cada `<details>`) y `gallery_navigate` (con índice). Dimensiones personalizadas (`link_location`, `event_type`, `categoria`) y eventos clave (`click_whatsapp`, `click_phone`) con los pasos del panel.
+  - **Microsoft Clarity**: carga tras `load` con `requestIdleCallback`, integración con GA4 desde su panel, marcador `CLARITY_ID`, nota de que el sitio no tiene formularios.
+  - **Search Console** (propiedad de dominio por DNS; alternativa: archivo HTML en la raíz que Emmanuel me pasa; enviar el sitemap tras el merge), **UTM** de Google Business Profile y Facebook, **aviso de privacidad** (qué herramientas mencionar; el texto legal lo valida el cliente), fase posterior en **Looker Studio** y **checklist de verificación** (DebugView, Tag Assistant, Clarity, LCP sin empeorar).
+- `docs/propuesta.md`: el bloque 7 apunta a `docs/medicion.md` e incluye Clarity; la §7 avisa de que manda el nuevo documento; el árbol de archivos, la decisión #20 y las referencias a `docs/tracking.md` actualizados.
+- **Decisión #10 (licencia web de Berthold Script) sube a prioridad alta** en `docs/propuesta.md`, `docs/diseno.md` y `CLAUDE.md`: el TTF ya se sirve públicamente (verificado: `https://jardincristel.mx/fonts/Berthold-Script.ttf` responde 200) y también desde `referencia/fonts/` en la rama y sus deploys.
+
+**Por qué**
+Dejar definido cómo se medirá el sitio antes de implementarlo y no mezclar la analítica con el LCP; y atender cuanto antes el riesgo de licencia de la tipografía.
+
+**Archivos tocados**
+`docs/medicion.md` (nuevo), `docs/propuesta.md`, `docs/diseno.md`, `CLAUDE.md`, `docs/BITACORA.md`. No se tocaron `main`, `referencia/` ni el `index.html` de la raíz.
+
+**Decisiones**
+- GA4 y Clarity solo se activan en `jardincristel.mx` (o con `?medicion=debug`), para que los deploy previews y `localhost` no contaminen los datos; se recomienda activar el filtro de tráfico de desarrollador en GA4.
+- Los eventos `click_cta` y `select_event_type` de la propuesta original desaparecen; el evento genérico `click` del sitio de referencia no se porta.
+- Propuesta de UTM de Facebook con `utm_medium=social` (no `organic`) para que GA4 lo clasifique como Organic Social; Emmanuel puede preferir `organic`.
+- Antes del merge hay que decidir (con aprobación) si `referencia/fonts/Berthold-Script.ttf` se excluye del despliegue.
+
+**Pendientes**
+- Emmanuel: confirmar origen y licencia de Berthold Script (prioridad alta); crear el proyecto de Clarity y pasar el ID; verificar Search Console (DNS o archivo HTML); actualizar los enlaces de Google Business Profile y Facebook; registrar dimensiones y eventos clave en GA4; validar el aviso de privacidad y elegir el consentimiento (A o B).
+- Datos que faltan para el aviso: correo ARCO y razón social/domicilio (decisión #5).
+
 ## Registro de commits
 
 - 2026-10-20 12:17 `a19da90` docs: configuración inicial, bitácora, baseline Lighthouse y hallazgos
@@ -142,3 +168,4 @@ Las tres direcciones del prototipo perdían el branding del cliente. Es mejor op
 - 2026-10-20 12:40 `4e2aa1f` docs: sección 10 de experiencia por dispositivo y decisiones aprobadas
 - 2026-10-20 14:03 `21cf65d` docs: benchmark competitivo
 - 2026-10-20 14:19 `f14d291` feat: prototipo de tres direcciones visuales (A, B, C)
+- 2026-10-20 14:45 `af94542` docs: optimizar identidad de referencia (sistema de diseño, catálogo de imágenes) y retirar prototipo
