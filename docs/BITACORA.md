@@ -49,6 +49,34 @@ Se decidió reconstruir como HTML semántico estático (sin build ni framework);
 - Emmanuel debe responder las 24 decisiones de `docs/propuesta.md` §9 (contenido del paquete, originales de fotos, logo vectorial, licencia de la fuente, dominio canónico, etc.).
 - Empezar el bloque 0 de implementación tras su aprobación.
 
+### 2026-10-20 — Bloque 0, experiencia por dispositivo y decisiones aprobadas
+
+**Qué se hizo**
+- **Bloque 0:** el build anterior (`index.html`, `assets/`, `images/`, `fonts/`, `icons/`, `manifest.json`) se movió con `git mv` a `referencia/` (historial conservado; sigue funcionando en `/referencia/` porque sus rutas son relativas). Se crearon `css/`, `js/`, `img/`, `fonts/` (con `.gitkeep`), un `index.html` provisional (`noindex`) y `netlify.toml` (`publish = "."`, `X-Robots-Tag: noindex` para `/referencia/*`). Quedan en la raíz `robots.txt`, `sitemap.xml` y `favicon.ico` hasta el bloque 9.
+- `docs/propuesta.md`: nueva **sección 10 “Experiencia por dispositivo”** (un HTML, tres layouts por CSS con media queries combinadas ancho + hover + pointer; móvil como app web, tablet y desktop); bloques 1 y 3–6 marcados como dependientes de la aprobación de la dirección visual; `referencia/` actualizado en §1.
+- §9: decisiones **aprobadas** #4, #6, #12–#15 (sin `AggregateRating`), #16 (no en v1), #17 (no), #18 (imagen enlazada), #19 (solo galería, bajo demanda), #21 (sin www), #22 (dos semanas tras el merge), #23, #24. **Pendientes del cliente:** #1, #2, #3, #5, #7, #8, #9, #10, #11, #20.
+
+**Por qué**
+Dejar el repo listo para construir el sitio nuevo sin perder el anterior, y fijar por escrito cómo se comporta en cada dispositivo antes de escribir CSS.
+
+**Archivos tocados**
+Movidos a `referencia/`; nuevos: `index.html` (provisional), `netlify.toml`, `css/.gitkeep`, `js/.gitkeep`, `img/.gitkeep`, `fonts/.gitkeep`; editados: `docs/propuesta.md`, `docs/BITACORA.md`.
+
+**Decisiones**
+- El `index.html` provisional es solo para la rama: **no se debe hacer merge a `main` antes de los bloques 3–6**, porque reemplazaría el sitio en producción.
+- Lo que lleva a la raíz el sitio viejo (`robots.txt`, `sitemap.xml`) no se toca todavía (bloque 9).
+- El layout de tablet es el valor por defecto desde 48em; el de desktop exige ancho ≥ 75em **y** `hover: hover` **y** `pointer: fine`.
+- Netlify no permite activar el deploy preview desde `netlify.toml` (es un ajuste del sitio en el panel). Netlify ya marca los deploys de rama y de PR con `noindex`.
+
+**Pendientes**
+- Activar en el panel de Netlify el branch deploy de `modernizacion` (pasos en la respuesta de esta sesión).
+- Aprobación de la dirección visual (§10) para iniciar los bloques 1 y 3–6; el bloque 2 (head/SEO) y el 9 pueden avanzar antes.
+- Respuestas del cliente a las decisiones pendientes.
+- `docs/benchmark/competencia.md` está sin versionar (no es de esta sesión); se deja intacto.
+
 ## Registro de commits
 
 - 2026-10-20 12:17 `a19da90` docs: configuración inicial, bitácora, baseline Lighthouse y hallazgos
+- 2026-10-20 12:26 `f09956c` docs: inventario del sitio actual y propuesta de reconstrucción
+- 2026-10-20 12:39 `e03c554` docs: mover build actual a referencia y dejar esqueleto (bloque 0)
+- 2026-10-20 12:39 `c695786` feat: esqueleto de carpetas, index provisional y netlify.toml (bloque 0)

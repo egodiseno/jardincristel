@@ -37,11 +37,11 @@ Decisión tomada: reconstruir como **HTML semántico estático**, sin build ni f
 ├── netlify.toml                # redirects (www→raíz, ya existe en el dominio) y headers si se prefiere
 ├── tools/
 │   └── optimize-images.mjs     # script ocasional (npx sharp) para generar derivados; NO es un build
-├── referencia/                 # build actual movido aquí (assets/, images/, fonts/, icons/ viejos) hasta aprobar su retiro
+├── referencia/                 # build anterior completo y funcional (index.html, assets/, images/, fonts/, icons/, manifest.json); noindex; se retira 2 semanas después del merge (decisión #22)
 └── docs/
 ```
 
-Reglas: nada de dependencias en tiempo de ejecución; sin CDN; un solo CSS y un solo JS; los derivados de imagen se generan con un script manual y se versionan. Los assets actuales **no se borran**: se mueven a `referencia/` y solo se eliminan con tu aprobación. Como producción es `main`, nada de esto afecta al sitio en vivo hasta que se haga el merge.
+Reglas: nada de dependencias en tiempo de ejecución; sin CDN; un solo CSS y un solo JS; los derivados de imagen se generan con un script manual y se versionan. Los assets actuales **no se borran**: ya están en `referencia/` (bloque 0, hecho) y se retiran dos semanas después del merge a `main` (decisión #22). `robots.txt`, `sitemap.xml` y `favicon.ico` siguen en la raíz hasta el bloque 9. Como producción es `main`, nada de esto afecta al sitio en vivo hasta que se haga el merge.
 
 ---
 
@@ -78,7 +78,7 @@ Un solo `<h1>`. Landmarks nativos (`header`, `nav`, `main`, `section`, `footer`)
         <h3>Cómo llegar</h3> mapa (imagen enlazada o embed diferido)
     <section id="faq">  (opcional, §8)  <h2>Preguntas frecuentes</h2> <details>…
   <footer>  © <año> Jardín Cristel · Facebook · (aviso de privacidad)
-  barra/botón flotante de WhatsApp (solo móvil)
+  CTA “Cotizar” por WhatsApp: botón central de la barra inferior (móvil) o en la barra superior (tablet/desktop); ver §10
   <dialog id="lightbox">
 ```
 
@@ -209,17 +209,18 @@ Detalles: los eventos de teléfono y WhatsApp son los de negocio; los `data-*` h
 
 ## 8. Plan de implementación (un commit por bloque)
 
-Cada bloque termina con una entrada en `docs/BITACORA.md` y un commit en español (`feat:`/`fix:`/`perf:`/`docs:`/`style:`), solo en `modernizacion`. Medición con Lighthouse al cerrar los bloques 4, 7 y 9.
+⚑ = depende de la aprobación de la dirección visual (§10). Cada bloque termina con una entrada en `docs/BITACORA.md` y un commit en español (`feat:`/`fix:`/`perf:`/`docs:`/`style:`), solo en `modernizacion`. Medición con Lighthouse al cerrar los bloques 4, 7 y 9.
 
 | Bloque | Contenido | Commit sugerido |
 |---|---|---|
-| 0 | Mover el build actual a `referencia/` (sin borrar) y dejar listo el esqueleto | `docs: mover build actual a referencia` |
-| 1 | `css/styles.css`: tokens (`--malva-600`, etc.), reset mínimo, tipografía, utilidades; fuentes WOFF2 subset y `@font-face` | `feat: tokens de diseño y fuentes WOFF2` |
+| — | **Dependientes de la aprobación de la dirección visual: bloques 1 y 3–6** (ver §10). Los bloques 0, 2 y 7–10 no dependen de ella. | |
+| 0 ✅ | Mover el build actual a `referencia/` (sin borrar) y dejar listo el esqueleto (`index.html` provisional, `netlify.toml`, carpetas) — **hecho** | `docs: mover build actual a referencia…` · `feat: esqueleto…` |
+| 1 ⚑ | `css/styles.css`: tokens (`--malva-600`, etc.), reset mínimo, tipografía, utilidades; fuentes WOFF2 subset y `@font-face` | `feat: tokens de diseño y fuentes WOFF2` |
 | 2 | `<head>` completo: metas, canonical, OG/Twitter, JSON-LD, iconos, manifest, preloads | `feat: head, SEO y datos estructurados` |
-| 3 | Header + navegación (móvil con `<button>`/`hidden`, desktop horizontal) + hero con `<picture>` y fetchpriority | `feat: header y hero con contenido en HTML` |
-| 4 | Nosotros + Eventos (6 `<article>`), imágenes responsivas | `feat: secciones nosotros y eventos` |
-| 5 | Paquete (sección o `<dialog>`) + galería con lightbox `<dialog>` | `feat: paquete y galería accesible` |
-| 6 | Contacto, mapa, footer, botón flotante de WhatsApp | `feat: contacto, footer y CTA flotante` |
+| 3 ⚑ | Header + navegación (móvil con `<button>`/`hidden`, desktop horizontal) + hero con `<picture>` y fetchpriority | `feat: header y hero con contenido en HTML` |
+| 4 ⚑ | Nosotros + Eventos (6 `<article>`), imágenes responsivas | `feat: secciones nosotros y eventos` |
+| 5 ⚑ | Paquete (sección o `<dialog>`) + galería con lightbox `<dialog>` | `feat: paquete y galería accesible` |
+| 6 ⚑ | Contacto, mapa, footer, botón flotante de WhatsApp | `feat: contacto, footer y CTA flotante` |
 | 7 | `js/main.js`: menú, scrollspy, lightbox, **tracking delegado**; `docs/tracking.md` | `feat: JS mínimo y tracking GA4 por delegación` |
 | 8 | `tools/optimize-images.mjs` + derivados AVIF/WebP + fondos aligerados + favicons reales | `perf: imágenes responsivas AVIF/WebP y fondos ligeros` |
 | 9 | `robots.txt`, `sitemap.xml`, `_headers`/`netlify.toml`, `404.html` | `feat: robots, sitemap, caché y 404` |
@@ -230,36 +231,163 @@ Criterio de “hecho” por bloque: validación HTML, sin errores en consola, si
 
 ---
 
-## 9. Decisiones pendientes para Emmanuel
+## 9. Decisiones para Emmanuel
+
+Estado: ✅ aprobada · ⏳ pendiente del cliente. Resumen: **aprobadas** #4, #6, #12–#15, #16–#19, #21–#24; **pendientes del cliente** #1, #2, #3, #5, #7, #8, #9, #10, #11, #20 (bloquean contenido, no la estructura).
 
 **Contenido**
-1. **Paquete por evento:** ¿el “Paquete completo” (70–150 personas, 6 hrs, DJ, inflable, etc.) aplica igual a bautizo, boda, graduación y empresarial? ¿Hay paquetes distintos? ¿Se muestran precios o “desde $X”?
-2. **Capacidad y horarios:** confirmar mínimo 70 / máximo 150 y el costo extra de carpa y pista (para JSON-LD y FAQ); horario de atención y de visitas.
-3. **Cumpleaños:** el texto de Nosotros los menciona pero no hay tarjeta. ¿Se agrega? ¿Y otros eventos (baby shower, aniversarios, posadas)?
-4. **Redacción:** “pueblo mágico” vs “centro de Tepotzotlán”, meta description más corta (≤155 caracteres), corregir “Llamanos”, “jardin”, “San Martin”. ¿Aprueba que se unifique el tono?
-5. **Dirección y datos legales:** dirección exacta con código postal 54600, ¿correo electrónico? (hoy no hay `mailto`), ¿Instagram/TikTok/Google Business Profile?
-6. **Aviso de privacidad y cookies:** ¿se agrega? (recomendado por GA4 y por LFPDPPP).
-7. **Mensaje de WhatsApp:** texto precargado actual (con diferencias entre el sitio y el modal); ¿se mantiene? ¿Uno por tipo de evento (“quiero cotizar una boda”)?
+1. ⏳ **Paquete por evento:** ¿el “Paquete completo” (70–150 personas, 6 hrs, DJ, inflable, etc.) aplica igual a bautizo, boda, graduación y empresarial? ¿Hay paquetes distintos? ¿Se muestran precios o “desde $X”?
+2. ⏳ **Capacidad y horarios:** confirmar mínimo 70 / máximo 150 y el costo extra de carpa y pista (para JSON-LD y FAQ); horario de atención y de visitas.
+3. ⏳ **Cumpleaños:** el texto de Nosotros los menciona pero no hay tarjeta. ¿Se agrega? ¿Y otros eventos (baby shower, aniversarios, posadas)?
+4. ✅ **Redacción:** “pueblo mágico” vs “centro de Tepotzotlán”, meta description más corta (≤155 caracteres), corregir “Llamanos”, “jardin”, “San Martin”. ¿Aprueba que se unifique el tono?
+   - *Aprobada.*
+5. ⏳ **Dirección y datos legales:** dirección exacta con código postal 54600, ¿correo electrónico? (hoy no hay `mailto`), ¿Instagram/TikTok/Google Business Profile?
+6. ✅ **Aviso de privacidad y cookies:** ¿se agrega? (recomendado por GA4 y por LFPDPPP).
+   - *Aprobada: se agrega aviso de privacidad y política de cookies/consentimiento; texto legal por definir.*
+7. ⏳ **Mensaje de WhatsApp:** texto precargado actual (con diferencias entre el sitio y el modal); ¿se mantiene? ¿Uno por tipo de evento (“quiero cotizar una boda”)?
 
 **Material gráfico**
-8. **Originales en alta resolución** de las fotos (las actuales son de 530 px); ¿hay más fotos o video? Imagen para `og:image` con logo.
-9. **Logo vectorial** (SVG/AI/PDF) para favicon y header; hoy el favicon es un PNG incrustado.
-10. **Tipografía:** ¿licencia de Berthold Script BQ (comercial) para web? Si no, buscar una script libre equivalente.
-11. **Fondos decorativos:** ¿son parte esencial de la identidad o se pueden simplificar en móvil?
+8. ⏳ **Originales en alta resolución** de las fotos (las actuales son de 530 px); ¿hay más fotos o video? Imagen para `og:image` con logo.
+9. ⏳ **Logo vectorial** (SVG/AI/PDF) para favicon y header; hoy el favicon es un PNG incrustado.
+10. ⏳ **Tipografía:** ¿licencia de Berthold Script BQ (comercial) para web? Si no, buscar una script libre equivalente.
+11. ⏳ **Fondos decorativos:** ¿son parte esencial de la identidad o se pueden simplificar en móvil?
 
 **UX / funcionalidad (propuestas, nada se implementa sin su OK)**
-12. **Botón flotante de WhatsApp** persistente (hoy hay barra solo en móvil): ¿barra inferior, botón circular, o ambos?
-13. **Carrusel de eventos** en móvil (scroll-snap, sin librerías) en lugar de seis tarjetas apiladas.
-14. **Sección de preguntas frecuentes** (capacidad, anticipo, horarios, estacionamiento, alimentos externos, descorche) con datos estructurados `FAQPage`.
-15. **Testimonios / reseñas** (Google, Facebook) con permiso de los autores; con `AggregateRating` solo si son reales y verificables.
-16. **Formulario de cotización** (fecha, tipo de evento, invitados) además de WhatsApp: requiere servicio de envío (Netlify Forms) y política de privacidad.
-17. **Calendario de disponibilidad** (fechas ocupadas) o solo “consulta fechas”.
-18. **Mapa interactivo** (iframe diferido) vs. imagen enlazada actual.
-19. **Video corto** del jardín en el hero o la galería (peso/LCP: solo con póster ligero y carga bajo demanda).
-20. **Analítica:** ¿se mantiene GA4 `G-DNF30KJ0Y7`? ¿Quién accede al panel para marcar `click_whatsapp` y `click_phone` como eventos clave? ¿Consent Mode v2?
+12. ✅ **Botón flotante de WhatsApp** persistente (hoy hay barra solo en móvil): ¿barra inferior, botón circular, o ambos?
+   - *Aprobada: la forma está definida en §10 (botón central “Cotizar” en la barra inferior móvil; botón en la barra superior en tablet/desktop).*
+13. ✅ **Carrusel de eventos** en móvil (scroll-snap, sin librerías) en lugar de seis tarjetas apiladas.
+   - *Aprobada: carrusel con scroll-snap en móvil (§10).*
+14. ✅ **Sección de preguntas frecuentes** (capacidad, anticipo, horarios, estacionamiento, alimentos externos, descorche) con datos estructurados `FAQPage`.
+   - *Aprobada: FAQ con `FAQPage`; el contenido de las respuestas depende de #1, #2 y #5.*
+15. ✅ **Testimonios / reseñas** (Google, Facebook) con permiso de los autores; con `AggregateRating` solo si son reales y verificables.
+   - *Aprobada **sin `AggregateRating`**: solo testimonios reales con permiso de los autores.*
+16. ✅ **Formulario de cotización** (fecha, tipo de evento, invitados) además de WhatsApp: requiere servicio de envío (Netlify Forms) y política de privacidad.
+   - *Aprobada: **no entra en v1** (solo WhatsApp y teléfono).*
+17. ✅ **Calendario de disponibilidad** (fechas ocupadas) o solo “consulta fechas”.
+   - *Aprobada: **no** habrá calendario; se invita a consultar fechas por WhatsApp.*
+18. ✅ **Mapa interactivo** (iframe diferido) vs. imagen enlazada actual.
+   - *Aprobada: **imagen enlazada** a Google Maps (sin iframe).*
+19. ✅ **Video corto** del jardín en el hero o la galería (peso/LCP: solo con póster ligero y carga bajo demanda).
+   - *Aprobada: **solo en la galería y bajo demanda** (póster ligero; el video no carga hasta que se pide).*
+20. ⏳ **Analítica:** ¿se mantiene GA4 `G-DNF30KJ0Y7`? ¿Quién accede al panel para marcar `click_whatsapp` y `click_phone` como eventos clave? ¿Consent Mode v2?
 
 **Técnicas / operación**
-21. **Dominio:** confirmar que el canónico es **`jardincristel.mx` sin www** (así responde hoy) y que no se quiere el contrario.
-22. **Retiro de `referencia/`:** cuándo borrar el build antiguo (regla: no se borra nada sin tu aprobación).
-23. **Despliegue:** ¿se hace PR a `main` y Netlify publica automáticamente? ¿Se quiere un deploy preview de `modernizacion` para validar antes?
-24. **Metas de performance** de la sección inicial: ¿ok con Performance ≥ 95 móvil y peso inicial ≤ 300 KiB?
+21. ✅ **Dominio:** confirmar que el canónico es **`jardincristel.mx` sin www** (así responde hoy) y que no se quiere el contrario.
+   - *Aprobada: canónico **sin `www`**.*
+22. ✅ **Retiro de `referencia/`:** cuándo borrar el build antiguo (regla: no se borra nada sin tu aprobación).
+   - *Aprobada: `referencia/` se retira **dos semanas después del merge** a `main`.*
+23. ✅ **Despliegue:** ¿se hace PR a `main` y Netlify publica automáticamente? ¿Se quiere un deploy preview de `modernizacion` para validar antes?
+   - *Aprobada: **sí** habrá deploy preview de `modernizacion`. `netlify.toml` ya existe, pero activarlo se hace en el panel de Netlify (ver bitácora, 2026-10-20 · bloque 0).*
+24. ✅ **Metas de performance** de la sección inicial: ¿ok con Performance ≥ 95 móvil y peso inicial ≤ 300 KiB?
+   - *Aprobada: Performance ≥ 95 en móvil y peso inicial ≤ 300 KiB.*
+
+---
+
+## 10. Experiencia por dispositivo
+
+**Un solo HTML y tres layouts por CSS.** No hay sitios separados, ni detección de user-agent, ni contenido duplicado oculto: el mismo DOM se presenta como app web en móvil, como sitio compacto en tablet y como sitio editorial en desktop. Todo lo que cambia entre layouts son reglas CSS (y, para los paneles, qué método del `<dialog>` se invoca).
+
+> **Estado: propuesta de dirección visual, pendiente de aprobación.** Los bloques 1 y 3–6 del plan (§8) dependen de ella y no se empiezan hasta que se apruebe. Se conserva la identidad de marca (paleta, tipografías, arcos); lo que se define aquí es la estructura de interacción por dispositivo.
+
+### 10.1 Criterio de selección: media queries combinadas
+
+El layout lo decide primero el **ancho** y, solo para el desktop, también el **tipo de puntero**. `hover` y `pointer` describen el dispositivo de entrada principal; no sustituyen al ancho.
+
+| Layout | Condición | Casos que cubre |
+|---|---|---|
+| **Móvil** | `width < 48em` (base, sin media query) | Teléfonos; también una ventana de escritorio estrecha (recibe la UI móvil, que es la correcta para ese ancho). |
+| **Tablet** | `width ≥ 48em` y **no** cumple la condición de desktop | Tablets (48em–74.99em); **pantallas más anchas con puntero táctil** (iPad Pro horizontal, pantallas táctiles grandes, Surface en modo tableta); laptops con ventana angosta. |
+| **Desktop** | `width ≥ 75em` **y** `hover: hover` **y** `pointer: fine` | Laptops y monitores con mouse/trackpad. |
+
+```css
+/* Base: MÓVIL (<48em). Mobile first: sin media query. */
+.nav { position: fixed; inset: auto 0 0 0; /* barra inferior */ }
+
+/* TABLET: desde 48em. Aplica también a anchos grandes con puntero táctil. */
+@media (min-width: 48em) {
+  .nav { position: sticky; inset: 0 0 auto 0; /* barra superior compacta */ }
+  .eventos__lista { display: grid; grid-template-columns: repeat(2, 1fr); overflow: visible; }
+}
+
+/* DESKTOP: solo con ancho amplio + hover real + puntero preciso. */
+@media (min-width: 75em) and (hover: hover) and (pointer: fine) {
+  .nav { /* menú horizontal con logo, enlaces y CTA */ }
+  .eventos__lista { grid-template-columns: repeat(3, 1fr); }
+  .paquete { display: block; position: static; }
+}
+
+/* Estados hover: SIEMPRE tras hover:hover, en cualquier ancho (un trackpad en ventana angosta también los usa). */
+@media (hover: hover) { .card:hover { transform: translateY(-4px); } }
+
+@media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+```
+
+Notas de implementación:
+- Los puntos de corte van en `em` (respetan el zoom/tamaño de fuente del usuario). Las `@media` no admiten custom properties; los valores 48em y 75em se documentan en un comentario al inicio de `styles.css` y se verifican con `grep`.
+- No se usa `any-pointer`: en híbridos (laptop táctil con mouse) el puntero principal manda, y el desktop se activa solo con `pointer: fine`.
+- Ningún layout depende de JS para mostrarse; el JS solo **mejora** (paneles, visor, scrollspy).
+- Sin imágenes duplicadas por layout: las `<img>` usan `srcset`/`sizes`, así que cada dispositivo descarga una sola variante. Los elementos que solo existen visualmente en un layout (p. ej. el item “Nosotros” en la barra inferior) se ocultan con `display: none`, lo que también los saca del árbol de accesibilidad.
+- `<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">` y `env(safe-area-inset-*)` para notch/barras del sistema; alturas con `dvh`.
+
+### 10.2 Componentes compartidos (un solo marcado)
+
+| Componente | Marcado único | Móvil | Tablet | Desktop |
+|---|---|---|---|---|
+| **Navegación** | `<nav aria-label="Principal">` con Inicio, Nosotros, Eventos, Galería, Contacto y CTA “Cotizar” | Barra inferior fija | Barra superior compacta | Menú horizontal en header |
+| **Eventos** | `<ul>` de 6 `<article>` | Carrusel scroll-snap horizontal | Rejilla de 2 columnas | Rejilla editorial de 3 columnas |
+| **Paquete** | `<dialog id="paquete">` | Bottom sheet | Panel lateral | Sección visible en la página |
+| **Galería** | Rejilla de `<a><img></a>` + `<dialog class="visor">` | Visor a pantalla completa con swipe | Visor con swipe y flechas | Lightbox con flechas y teclado |
+| **CTA Cotizar** | `<a href="wa.me…" data-track="whatsapp">` | Botón central de la barra | Botón en la barra superior | Botón en el header |
+
+### 10.3 Móvil (<48em): app web
+
+- **Barra de navegación inferior** (`position: fixed; bottom: 0`, `padding-bottom: env(safe-area-inset-bottom)`): **Inicio · Eventos · [Cotizar] · Galería · Contacto**. Icono SVG inline + etiqueta de texto visible en cada item (no solo iconos). “Nosotros” no aparece en la barra (queda accesible por scroll y por el enlace del hero). Cada item mide ≥ 48×48 px.
+  - El botón central **“Cotizar”** es un enlace a WhatsApp (`wa.me`), con diseño destacado (circular, color de acción) y `data-track="whatsapp" data-track-location="nav-inferior"`. Su `aria-label` empieza con el texto visible (“Cotizar por WhatsApp”), por H11.
+  - Sección activa con `aria-current="location"` mediante `IntersectionObserver`; foco visible; `body` con `padding-bottom` para que la barra no tape el contenido.
+  - El header superior es mínimo (solo logo/nombre), no contiene el menú.
+- **Eventos como tarjetas con scroll-snap horizontal** (sin librerías):
+  ```css
+  .eventos__lista { display: grid; grid-auto-flow: column; grid-auto-columns: 82%;
+    gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain; scroll-padding-inline: 1rem; }
+  .evento { scroll-snap-align: center; }
+  ```
+  La siguiente tarjeta asoma (82 %) para sugerir el gesto; el contenedor es una región enfocable con `aria-label` para operarlo con teclado; indicador de posición opcional con `animation-timeline: scroll()` si hay soporte, si no, sin indicador. Cada tarjeta tiene su botón “Ver paquete” (abre el bottom sheet).
+- **Paquete como bottom sheet con `<dialog>`**: `showModal()` desde el botón; CSS `inset: auto 0 0 0; max-height: 85dvh; border-radius: 1.75rem 1.75rem 0 0; margin: 0`, animación de entrada con `@starting-style` y `transition … allow-discrete`, asa visual arriba, botón cerrar, Escape, clic en el fondo (`::backdrop`) y gesto opcional de arrastrar hacia abajo (≈ 20 líneas de `pointer events`). El foco se atrapa y se restaura al cerrar (nativo). CTA “Cotizar paquete” dentro del sheet.
+  - *Sin JS*: el botón es un enlace a `#paquete` y la regla `.paquete:target { display: block; position: static }` muestra el contenido como sección.
+- **Galería a pantalla completa con swipe**: rejilla de miniaturas (2 columnas); al tocar, un `<dialog class="visor">` a `100dvh` con una tira horizontal `scroll-snap-type: x mandatory` + `scroll-snap-stop: always` de las 6 fotos: el swipe es el desplazamiento nativo (sin JS de gestos), con `touch-action: pan-x pinch-zoom` para permitir zoom con pellizco. Se abre en la foto tocada (`scrollIntoView({inline:'center', behavior:'instant'})`); contador “3 / 6” en una región `aria-live`; botón cerrar; la imagen grande se carga al abrir (variante 1200w).
+- **Manifest `display: standalone`**: `manifest.webmanifest` con `id`, `start_url: "/"`, `display: "standalone"`, `display_override: ["standalone","minimal-ui"]`, `orientation: "any"` (se quita `portrait` forzado), `theme_color`/`background_color` = color de marca (igual que `<meta name="theme-color">`), iconos 192/512 y maskable, y `shortcuts` (“Cotizar por WhatsApp”, “Llamar”). Sin service worker (H2): Chrome en Android permite instalar sin él; en iOS se agrega desde Compartir → Añadir a pantalla de inicio. En modo standalone no hay barra de URL, por eso la navegación inferior y los safe areas son obligatorios.
+- **View Transitions como mejora progresiva**: `document.startViewTransition` (mismo documento, no multipágina) para abrir el visor (la miniatura “se expande” con `view-transition-name`) y el bottom sheet. Todo está protegido con `if (document.startViewTransition)` y desactivado con `prefers-reduced-motion: reduce`; sin soporte, el `<dialog>` se abre igual sin transición.
+
+### 10.4 Tablet (48em–74.99em, y anchos mayores con puntero táctil)
+
+- **Barra superior compacta** (sticky, ≈ 56 px): logo a la izquierda, enlaces en una sola línea (icono + texto corto) y **“Cotizar”** a la derecha. Sin barra inferior.
+- **Rejilla de 2 columnas** para eventos (sin carrusel), galería de 3 columnas desde 64em; Nosotros en dos columnas (texto + foto).
+- **Paquete en panel lateral**: el mismo `<dialog>` como *drawer* a la derecha (`inset: 0 0 0 auto; width: min(28rem, 90vw); height: 100dvh`) que desliza desde el borde; `showModal()`, cierre con Escape, botón y clic en el fondo.
+- **Visor de galería** a pantalla completa con swipe (igual que móvil) y flechas visibles; objetivos táctiles ≥ 44 px; **sin estilos hover** (todo bajo `@media (hover: hover)`).
+- Pantallas táctiles grandes (≥ 75em sin mouse): mismo layout de tablet con contenedor de máx. 72rem centrado.
+
+### 10.5 Desktop (≥75em con `hover: hover` y `pointer: fine`)
+
+- **Menú horizontal** en el header (logo · enlaces · “Cotizar”), con `scroll-margin-top` en las secciones para compensar el header fijo y subrayado animado del enlace activo.
+- **Rejilla editorial de 3 columnas**: tarjetas de eventos con desplazamientos verticales alternos, Nosotros a dos columnas con foto en arco grande, galería asimétrica (una foto destacada + cinco). Aquí viven los **fondos decorativos** de ≥ 75em (cargados solo en este layout, ver §5).
+- **Paquete visible como sección** (`#paquete`): el `<dialog>` se muestra estático (`display: block; position: static`) sin `showModal()`; los botones “Ver paquete” se ocultan y el menú enlaza a la sección.
+- **Estados hover** (y `:focus-visible` siempre): tarjetas que suben 4 px, zoom 1.03 en galería, botones con tono más oscuro, flechas de lightbox con fondo. Lightbox con ← / → / Esc.
+- Tracking idéntico en los tres layouts (misma delegación, `data-track-location` distinto: `nav-inferior`, `nav-superior`, `header`).
+
+### 10.6 JS necesario (≈ 1 KB extra sobre el plan)
+
+| Función | Qué hace | Sin JS |
+|---|---|---|
+| Paquete | `matchMedia('(min-width: 75em) and (hover: hover) and (pointer: fine)')` decide `showModal()` (móvil/tablet) o dejarlo como sección (desktop); escucha el cambio al rotar/redimensionar | `#paquete` por `:target` |
+| Visor de galería | Abre el `<dialog>`, posiciona la foto, actualiza el contador | Las miniaturas enlazan a la imagen grande |
+| Scrollspy | `aria-current` en la navegación | Navegación por anclas normal |
+| View Transitions | Envuelve el abrir/cerrar | Sin animación |
+
+### 10.7 Riesgos y verificación
+
+- **Barra inferior en iOS/Android**: barras dinámicas del navegador y teclado; se usa `dvh`, `env(safe-area-inset-bottom)` y se prueba en Safari iOS y Chrome Android reales.
+- **Híbridos y ventanas redimensionadas**: probar rotación de tablet, ventana de laptop de 1100 px, monitor táctil grande, y cambio de puntero (conectar mouse a un iPad).
+- **Accesibilidad**: foco atrapado y restaurado en los tres `<dialog>`, `aria-current`, contraste AA (token `--malva-600`), objetivos táctiles ≥ 44 px, `prefers-reduced-motion`, orden de lectura coherente (el DOM es el mismo en los tres layouts).
+- **Pruebas**: Lighthouse móvil y desktop por separado (metas: objetivos al inicio de este documento), DevTools con emulación táctil y 3 anchos de referencia (390, 820, 1440 px), más dispositivos reales: iPhone (Safari), Android (Chrome), iPad y laptop.
+- **Una versión, un mantenimiento**: añadir un evento o una foto es editar el HTML una vez; los tres layouts lo reflejan.
