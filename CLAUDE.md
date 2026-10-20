@@ -12,8 +12,8 @@ Es una landing de una sola página con secciones ancla: `#inicio`, `#nosotros`, 
 
 - Sitio estático servido desde la raíz del repo (`netlify.toml`, sin build). Destino: HTML semántico + `css/` + `js/` + `img/` + `fonts/` en la raíz; hoy `index.html` es provisional.
 - **`referencia/`** contiene el build anterior (`index.html`, `assets/main-*.js|css` compilados con Vite + Tailwind, `images/`, `fonts/`, `icons/`, `manifest.json`), funcional y `noindex`. Es solo referencia de diseño y contenido; el código fuente original no existe en el repo. No se borra nada de ahí sin aprobación.
-- **Identidad:** se conserva y se optimiza (paleta malva/lavanda/marfil, Berthold Script en logo y título, acuarelas florales y arcos). Ver `docs/diseno.md`.
-- Fuentes de referencia: Berthold Script (licencia web pendiente, **decisión #10, prioridad alta**: el TTF ya se sirve públicamente) y Merriweather (OFL).
+- **Identidad:** se conserva y se optimiza (paleta malva/lavanda/marfil, logo “Jardín Cristel” y títulos en script caligráfico, acuarelas florales y arcos). Ver `docs/diseno.md`.
+- **Logo y tipografía (decisión #10, resuelta con condición):** el logo será SVG; `img/logo.svg` es un marcador con la imagen actual del logo (`role="img"`, `aria-label="Jardín Cristel"`) hasta que el cliente compre la licencia Desktop. H1 y H2 usan **Pinyon Script (OFL)** en `fonts/pinyon-script-400.woff2` (temporal). **Nunca vectorizar ni desplegar `Berthold-Script.ttf`** (ya se retiró de `referencia/fonts/`; sigue en el historial de git). Merriweather es OFL.
 - Analítica: Google Tag Manager / gtag (`G-DNF30KJ0Y7`), cargado desde `index.html`.
 - Sin build, sin `package.json`. Para revisar localmente basta un servidor estático (p. ej. `npx serve .`).
 
@@ -30,6 +30,7 @@ Es una landing de una sola página con secciones ancla: `#inicio`, `#nosotros`, 
 - Commits pequeños y en español, con prefijo: `feat:`, `fix:`, `perf:`, `docs:`, `style:`.
 - **No borrar assets sin preguntar primero** (imágenes, fuentes, iconos, etc.).
 - Hook de git: `.githooks/post-commit` agrega cada commit al "Registro de commits" de `docs/BITACORA.md`. Se activa con `git config core.hooksPath .githooks` (la config no se versiona; ejecutarla tras clonar).
+- **No mergear a `main` sin el SVG final y la licencia confirmada.**
 - **Sin frameworks CSS ni bundlers.** Todo cambio al sitio se hace desde Claude Code en terminal.
 - Al terminar cada tarea, agrega una entrada en docs/BITACORA.md con fecha, qué se hizo, por qué, archivos tocados, decisiones y pendientes.
 

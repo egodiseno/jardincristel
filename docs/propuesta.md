@@ -4,7 +4,7 @@ Decisión tomada: reconstruir como **HTML semántico estático**, sin build ni f
 
 **Objetivos medibles (móvil, Lighthouse):** Performance ≥ 95, LCP ≤ 2.0 s (hoy 4.9 s), CLS ≤ 0.02, TBT ≤ 50 ms, Accessibility 100, Best Practices 100, SEO 100; peso inicial de la página ≤ 300 KiB (hoy 902 KiB).
 
-**Principio de identidad:** se **conserva la identidad de `referencia/` y se optimiza**: paleta malva / lavanda / marfil, Berthold Script en logo y título, acuarelas florales y arcos. Mejoran el diseño gráfico, la UX/UI y la tecnología (HTML semántico estático, CSS propio con custom properties, JS vanilla; **sin Tailwind ni Vite**). El sistema de diseño optimizado está en `docs/diseno.md` y el catálogo de imágenes en `docs/imagenes.md`. (Un intento de rediseño completo se probó como prototipo y se descartó; ver §11.)
+**Principio de identidad:** se **conserva la identidad de `referencia/` y se optimiza**: paleta malva / lavanda / marfil, el logo “Jardín Cristel” y los títulos en estilo script caligráfico (Berthold Script en la referencia; **Pinyon Script, OFL, como fuente temporal**, decisión #10), acuarelas florales y arcos. Mejoran el diseño gráfico, la UX/UI y la tecnología (HTML semántico estático, CSS propio con custom properties, JS vanilla; **sin Tailwind ni Vite**). El sistema de diseño optimizado está en `docs/diseno.md` y el catálogo de imágenes en `docs/imagenes.md`. (Un intento de rediseño completo se probó como prototipo y se descartó; ver §11.)
 
 ---
 
@@ -19,7 +19,7 @@ Decisión tomada: reconstruir como **HTML semántico estático**, sin build ni f
 ├── js/
 │   └── main.js                 # <details> de “Qué incluye”, galería, scrollspy, tracking GA4 + Clarity diferido (≈ 4–5 KB sin minificar)
 ├── fonts/
-│   ├── berthold-script-400.woff2     # solo logo y H1; sujeto a licencia web (decisión #10); subset latino
+│   ├── pinyon-script-400.woff2       # H1 y H2; OFL, temporal (decisión #10); subset latino, 24.5 KB (+ OFL-pinyon-script.txt)
 │   ├── merriweather-400.woff2        # OFL; subset latino
 │   └── merriweather-700.woff2
 ├── img/
@@ -127,7 +127,7 @@ Hoy el LCP (4.9 s en móvil) es el `<h2>` del hero: ~330 ms de TTFB + ~2.2 s esp
 
 1. **Contenido en el HTML**: el h1 y el texto del hero existen en el documento inicial; el navegador los pinta sin esperar JS.
 2. **Imagen del hero como `<img>`**, no como `background-image`: `<picture>` con `<source type="image/avif">` + `<source type="image/webp">`, `srcset` 480w/960w/1600w, `sizes="100vw"`, `width`/`height` explícitos, `fetchpriority="high"`, `decoding="async"`, **sin** `loading="lazy"`. `<link rel="preload" as="image" imagesrcset=… imagesizes="100vw" fetchpriority="high">` en el `<head>`.
-3. **Fuentes**: WOFF2 con subset latino (`pyftsubset`, `unicode-range` U+0020-007E, U+00A0-00FF, comillas, ¡¿, €, —). `<link rel="preload" as="font" type="font/woff2" crossorigin>` solo para Berthold Script (h1) y Merriweather Regular. `font-display: swap` (cuerpo) y, para la fuente script del h1, `swap` con un fallback ajustado (`size-adjust`, `ascent-override`) para que el cambio no mueva el layout (CLS ≈ 0).
+3. **Fuentes**: WOFF2 con subset latino (`pyftsubset`, `unicode-range` U+0020-007E, U+00A0-00FF, comillas, ¡¿, €, —). `<link rel="preload" as="font" type="font/woff2" crossorigin>` solo para Pinyon Script (h1) y Merriweather Regular. `font-display: swap` (cuerpo) y, para la fuente script del h1, `swap` con un fallback ajustado (`size-adjust`, `ascent-override`) para que el cambio no mueva el layout (CLS ≈ 0).
 4. **CSS**: un solo archivo pequeño (objetivo < 12 KB), sin reset gigante; el CSS del primer viewport al principio. Si hiciera falta, inline del crítico (< 8 KB) y `css/styles.css` con `preload`/`media` trick; solo se decide con medición.
 5. **JS**: `type="module"` o `defer`, < 5 KB, sin trabajo en el hilo principal antes del LCP; gtag después del evento `load`.
 6. **Fondos decorativos fuera de la ruta crítica**: no aparecen en el primer viewport móvil; se cargan por CSS solo en las secciones inferiores y ≥768 px, con `content-visibility: auto` en las secciones largas.
@@ -211,6 +211,8 @@ Detalles: los eventos de teléfono y WhatsApp son los de negocio; los `data-*` h
 
 ## 8. Plan de implementación (un commit por bloque)
 
+**Condición de merge (decisión #10): no mergear a `main` sin el SVG final y la licencia confirmada.**
+
 ⚑ = depende de la aprobación del sistema de diseño (`docs/diseno.md`) y de la experiencia por dispositivo (§10). Cada bloque termina con una entrada en `docs/BITACORA.md` y un commit en español (`feat:`/`fix:`/`perf:`/`docs:`/`style:`), solo en `modernizacion`. Medición con Lighthouse al cerrar los bloques 4, 7 y 9.
 
 | Bloque | Contenido | Commit sugerido |
@@ -235,7 +237,7 @@ Criterio de “hecho” por bloque: validación HTML, sin errores en consola, si
 
 ## 9. Decisiones para Emmanuel
 
-Estado: ✅ aprobada · ⏳ pendiente del cliente. Resumen: **aprobadas** #4, #6, #12–#15, #16–#19, #21–#24; **pendientes del cliente** #1, #2, #3, #5, #7, #8, #9, **#10 (prioridad alta)**, #11, #20 (bloquean contenido, no la estructura).
+Estado: ✅ aprobada · ⏳ pendiente del cliente. Resumen: **aprobadas** #4, #6, #10 (con condición), #12–#15, #16–#19, #21–#24; **pendientes del cliente** #1, #2, #3, #5, #7, #8, #9, #11, #20, y de #10 la licencia Desktop de Berthold Script y el SVG final del logo (**bloquean el merge a `main`**) (bloquean contenido, no la estructura).
 
 **Contenido**
 1. ⏳ **Paquete por evento:** ¿el “Paquete completo” (70–150 personas, 6 hrs, DJ, inflable, etc.) aplica igual a bautizo, boda, graduación y empresarial? ¿Hay paquetes distintos? ¿Se muestran precios o “desde $X”?
@@ -250,8 +252,8 @@ Estado: ✅ aprobada · ⏳ pendiente del cliente. Resumen: **aprobadas** #4, #6
 
 **Material gráfico**
 8. ⏳ **Originales en alta resolución** de las fotos (las actuales son de 530 px); ¿hay más fotos o video? Imagen para `og:image` con logo.
-9. ⏳ **Logo vectorial** (SVG/AI/PDF) para favicon y header; hoy el favicon es un PNG incrustado en un `.svg` de 428 KB. *(Revertida a pendiente: se conserva el logo de referencia, es decir, “Jardín Cristel” en Berthold Script; el wordmark nuevo del prototipo queda descartado.)*
-10. 🔴 **PRIORIDAD ALTA — Licencia web de Berthold Script BQ:** el TTF (188 KB) **ya se sirve públicamente**: desde producción (`https://jardincristel.mx/fonts/Berthold-Script.ttf`, verificado: responde 200) y desde `referencia/fonts/` en esta rama y sus deploys (y en producción si `referencia/` llega a `main`). No consta con qué licencia se obtuvo; hay que confirmarlo con quien lo adquirió (proveedor, factura o contrato) **cuanto antes**, antes del merge y de cualquier uso nuevo. Opciones: **(a)** licencia web del titular, **(b)** compra, **(c)** convertir a **contornos SVG solo el logo y el H1** si la licencia lo permite (texto real siempre en el HTML, p. ej. `<title>` del SVG o texto oculto accesible). Merriweather es OFL y no tiene este problema. Mientras no se resuelva: **no se agregan nuevos usos** de Berthold, y antes del merge a `main` hay que decidir (con tu aprobación, porque implica no incluir un archivo) si `referencia/fonts/Berthold-Script.ttf` se excluye del despliegue. El bloque 3 (logo y H1) depende de esta decisión; el bloque 1 puede avanzar con Merriweather. *No es asesoría legal: confirmar el alcance de la licencia con quien la emitió.*
+9. ⏳ **Logo vectorial** (SVG/AI/PDF) para favicon y header; hoy el favicon es un PNG incrustado en un `.svg` de 428 KB. *(Parcialmente cubierta por #10: `img/logo.svg` es un **marcador** accesible con la imagen actual del logo; el SVG final lo entrega el cliente tras comprar la licencia Desktop.)*
+10. ✅ **Licencia web de Berthold Script BQ — resuelta el 2026-10-20, con condición.** El TTF se servía públicamente (producción, `referencia/` y deploys de la rama). Decisión: **(1)** el logo “Jardín Cristel” será **SVG**; hasta que el cliente compre la **licencia Desktop** se usa **la imagen actual del logo como marcador** (`img/logo.svg`, la flor de `referencia/icons/`, con `role="img"` y `aria-label="Jardín Cristel"`); **no se vectoriza desde `Berthold-Script.ttf`**. **(2)** H1 y títulos de sección usan una **fuente libre temporal: Pinyon Script (OFL)**, WOFF2 propio con subset latino (`fonts/pinyon-script-400.woff2`, 24.5 KB, `font-display: swap`); motivos y alternativas descartadas en `docs/diseno.md` §7. **(3)** `Berthold-Script.ttf` **se retiró del despliegue de la rama** (`git rm referencia/fonts/Berthold-Script.ttf`; sigue en el historial de git); la copia de producción (`main`) se retira cuando llegue el merge. **(4) Condición: no mergear a `main` sin el SVG final y la licencia confirmada.** Pendientes del cliente: comprar la licencia Desktop y entregar el SVG final del logo. Merriweather es OFL y no tiene este problema. *No es asesoría legal: confirmar el alcance de la licencia con quien la emita.*
 11. ⏳ **Fondos decorativos (acuarelas):** ¿son parte esencial de la identidad o se pueden simplificar en móvil? Propuesta de composición, menos piezas y meta de peso en `docs/diseno.md` §4.
 
 **UX / funcionalidad (propuestas, nada se implementa sin su OK)**

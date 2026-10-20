@@ -179,6 +179,31 @@ Cerrar el marcador `CLARITY_ID` con el valor real para que el bloque 7 se implem
 - Emmanuel: conectar Clarity con GA4 desde el panel de Clarity.
 - Resto de pendientes de medición sin cambios (Search Console, UTM de Business Profile/Facebook, dimensiones y eventos clave en GA4, aviso de privacidad y consentimiento).
 
+### 2026-10-20 — Decisión #10 (Berthold Script): logo SVG, fuente temporal y TTF retirado
+
+**Qué se hizo**
+- **Logo:** `img/logo.svg` (nuevo, 20 KB) como **marcador** con la imagen actual del logo (la flor acuarelada de `referencia/icons/android-chrome-512x512.png`, incrustada como WebP 256×256), con `role="img"` y `aria-label="Jardín Cristel"`. **No se vectorizó nada desde `Berthold-Script.ttf`.**
+- **Fuente temporal:** elegida **Pinyon Script (OFL)**; `fonts/pinyon-script-400.woff2` (**24.5 KB**, subset latino con fonttools desde el WOFF2 de Fontsource, 200 glifos, `font-display: swap`) y `fonts/OFL-pinyon-script.txt`. Comparada con Great Vibes, Parisienne, Alex Brush, Allura, Italianno y Tangerine (mismo texto a 64/36/26 px); motivos en `docs/diseno.md` §7.2. Uso: solo H1 y H2, mínimo 36 px; H2 en malva-600.
+- **TTF retirado del despliegue de la rama:** `git rm referencia/fonts/Berthold-Script.ttf`. **Sigue en el historial de git** (p. ej. commits `74ec3f1` y `d3139cc`, y `e03c554` donde se movió a `referencia/`); no se reescribió la historia.
+- `docs/propuesta.md` (#10 ahora ✅ resuelta con condición, #9 parcialmente cubierta, árbol de archivos, preload de fuentes) y `CLAUDE.md`: **“no mergear a `main` sin el SVG final y la licencia confirmada.”** Notas en `docs/diseno.md` (nueva §7), `docs/imagenes.md` e `docs/inventario.md`.
+
+**Por qué**
+El TTF de Berthold Script se servía públicamente sin licencia confirmada. Se retira del despliegue, se deja un marcador y una fuente OFL temporal para poder seguir construyendo, y se bloquea el merge hasta que exista el SVG final y la licencia.
+
+**Archivos tocados**
+Nuevos: `img/logo.svg`, `fonts/pinyon-script-400.woff2`, `fonts/OFL-pinyon-script.txt`. Eliminado del árbol: `referencia/fonts/Berthold-Script.ttf`. Editados: `docs/propuesta.md`, `docs/diseno.md`, `docs/imagenes.md`, `docs/inventario.md`, `CLAUDE.md`, `docs/BITACORA.md`.
+
+**Decisiones y hallazgos**
+- La ruta `fonts/Berthold-Script.ttf` de la instrucción ya no existía en la raíz (el bloque 0 lo movió a `referencia/fonts/`); el archivo desplegado en la rama era ese.
+- “La imagen actual del logo” es la flor: el nombre “Jardín Cristel” en la referencia es texto en Berthold, no una imagen; el marcador muestra solo la flor.
+- `role="img"`/`aria-label` solo funcionan si el SVG se incrusta en el HTML; con `<img>` el nombre lo da el `alt` (documentado en `docs/diseno.md` §7.1).
+- `referencia/index.html` ahora cae a `cursive` en título y logo (y su CSS pide un archivo que ya no existe): aceptable, es solo referencia.
+- **Producción (`main`) sigue sirviendo `/fonts/Berthold-Script.ttf`**; no se toca `main`. Desaparece con el merge. Si quieres quitarlo antes, hay que hacerlo directamente en `main`.
+
+**Pendientes**
+- Cliente: comprar la licencia Desktop de Berthold Script y entregar el SVG final del logo (bloquean el merge).
+- Afinar el fallback con `size-adjust`/`ascent-override` de Pinyon Script al implementar el bloque 1 y medir el CLS.
+
 ## Registro de commits
 
 - 2026-10-20 12:17 `a19da90` docs: configuración inicial, bitácora, baseline Lighthouse y hallazgos
@@ -190,3 +215,4 @@ Cerrar el marcador `CLARITY_ID` con el valor real para que el bloque 7 se implem
 - 2026-10-20 14:19 `f14d291` feat: prototipo de tres direcciones visuales (A, B, C)
 - 2026-10-20 14:45 `af94542` docs: optimizar identidad de referencia (sistema de diseño, catálogo de imágenes) y retirar prototipo
 - 2026-10-20 14:58 `cf8626d` docs: plan de medición (GA4, Clarity, Search Console) y prioridad de la licencia de Berthold Script
+- 2026-10-20 15:07 `189eb98` docs: registrar ID de Clarity en el plan de medición

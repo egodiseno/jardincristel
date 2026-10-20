@@ -116,3 +116,8 @@ Los iconos están pegados como `<svg><path …></svg>` en cada uso, sin reutiliz
 | Teléfono relleno / contorno | Contacto (móvil / escritorio) | Un `<symbol>` |
 | Ubicación | Contacto (escritorio) | `<symbol>` |
 | Cerrar × (lightbox) | caracteres `&times;`, `&#10094;`, `&#10095;` como texto | Se eliminan con el lightbox |
+
+## 6. Logo (marcador) y fuente retirada
+
+- `img/logo.svg` (**nuevo**, 20 KB): marcador del logo “Jardín Cristel” con la imagen actual del logo (la flor de `icons/android-chrome-512x512.png`, incrustada como WebP 256×256), accesible con `role="img"` y `aria-label="Jardín Cristel"`. Se sustituye por el SVG final del cliente (decisión #10; `docs/diseno.md` §7).
+- `referencia/fonts/Berthold-Script.ttf` se **retiró del despliegue de la rama** el 2026-10-20 (sigue en el historial de git). La referencia (`referencia/index.html`) muestra ahora su título y logo con la tipografía de reserva (`cursive`).

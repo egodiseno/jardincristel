@@ -1,8 +1,8 @@
 # Sistema de diseño optimizado — Jardín Cristel
 
-Optimización del diseño de `referencia/` **conservando su branding**: paleta malva / lavanda / marfil, Berthold Script en logo y título (sujeto a licencia, decisión #10), acuarelas florales y arcos. Se mejora el diseño gráfico, la UX/UI y la tecnología, sin Tailwind ni Vite: HTML semántico, CSS propio con custom properties y JS vanilla. Este documento es el contrato de diseño para los bloques 1 y 3–6 de `docs/propuesta.md` (§8), que quedan bloqueados hasta su aprobación. Se apoya en `docs/inventario.md`, `docs/imagenes.md` y la experiencia por dispositivo de `docs/propuesta.md` §10 (ajustada por “sin modales”, §10.8).
+Optimización del diseño de `referencia/` **conservando su branding**: paleta malva / lavanda / marfil, logo “Jardín Cristel” y títulos en estilo script caligráfico (Berthold Script en la referencia; **Pinyon Script, OFL, como fuente temporal**; decisión #10, §7), acuarelas florales y arcos. Se mejora el diseño gráfico, la UX/UI y la tecnología, sin Tailwind ni Vite: HTML semántico, CSS propio con custom properties y JS vanilla. Este documento es el contrato de diseño para los bloques 1 y 3–6 de `docs/propuesta.md` (§8), que quedan bloqueados hasta su aprobación. Se apoya en `docs/inventario.md`, `docs/imagenes.md` y la experiencia por dispositivo de `docs/propuesta.md` §10 (ajustada por “sin modales”, §10.8).
 
-**Qué se conserva:** nombre, logo en Berthold Script, paleta, acuarelas, arcos, fotografías reales, tono de los textos, WhatsApp como canal principal.
+**Qué se conserva:** nombre, logo “Jardín Cristel” (marcador SVG hasta recibir el final; §7), paleta, acuarelas, arcos, fotografías reales, tono de los textos, WhatsApp como canal principal.
 **Qué cambia:** contraste (AA), foco visible, marcos de imagen (sin bordes oliva), interacciones (sin modales ni lightbox), peso de las acuarelas, estructura de los CTA, imágenes de eventos.
 
 ---
@@ -49,6 +49,7 @@ Eliminados: `oliva-900 #28350d` (bordes de las imágenes) y el color de enlace a
 - **Texto normal** (< 24 px): `pizarra-900` sobre marfil/malva-50; `marfil-50` sobre `malva-500`, `lavanda-800/700/900`; enlaces en `malva-600`. Nunca `malva-400`.
 - **Texto grande** (≥ 24 px, o ≥ 18.66 px en negrita): puede usar `malva-400` (3.4–3.8:1, cumple AA para texto grande, no AAA). Si un título baja de 24 px en móvil, pasa a `malva-600`.
 - **Botón primario:** fondo `lavanda-800`, texto marfil-50; hover `lavanda-700`; active `lavanda-900`. **Botón secundario:** contorno y texto `lavanda-800` sobre fondo transparente; hover con fondo `lavanda-800` y texto marfil.
+- **Títulos en Pinyon Script (H1 y H2):** los trazos finos de la caligrafía necesitan más contraste que el texto grande común, así que el H2 usa **`malva-600`** (6.4–6.5:1), no `malva-400`, y no baja de 36 px (§7). El H1 sobre el hero va en marfil-50 sobre el degradado.
 - **Superficies malva** (header, footer, barra CTA): fondo `malva-500`, hover `malva-600`.
 - Los hover viven bajo `@media (hover: hover)` y los estados `:active` y `:focus-visible` siempre.
 
@@ -301,7 +302,70 @@ Las sugerencias son punto de partida; Emmanuel puede preferir otros símbolos.
 
 ## 6. Decisiones y dependencias
 
-- **#8 (originales de fotos), #9 (logo vectorial) y #10 (licencia web de Berthold Script):** pendientes del cliente; **#10 es de prioridad alta** (el TTF ya se sirve públicamente en producción y desde `referencia/`). Opciones para #10: licencia web, compra, o contornos SVG solo para logo y H1 si la licencia lo permite. Merriweather es OFL.
+- **#8 (originales de fotos) y #9 (logo vectorial):** pendientes del cliente. **#10 resuelta con condición (§7):** logo SVG con marcador, Pinyon Script temporal y **no mergear a `main` sin el SVG final y la licencia confirmada**.
 - **#1 (paquete por evento):** si el paquete cambia por evento, la sección “Qué incluye tu evento” se parametriza por evento; mientras tanto es única.
 - **Aprobación de este documento** desbloquea los bloques 1 y 3–6 (`docs/propuesta.md` §8).
 - **Retiro de `bg-modal*.webp`** y de las acuarelas sustituidas: no se borra nada sin aprobación (regla de trabajo); la limpieza de `referencia/` se hace dos semanas después del merge (decisión #22).
+
+---
+
+## 7. Logo y tipografía de títulos (decisión #10)
+
+**Decisión (2026-10-20):** el logo “Jardín Cristel” será SVG; hasta que el cliente compre la licencia Desktop de Berthold Script se usa la **imagen actual del logo como marcador**. H1 y títulos de sección usan una **fuente libre temporal**. `Berthold-Script.ttf` ya no se despliega desde la rama. **Condición: no mergear a `main` sin el SVG final y la licencia confirmada.**
+
+### 7.1 Logo: marcador SVG accesible
+
+- **Archivo:** `img/logo.svg` (20 KB). Incrusta como data URI WebP (256×256, con transparencia) la **imagen actual del logo**, es decir, la flor acuarelada que ya usan los iconos de `referencia/icons/` (`android-chrome-512x512.png`). Es lo único que existe hoy como imagen de logo: el nombre “Jardín Cristel” en la referencia es **texto** en Berthold Script, no una imagen. **No se vectorizó ni se derivó nada de `Berthold-Script.ttf`.**
+- **Accesibilidad:** `<svg role="img" aria-label="Jardín Cristel" …>`. Si el SVG se inserta con `<img src="img/logo.svg" alt="Jardín Cristel">`, el nombre lo da el `alt` (los atributos ARIA dentro de un SVG usado como imagen no se exponen); para que `role="img"` y `aria-label` surtan efecto hay que **incrustar el `<svg>` en el HTML**:
+
+```html
+<a class="logo" href="/" aria-label="Jardín Cristel, inicio">
+  <svg role="img" aria-label="Jardín Cristel" viewBox="0 0 256 256" width="56" height="56" focusable="false">
+    <image width="256" height="256" href="data:image/webp;base64,…" />   <!-- contenido de img/logo.svg pegado en línea -->
+  </svg>
+</a>
+```
+
+- **Sustitución:** cuando llegue el SVG final se reemplaza el contenido de `img/logo.svg` (y el bloque en línea) conservando `role="img"` y `aria-label="Jardín Cristel"`. El favicon, los iconos y la imagen Open Graph se rehacen a partir del SVG final (decisión #9).
+- **Límite del marcador:** muestra solo la flor, sin el nombre. Mientras tanto el nombre visible junto al logo (si se muestra) es **texto HTML** en la fuente temporal de §7.2, no una imagen del nombre.
+
+### 7.2 Fuente temporal: Pinyon Script
+
+| | |
+|---|---|
+| **Fuente** | Pinyon Script (Sorkin Type), licencia **SIL OFL 1.1** (`fonts/OFL-pinyon-script.txt`) |
+| **Archivo** | `fonts/pinyon-script-400.woff2`: **24.5 KB** (el TTF de Berthold pesaba 188 KB). Subset latino generado con `fonttools` a partir del WOFF2 latino de Fontsource: U+0020–007E, U+00A0–00FF (acentos, ñ, ¡ ¿), comillas, rayas, puntos suspensivos y €; 200 glifos; funciones `kern`, `liga`, `calt`, `ccmp`; sin hinting |
+| **Uso** | **Solo H1 y H2** (hero y títulos de sección), nunca por debajo de **36 px**. H3 y títulos de tarjeta, en Merriweather Bold |
+| **Color** | H1 en marfil-50 sobre el hero; H2 en **malva-600** (§1.2) |
+
+```css
+@font-face {
+  font-family: "Pinyon Script";
+  src: url("../fonts/pinyon-script-400.woff2") format("woff2");
+  font-weight: 400; font-style: normal;
+  font-display: swap;
+}
+h1, h2 { font-family: "Pinyon Script", "Snell Roundhand", "Apple Chancery", cursive; font-weight: 400; font-synthesis: none; letter-spacing: 0; }
+h1 { font-size: clamp(3.5rem, 13vw, 5.75rem); }
+h2 { font-size: clamp(2.25rem, 7vw, 3.5rem); }      /* mínimo 36 px */
+```
+
+`<link rel="preload" as="font" type="font/woff2" href="fonts/pinyon-script-400.woff2" crossorigin>` para el H1 (probable elemento LCP). El cambio de fuente (`swap`) puede mover el layout: se afina con un fallback ajustado (`size-adjust`, `ascent-override`) al implementar el bloque 1 y se mide el CLS.
+
+**Por qué Pinyon Script.** Es la script libre más cercana a la formalidad de Berthold Script (caligrafía inglesa de punta fina, mayúsculas ornamentadas, inclinación similar), cubre todo el latín con acentos y ñ, y es OFL (se puede autohospedar y modificar/subsetear). Se compararon, en el mismo texto (“Jardín Cristel”, “Nuestros eventos”, “Qué incluye tu evento”, “Galería”) a 64, 36 y 26 px:
+
+| Candidata (OFL) | Resultado |
+|---|---|
+| **Pinyon Script** | **Elegida.** Formal y elegante como la referencia; legible desde 36 px |
+| Great Vibes | Muy cercana, pero más condensada; las mayúsculas (J, N, C) se confunden y las minúsculas pierden claridad con acentos |
+| Parisienne | La más legible en tamaños pequeños, pero más desenfadada, menos formal |
+| Alex Brush | Trazo de pincel, más pesada y casual; se aleja de la caligrafía formal |
+| Allura | Fina y ligera; a 24–36 px el trazo se pierde |
+| Italianno | Comprimida y con x-altura pequeña; poco legible en móvil |
+| Tangerine | Demasiado fina y pequeña para títulos |
+
+**Límite conocido:** como la referencia, un script de trazo fino se lee mal por debajo de ~36 px y con poco contraste: por eso solo H1/H2, tamaño mínimo y color `malva-600` en los H2. Pinyon Script no es Berthold: la forma de las letras cambia ligeramente; es una solución **temporal** hasta que el cliente decida la licencia y el SVG final.
+
+### 7.3 Condición de merge
+
+**No mergear a `main` sin el SVG final y la licencia confirmada.** Mientras tanto, producción (`main`) sigue sirviendo `/fonts/Berthold-Script.ttf` (no se toca `main`); ese archivo desaparece con el merge porque el árbol nuevo no lo incluye.

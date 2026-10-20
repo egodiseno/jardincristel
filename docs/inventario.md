@@ -156,6 +156,8 @@ Contrastes: pizarra/marfil-50 9.55:1 ✔ · pizarra/malva-50 8.69:1 ✔ · marfi
 
 Total 479,058 B, todo TTF. Escala usada: 14 px (sm), 16 px (base), 24 px (2xl), 30 px (3xl), 36 px (4xl), 60 px (6xl); `font-medium` (500) en botones se sintetiza (no existe ese peso).
 
+> **Nota (2026-10-20):** `Berthold-Script.ttf` se retiró de `referencia/fonts/` (decisión #10; licencia pendiente) y se sustituye de forma temporal por **Pinyon Script (OFL)** en el sitio nuevo; ver `docs/diseno.md` §7.
+
 ## 5. Breakpoints y layout
 
 - Min-width de Tailwind: 640, 768, 1024, 1280, 1536 px. Los que realmente cambian la página: **768** (menú desktop visible, cuadrícula de eventos de 2 columnas, fondos más grandes) y **1024** (fondos desktop, galería y eventos de 3 columnas, textos largos del hero y Nosotros, se ocultan CTA y botones móviles).
