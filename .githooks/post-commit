@@ -1,0 +1,13 @@
+#!/bin/sh
+# Agrega una línea al "Registro de commits" de docs/BITACORA.md.
+# Solo escribe en el archivo; no hace commit (evita bucles).
+
+ROOT=$(git rev-parse --show-toplevel) || exit 0
+BITACORA="$ROOT/docs/BITACORA.md"
+[ -f "$BITACORA" ] || exit 0
+
+LINEA=$(git log -1 --format='- %ad `%h` %s' --date=format:'%Y-%m-%d %H:%M')
+
+grep -q '^## Registro de commits' "$BITACORA" || printf '\n## Registro de commits\n\n' >> "$BITACORA"
+printf '%s\n' "$LINEA" >> "$BITACORA"
+exit 0
