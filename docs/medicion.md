@@ -124,13 +124,14 @@ Marcar **`click_whatsapp`** y **`click_phone`**.
 
 Grabaciones de sesión y mapas de calor, sin costo. Sirve para ver cómo se usan el carrusel de eventos, la barra inferior móvil y “Qué incluye”.
 
-- **Marcador:** el proyecto aún no existe. El código define `const CLARITY_ID = 'CLARITY_ID';` y **no carga nada mientras el valor sea el marcador** (`if (CLARITY_ID === 'CLARITY_ID') return;`). Cuando Emmanuel cree el proyecto, se sustituye por el ID real (cadena corta alfanumérica que da Clarity).
+- **ID del proyecto: `z0uyber2t9`** (recibido de Emmanuel el 2026-10-20; los IDs de Clarity son públicos, van en el HTML de cualquier sitio que lo use). El código lo define como `const CLARITY_ID = 'z0uyber2t9';` y conserva la guarda: **no carga nada si el valor está vacío o es el marcador `CLARITY_ID`** (así el ID se puede quitar o cambiar sin tocar la lógica).
+- **Diferencia deliberada con el panel:** Clarity indica pegar su script en el `<head>`. Aquí **no** se pone en el `<head>`: el mismo snippet oficial se inyecta desde `js/main.js` después de `load` y en `requestIdleCallback`, para no competir con el LCP. La estructura del snippet es idéntica a la entregada por el panel (misma cola `clarity.q`, `async`, `https://www.clarity.ms/tag/<ID>`).
 - **Carga:** el script se inyecta **después del evento `load`** y dentro de `requestIdleCallback` (con `setTimeout` de respaldo en navegadores sin esa API, p. ej. Safari), y solo en producción:
 
 ```js
-const CLARITY_ID = 'CLARITY_ID';   // ← sustituir por el ID real del proyecto de Clarity
+const CLARITY_ID = 'z0uyber2t9';   // ID del proyecto de Clarity (si queda vacío o como 'CLARITY_ID', no se carga)
 function cargarClarity() {
-  if (!MEDIR || CLARITY_ID === 'CLARITY_ID') return;
+  if (!MEDIR || !CLARITY_ID || CLARITY_ID === 'CLARITY_ID') return;
   (function (c, l, a, r, i, t, y) {                    // snippet oficial de Clarity
     c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
     t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
@@ -142,7 +143,7 @@ addEventListener('load', () => ('requestIdleCallback' in window
   : setTimeout(cargarClarity, 2500)));
 ```
 
-(El snippet exacto se copia del panel de Clarity al implementar; el de arriba muestra la estructura.)
+(Snippet verificado contra el entregado por el panel de Clarity el 2026-10-20.)
 
 - **Integración con GA4:** en el panel de Clarity → **Settings → Setup → Google Analytics integration**, conectar la propiedad de GA4 (`G-DNF30KJ0Y7`); así se puede saltar de una sesión de GA4 a su grabación y filtrar grabaciones por eventos. Verificarla en DebugView/Clarity después de conectar (el panel guía el proceso; los nombres exactos del menú pueden variar).
 - **Eventos y etiquetas en Clarity (opcional, bajo costo):** espejar `click_whatsapp`/`click_phone` con `clarity('event', 'click_whatsapp')` y etiquetar `clarity('set', 'event_type', 'boda')`, para filtrar grabaciones por tipo de evento.
@@ -238,7 +239,7 @@ No es parte del bloque 7; se hace cuando haya 2–4 semanas de datos y las dimen
 
 **Microsoft Clarity**
 - [ ] El proyecto recibe sesiones (*Dashboard → Recordings*): al menos una grabación de móvil y una de desktop en 24 h.
-- [ ] El marcador `CLARITY_ID` fue sustituido por el ID real y el script no se carga si el marcador sigue presente.
+- [ ] `CLARITY_ID` es `z0uyber2t9` y el script no se carga si el valor queda vacío o es el marcador; en el *waterfall* aparece `clarity.ms/tag/z0uyber2t9` solo después de `load`.
 - [ ] La integración con GA4 aparece como conectada.
 - [ ] El heatmap del carrusel de eventos y de la barra inferior móvil registra toques.
 
@@ -258,5 +259,5 @@ No es parte del bloque 7; se hace cuando haya 2–4 semanas de datos y las dimen
 
 - **Bloque 7** (`docs/propuesta.md` §8): implementa §1, §2 y la carga diferida; depende de que los bloques 3–6 hayan puesto los atributos `data-*` en el HTML.
 - **Decisión #20 (analítica):** mantener `G-DNF30KJ0Y7`, quién entra al panel de GA4, y elección de consentimiento (A o B).
-- **Emmanuel debe:** crear el proyecto de Clarity y pasar el ID; verificar Search Console (DNS o archivo); actualizar los enlaces de Google Business Profile y Facebook; registrar las dimensiones y los eventos clave en GA4; validar el aviso de privacidad.
+- **Emmanuel debe:** conectar Clarity con GA4 en el panel de Clarity (el proyecto y su ID ya existen); verificar Search Console (DNS o archivo); actualizar los enlaces de Google Business Profile y Facebook; registrar las dimensiones y los eventos clave en GA4; validar el aviso de privacidad.
 - **Datos que faltan:** correo para ejercer derechos ARCO y razón social/domicilio del responsable (decisión #5).

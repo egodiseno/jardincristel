@@ -223,7 +223,7 @@ Detalles: los eventos de teléfono y WhatsApp son los de negocio; los `data-*` h
 | 4 ⚑ | Nosotros + Eventos (6 `<article>`), imágenes responsivas | `feat: secciones nosotros y eventos` |
 | 5 ⚑ | Sección “Qué incluye tu evento” (sin modal) + galería en página (carrusel / principal + miniaturas) | `feat: qué incluye y galería en página` |
 | 6 ⚑ | Contacto, mapa, footer, botón flotante de WhatsApp | `feat: contacto, footer y CTA flotante` |
-| 7 | `js/main.js`: `<details>` de “Qué incluye”, galería, scrollspy, **tracking GA4 por delegación con `data-*`** y **Microsoft Clarity** diferido (`load` + `requestIdleCallback`, marcador `CLARITY_ID`); dimensiones personalizadas, eventos clave, Search Console, UTM de Business Profile/Facebook, aviso de privacidad y checklist de verificación según **`docs/medicion.md`** | `feat: JS mínimo, tracking GA4 por delegación y Clarity diferido` |
+| 7 | `js/main.js`: `<details>` de “Qué incluye”, galería, scrollspy, **tracking GA4 por delegación con `data-*`** y **Microsoft Clarity** diferido (`load` + `requestIdleCallback`, ID de Clarity `z0uyber2t9`); dimensiones personalizadas, eventos clave, Search Console, UTM de Business Profile/Facebook, aviso de privacidad y checklist de verificación según **`docs/medicion.md`** | `feat: JS mínimo, tracking GA4 por delegación y Clarity diferido` |
 | 8 | `tools/optimize-images.mjs` + derivados AVIF/WebP + fondos aligerados + favicons reales | `perf: imágenes responsivas AVIF/WebP y fondos ligeros` |
 | 9 | `robots.txt`, `sitemap.xml`, `_headers`/`netlify.toml`, `404.html` | `feat: robots, sitemap, caché y 404` |
 | 10 | QA: Lighthouse (móvil/desktop), axe, teclado, lector de pantalla, Rich Results, W3C validator, prueba sin JS, tabla comparativa vs `baseline/` | `docs: benchmark posterior y QA` |
@@ -271,7 +271,7 @@ Estado: ✅ aprobada · ⏳ pendiente del cliente. Resumen: **aprobadas** #4, #6
    - *Aprobada: **imagen enlazada** a Google Maps (sin iframe).*
 19. ✅ **Video corto** del jardín en el hero o la galería (peso/LCP: solo con póster ligero y carga bajo demanda).
    - *Aprobada: **solo en la galería y bajo demanda** (póster ligero; el video no carga hasta que se pide).*
-20. ⏳ **Analítica:** ¿se mantiene GA4 `G-DNF30KJ0Y7`? ¿Quién accede al panel para registrar las dimensiones (`link_location`, `event_type`, `categoria`) y marcar `click_whatsapp` y `click_phone` como eventos clave? ¿Consentimiento: aviso informativo (A) o Consent Mode v2 con banner (B)? Se suma **Microsoft Clarity** (Emmanuel crea el proyecto y pasa el ID) y la verificación de Search Console; detalle en `docs/medicion.md`.
+20. ⏳ **Analítica:** ¿se mantiene GA4 `G-DNF30KJ0Y7`? ¿Quién accede al panel para registrar las dimensiones (`link_location`, `event_type`, `categoria`) y marcar `click_whatsapp` y `click_phone` como eventos clave? ¿Consentimiento: aviso informativo (A) o Consent Mode v2 con banner (B)? Se suma **Microsoft Clarity** (proyecto creado, ID `z0uyber2t9`; falta conectarlo con GA4 en su panel) y la verificación de Search Console; detalle en `docs/medicion.md`.
 
 **Técnicas / operación**
 21. ✅ **Dominio:** confirmar que el canónico es **`jardincristel.mx` sin www** (así responde hoy) y que no se quiere el contrario.

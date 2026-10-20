@@ -159,6 +159,26 @@ Dejar definido cómo se medirá el sitio antes de implementarlo y no mezclar la 
 - Emmanuel: confirmar origen y licencia de Berthold Script (prioridad alta); crear el proyecto de Clarity y pasar el ID; verificar Search Console (DNS o archivo HTML); actualizar los enlaces de Google Business Profile y Facebook; registrar dimensiones y eventos clave en GA4; validar el aviso de privacidad y elegir el consentimiento (A o B).
 - Datos que faltan para el aviso: correo ARCO y razón social/domicilio (decisión #5).
 
+### 2026-10-20 — ID de Microsoft Clarity registrado en el plan de medición
+
+**Qué se hizo**
+- Emmanuel creó el proyecto de Clarity y pasó el snippet; el ID es `z0uyber2t9`. Se registra en `docs/medicion.md` (§2, checklist y pendientes) y en el bloque 7 de `docs/propuesta.md` (y decisión #20). Sigue siendo solo documentación: nada implementado.
+- El snippet entregado se verificó contra el esqueleto documentado (misma cola `clarity.q`, `async`, `https://www.clarity.ms/tag/<ID>`).
+
+**Por qué**
+Cerrar el marcador `CLARITY_ID` con el valor real para que el bloque 7 se implemente sin pasos pendientes.
+
+**Archivos tocados**
+`docs/medicion.md`, `docs/propuesta.md`, `docs/BITACORA.md`.
+
+**Decisiones**
+- El snippet **no** va en el `<head>` como indica el panel: se inyecta desde `js/main.js` tras `load` y en `requestIdleCallback`, para no afectar el LCP.
+- Se conserva la guarda: si `CLARITY_ID` está vacío o es el marcador, no se carga; y solo se carga en `jardincristel.mx` (o con `?medicion=debug`).
+
+**Pendientes**
+- Emmanuel: conectar Clarity con GA4 desde el panel de Clarity.
+- Resto de pendientes de medición sin cambios (Search Console, UTM de Business Profile/Facebook, dimensiones y eventos clave en GA4, aviso de privacidad y consentimiento).
+
 ## Registro de commits
 
 - 2026-10-20 12:17 `a19da90` docs: configuración inicial, bitácora, baseline Lighthouse y hallazgos
@@ -169,3 +189,4 @@ Dejar definido cómo se medirá el sitio antes de implementarlo y no mezclar la 
 - 2026-10-20 14:03 `21cf65d` docs: benchmark competitivo
 - 2026-10-20 14:19 `f14d291` feat: prototipo de tres direcciones visuales (A, B, C)
 - 2026-10-20 14:45 `af94542` docs: optimizar identidad de referencia (sistema de diseño, catálogo de imágenes) y retirar prototipo
+- 2026-10-20 14:58 `cf8626d` docs: plan de medición (GA4, Clarity, Search Console) y prioridad de la licencia de Berthold Script
