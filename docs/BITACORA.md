@@ -204,6 +204,40 @@ Nuevos: `img/logo.svg`, `fonts/pinyon-script-400.woff2`, `fonts/OFL-pinyon-scrip
 - Cliente: comprar la licencia Desktop de Berthold Script y entregar el SVG final del logo (bloquean el merge).
 - Afinar el fallback con `size-adjust`/`ascent-override` de Pinyon Script al implementar el bloque 1 y medir el CLS.
 
+### 2026-10-20 — Piloto: hero, eventos y “Qué incluye tu evento” (`docs/diseno.md` aprobado)
+
+**Qué se hizo**
+- `docs/diseno.md` **aprobado**; desbloquea los bloques 1 y 3–6. Se implementó el **piloto** en la rama `modernizacion` (commit `3ae5cba`), sin tocar `main`:
+  - **Hero:** `<picture>` AVIF/WebP (recorte 4:5 en móvil; preload con `fetchpriority`), logo marcador (`img/logo.svg`), H1 en Pinyon Script, CTA “Cotizar por WhatsApp” con mensaje prellenado.
+  - **Eventos:** 6 tarjetas con arco proporcional en `cqw`, sin bordes, sombra lavanda, zoom lento de la foto dentro del marco y CTA “Cotizar mi <evento>” (WhatsApp prellenado por evento) + “Ver qué incluye”; carril con scroll-snap en móvil, 2 columnas en tablet, 3 en escritorio.
+  - **Qué incluye tu evento:** 4 categorías en `<details>` (solo el primero abierto en móvil; abiertos en tablet y escritorio). Sin `<dialog>` ni modales (§10.8).
+  - Tres layouts por media queries (<48em; ≥48em; ≥75em con `hover: hover` y `pointer: fine`) con un solo HTML; navegación del piloto (barra inferior móvil, barra superior tablet, menú horizontal escritorio).
+  - **Medición:** `data-*` y GA4 por delegación según `docs/medicion.md` (solo mide en `jardincristel.mx` o con `?medicion=debug`); **Clarity no se cargó**.
+  - Nuevos: `index.html` (reemplaza el provisional), `css/styles.css`, `js/main.js`, `img/hero/*` (AVIF/WebP), `img/eventos/*` (provisionales), `fonts/merriweather-400|700.woff2` + `OFL-merriweather.txt`, `tools/optimizar-imagenes.cjs`.
+- **Medición** (`docs/benchmark/piloto/`): Lighthouse sobre el deploy de la rama (3 corridas, mediana): móvil 100 / 100 / 100, LCP **1.41 s** (línea base 74 y 4.9 s), CLS 0.000, TBT 19 ms, 161 KiB (902 KiB); escritorio 100 / 100 / 100, LCP 0.41 s. SEO 69 solo por el `noindex` intencional. Capturas a 360, 768 y 1280 px.
+- Documentación: `docs/propuesta.md` (estado por bloque tras el piloto), `docs/diseno.md` (§8 notas de implementación), `docs/medicion.md`, `docs/imagenes.md` (§7 derivados), `CLAUDE.md`.
+
+**Por qué**
+Validar el sistema de diseño y la arquitectura (HTML en el documento, imágenes responsivas, fuentes propias, JS mínimo) con una porción real antes de construir el resto.
+
+**Archivos tocados**
+Ver lista de nuevos arriba; editados `docs/propuesta.md`, `docs/diseno.md`, `docs/medicion.md`, `docs/imagenes.md`, `CLAUDE.md`, `docs/BITACORA.md`.
+
+**Decisiones y hallazgos**
+- **GA4 cuesta rendimiento:** con `?medicion=debug` (gtag cargado) el móvil baja a Performance 98, LCP 1.71 s, **TBT 115 ms (meta 50)** y **323 KiB (meta 300)**; gtag.js ≈ 162 KiB. A decidir en el bloque 7: retrasar la carga hasta la primera interacción o aceptar el costo.
+- **Incidencia con GA4:** durante esas corridas el bloqueo de red no cubrió `https://www.google.com/g/collect` y **pudieron llegar a la propiedad real `G-DNF30KJ0Y7` unos 4 `page_view` con `debug_mode`** (3 corridas + 1 repetición). Activar el filtro “Tráfico de desarrollador” en GA4 (`docs/medicion.md` §1.7) y descartarlos. Las pruebas de interacción bloquearon toda la red de Google y no enviaron nada.
+- “Cotizar” existe dos veces en el DOM (barra inferior < 48em y header ≥ 48em; el CSS oculta el que no toca): resuelve el orden de foco sin `data-track-location` dinámico.
+- El velo de lavanda-900 sobre el hero se calibró midiendo el contraste real sobre píxeles (peor píxel ≥ 5.3:1 a 320 px); se aligeró para que la foto se vea.
+- Las imágenes de eventos siguen siendo provisionales (530×386 px): se ven blandas a alta densidad hasta tener las finales.
+- `index.html` del piloto lleva `noindex` provisional: quitarlo antes del merge. Condición de merge vigente (decisión #10): **no mergear a `main` sin el SVG final y la licencia confirmada**.
+- Se usaron y se cerraron por PID exacto los servidores locales (8124, PID 78180).
+
+**Pendientes**
+- Resto de bloques: Nosotros, galería, contacto/mapa, head completo (OG, JSON-LD, iconos, manifest), robots/sitemap/caché, acuarelas y QA.
+- Decidir la estrategia de carga de GA4 (TBT/peso) y activar el filtro de tráfico de desarrollador.
+- Emmanuel: notas de `docs/imagenes.md`, imágenes finales, licencia/SVG del logo, mensaje de WhatsApp (#7) y demás decisiones pendientes.
+- No verificado: dispositivos reales, Safari/Firefox, lectores de pantalla/axe, recepción real en GA4 (ver `docs/benchmark/piloto/README.md`).
+
 ## Registro de commits
 
 - 2026-10-20 12:17 `a19da90` docs: configuración inicial, bitácora, baseline Lighthouse y hallazgos
@@ -216,3 +250,5 @@ Nuevos: `img/logo.svg`, `fonts/pinyon-script-400.woff2`, `fonts/OFL-pinyon-scrip
 - 2026-10-20 14:45 `af94542` docs: optimizar identidad de referencia (sistema de diseño, catálogo de imágenes) y retirar prototipo
 - 2026-10-20 14:58 `cf8626d` docs: plan de medición (GA4, Clarity, Search Console) y prioridad de la licencia de Berthold Script
 - 2026-10-20 15:07 `189eb98` docs: registrar ID de Clarity en el plan de medición
+- 2026-10-20 15:25 `a0aa9c9` feat: logo SVG marcador, Pinyon Script temporal y retiro de Berthold-Script.ttf del despliegue
+- 2026-10-20 16:05 `3ae5cba` feat: piloto (hero, eventos y qué incluye tu evento) con tokens de docs/diseno.md

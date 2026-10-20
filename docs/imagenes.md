@@ -121,3 +121,15 @@ Los iconos están pegados como `<svg><path …></svg>` en cada uso, sin reutiliz
 
 - `img/logo.svg` (**nuevo**, 20 KB): marcador del logo “Jardín Cristel” con la imagen actual del logo (la flor de `icons/android-chrome-512x512.png`, incrustada como WebP 256×256), accesible con `role="img"` y `aria-label="Jardín Cristel"`. Se sustituye por el SVG final del cliente (decisión #10; `docs/diseno.md` §7).
 - `referencia/fonts/Berthold-Script.ttf` se **retiró del despliegue de la rama** el 2026-10-20 (sigue en el historial de git). La referencia (`referencia/index.html`) muestra ahora su título y logo con la tipografía de reserva (`cursive`).
+
+## 7. Derivados del piloto (generados con `tools/optimizar-imagenes.cjs`)
+
+| Archivo | Origen | px | Peso | Uso |
+|---|---|---|---|---|
+| `img/hero/hero-d-960.avif` / `.webp` | `hero.webp` | 960×600 | 31,192 / 44,472 B | hero tablet/escritorio |
+| `img/hero/hero-d-1600.avif` / `.webp` | `hero.webp` | 1600×1000 | 51,059 / 74,590 B | hero escritorio |
+| `img/hero/hero-m-480.avif` / `.webp` | recorte 4:5 de `hero.webp` | 480×600 | 16,019 / 23,174 B | hero móvil |
+| `img/hero/hero-m-800.avif` / `.webp` | recorte 4:5 de `hero.webp` | 800×1000 | 27,604 / 40,396 B | hero móvil denso |
+| `img/eventos/{bautizo,comunion,xv,boda,graduacion,empresarial}.webp` | copia de las de la referencia (provisionales) | 530×386 | 4.7–23 KB | tarjetas de evento (AVIF no ahorra peso con estos orígenes) |
+
+El hero móvil reemplaza al `hero.webp` de 1728 px (78 KB) que se descargaba en móvil: ahora ≈ 16 KB (AVIF).

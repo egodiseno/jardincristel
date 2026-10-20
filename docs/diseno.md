@@ -1,5 +1,7 @@
 # Sistema de diseño optimizado — Jardín Cristel
 
+> **Estado: APROBADO el 2026-10-20.** Desbloquea los bloques 1 y 3–6 de `docs/propuesta.md`. El piloto (§8) ya lo aplica.
+
 Optimización del diseño de `referencia/` **conservando su branding**: paleta malva / lavanda / marfil, logo “Jardín Cristel” y títulos en estilo script caligráfico (Berthold Script en la referencia; **Pinyon Script, OFL, como fuente temporal**; decisión #10, §7), acuarelas florales y arcos. Se mejora el diseño gráfico, la UX/UI y la tecnología, sin Tailwind ni Vite: HTML semántico, CSS propio con custom properties y JS vanilla. Este documento es el contrato de diseño para los bloques 1 y 3–6 de `docs/propuesta.md` (§8), que quedan bloqueados hasta su aprobación. Se apoya en `docs/inventario.md`, `docs/imagenes.md` y la experiencia por dispositivo de `docs/propuesta.md` §10 (ajustada por “sin modales”, §10.8).
 
 **Qué se conserva:** nombre, logo “Jardín Cristel” (marcador SVG hasta recibir el final; §7), paleta, acuarelas, arcos, fotografías reales, tono de los textos, WhatsApp como canal principal.
@@ -304,7 +306,7 @@ Las sugerencias son punto de partida; Emmanuel puede preferir otros símbolos.
 
 - **#8 (originales de fotos) y #9 (logo vectorial):** pendientes del cliente. **#10 resuelta con condición (§7):** logo SVG con marcador, Pinyon Script temporal y **no mergear a `main` sin el SVG final y la licencia confirmada**.
 - **#1 (paquete por evento):** si el paquete cambia por evento, la sección “Qué incluye tu evento” se parametriza por evento; mientras tanto es única.
-- **Aprobación de este documento** desbloquea los bloques 1 y 3–6 (`docs/propuesta.md` §8).
+- **Este documento fue aprobado el 2026-10-20** y desbloquea los bloques 1 y 3–6 (`docs/propuesta.md` §8).
 - **Retiro de `bg-modal*.webp`** y de las acuarelas sustituidas: no se borra nada sin aprobación (regla de trabajo); la limpieza de `referencia/` se hace dos semanas después del merge (decisión #22).
 
 ---
@@ -369,3 +371,18 @@ h2 { font-size: clamp(2.25rem, 7vw, 3.5rem); }      /* mínimo 36 px */
 ### 7.3 Condición de merge
 
 **No mergear a `main` sin el SVG final y la licencia confirmada.** Mientras tanto, producción (`main`) sigue sirviendo `/fonts/Berthold-Script.ttf` (no se toca `main`); ese archivo desaparece con el merge porque el árbol nuevo no lo incluye.
+
+---
+
+## 8. Piloto: notas de implementación
+
+Primera aplicación del sistema (hero, eventos y “Qué incluye tu evento”) en `index.html`, `css/styles.css` y `js/main.js`. Mediciones y capturas: `docs/benchmark/piloto/`. Decisiones tomadas al implementarlo:
+
+- **Tokens:** solo los de §1 (13 valores). Verificado: ningún `#hex` ni `rgb()` del CSS queda fuera de los tokens (el velo del hero usa `rgb(72 44 72 / α)` = lavanda-900 con transparencia); `tools/contraste.mjs`: 25 pares, 0 fallos.
+- **Hero:** foto de la referencia como `<picture>` (AVIF/WebP, recorte vertical 4:5 en móvil) bajo un **velo de lavanda-900** (degradado vertical en móvil/tablet y horizontal en escritorio, donde el texto ocupa la izquierda). El contraste del texto marfil se **midió sobre píxeles reales** (se oculta el texto, se captura el hero y se toma el percentil 98 de luminancia bajo cada bloque): peor píxel ≥ 5.3:1 a 320 px y ≥ 6.5:1 desde 360 px (kicker 12.8 px, H1 y párrafo). El CSS mantiene ese margen porque la foto final puede ser más clara.
+- **Marco de las tarjetas de evento:** el arco (22 cqw, §2) se aplica a la **tarjeta completa** (foto + texto), como en la referencia, no solo a la foto; el zoom hover (1 → 1.06, 700 ms) actúa solo sobre la foto dentro de su marco fijo y se desactiva con `prefers-reduced-motion`. Foto cuadrada en móvil y 4:5 en tablet/escritorio (`object-fit: cover`).
+- **Navegación del piloto:** solo enlaza las secciones que existen (Inicio, Eventos, Qué incluye). **“Cotizar” está dos veces en el DOM**: el botón central de la barra inferior (< 48em, `data-track-location="barra-movil"`) y el del header (≥ 48em, `header`); CSS oculta el que no corresponde (`display: none`, fuera del árbol de accesibilidad). Así se resuelve el problema de orden de foco del botón central que arrastraba el prototipo descartado y no hace falta un `data-track-location` dinámico.
+- **Tipografía:** H1 `clamp(2.75rem, 15vw, 5.75rem)` (54 px a 360 px, 48 px a 320 px; **sin desbordar** a 320 ni 360 px) y H2 `clamp(2.25rem, 8vw, 3.5rem)` (mínimo 36 px), ambos en Pinyon Script; Merriweather 400/700 en WOFF2 propio (10.5 KB cada peso, subset latino).
+- **Imágenes:** las actuales como marcador (`docs/imagenes.md` sin notas del cliente). Las de eventos son de 530×386 px recortadas a cuadrado o 4:5, por lo que se ven blandas en pantallas de alta densidad; se sustituyen por las imágenes finales (§5).
+- **Mensaje de WhatsApp:** el de las tarjetas es el de §3.2; el genérico (hero, “Qué incluye”, barra y header) es provisional hasta resolver la decisión #7.
+- **Medición:** atributos `data-*` y `js/main.js` según `docs/medicion.md`; solo mide en `jardincristel.mx` o con `?medicion=debug`. **Clarity no se carga todavía.**

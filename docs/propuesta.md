@@ -213,23 +213,25 @@ Detalles: los eventos de teléfono y WhatsApp son los de negocio; los `data-*` h
 
 **Condición de merge (decisión #10): no mergear a `main` sin el SVG final y la licencia confirmada.**
 
-⚑ = depende de la aprobación del sistema de diseño (`docs/diseno.md`) y de la experiencia por dispositivo (§10). Cada bloque termina con una entrada en `docs/BITACORA.md` y un commit en español (`feat:`/`fix:`/`perf:`/`docs:`/`style:`), solo en `modernizacion`. Medición con Lighthouse al cerrar los bloques 4, 7 y 9.
+⚑ = dependía de la aprobación del sistema de diseño (`docs/diseno.md`), **aprobado el 2026-10-20: bloques desbloqueados**. ◐ = parcial en el piloto · ⏳ = pendiente. Cada bloque termina con una entrada en `docs/BITACORA.md` y un commit en español (`feat:`/`fix:`/`perf:`/`docs:`/`style:`), solo en `modernizacion`. Medición con Lighthouse al cerrar los bloques 4, 7 y 9.
 
 | Bloque | Contenido | Commit sugerido |
 |---|---|---|
-| — | **Dependientes de la aprobación de `docs/diseno.md`: bloques 1 y 3–6** (ver §10). Los bloques 0, 2 y 7–10 no dependen de ella. | |
+| — | **Bloques 1 y 3–6 desbloqueados** (`docs/diseno.md` aprobado el 2026-10-20). **Piloto implementado** en `index.html`, `css/styles.css` y `js/main.js` (hero, eventos y “Qué incluye tu evento”); mediciones y capturas en `docs/benchmark/piloto/`. | |
 | 0 ✅ | Mover el build actual a `referencia/` (sin borrar) y dejar listo el esqueleto (`index.html` provisional, `netlify.toml`, carpetas) — **hecho** | `docs: mover build actual a referencia…` · `feat: esqueleto…` |
-| 1 ⚑ | `css/styles.css`: tokens de `docs/diseno.md`, reset mínimo, tipografía, utilidades; fuentes WOFF2 subset y `@font-face` | `feat: tokens de diseño y fuentes WOFF2` |
+| 1 ◐ | `css/styles.css`: tokens de `docs/diseno.md`, reset mínimo, tipografía, utilidades; fuentes WOFF2 subset y `@font-face` | `feat: tokens de diseño y fuentes WOFF2` |
 | 2 | `<head>` completo: metas, canonical, OG/Twitter, JSON-LD, iconos, manifest, preloads | `feat: head, SEO y datos estructurados` |
-| 3 ⚑ | Header + navegación (móvil con `<button>`/`hidden`, desktop horizontal) + hero con `<picture>` y fetchpriority | `feat: header y hero con contenido en HTML` |
-| 4 ⚑ | Nosotros + Eventos (6 `<article>`), imágenes responsivas | `feat: secciones nosotros y eventos` |
-| 5 ⚑ | Sección “Qué incluye tu evento” (sin modal) + galería en página (carrusel / principal + miniaturas) | `feat: qué incluye y galería en página` |
-| 6 ⚑ | Contacto, mapa, footer, botón flotante de WhatsApp | `feat: contacto, footer y CTA flotante` |
+| 3 ◐ | Header + navegación (móvil con `<button>`/`hidden`, desktop horizontal) + hero con `<picture>` y fetchpriority | `feat: header y hero con contenido en HTML` |
+| 4 ◐ | Nosotros + Eventos (6 `<article>`), imágenes responsivas | `feat: secciones nosotros y eventos` |
+| 5 ◐ | Sección “Qué incluye tu evento” (sin modal) + galería en página (carrusel / principal + miniaturas) | `feat: qué incluye y galería en página` |
+| 6 ⏳ | Contacto, mapa, footer, botón flotante de WhatsApp | `feat: contacto, footer y CTA flotante` |
 | 7 | `js/main.js`: `<details>` de “Qué incluye”, galería, scrollspy, **tracking GA4 por delegación con `data-*`** y **Microsoft Clarity** diferido (`load` + `requestIdleCallback`, ID de Clarity `z0uyber2t9`); dimensiones personalizadas, eventos clave, Search Console, UTM de Business Profile/Facebook, aviso de privacidad y checklist de verificación según **`docs/medicion.md`** | `feat: JS mínimo, tracking GA4 por delegación y Clarity diferido` |
-| 8 | `tools/optimize-images.mjs` + derivados AVIF/WebP + fondos aligerados + favicons reales | `perf: imágenes responsivas AVIF/WebP y fondos ligeros` |
+| 8 | `tools/optimizar-imagenes.cjs` + derivados AVIF/WebP + fondos aligerados + favicons reales | `perf: imágenes responsivas AVIF/WebP y fondos ligeros` |
 | 9 | `robots.txt`, `sitemap.xml`, `_headers`/`netlify.toml`, `404.html` | `feat: robots, sitemap, caché y 404` |
 | 10 | QA: Lighthouse (móvil/desktop), axe, teclado, lector de pantalla, Rich Results, W3C validator, prueba sin JS, tabla comparativa vs `baseline/` | `docs: benchmark posterior y QA` |
 | 11 | Revisión final con Emmanuel; retiro de `referencia/` (solo con su OK); PR a `main` (lo decide Emmanuel) | — |
+
+**Estado tras el piloto (2026-10-20).** 1 ◐ tokens, fuentes WOFF2 (Pinyon Script, Merriweather) y base CSS; faltan los demás componentes · 2 ◐ `title`, `description`, `canonical` y `noindex` provisional; faltan Open Graph, JSON-LD, iconos y manifest · 3 ◐ header, navegación por layout y hero (`<picture>` AVIF/WebP, logo marcador, CTA con mensaje prellenado) · 4 ◐ Eventos hecho; falta Nosotros · 5 ◐ “Qué incluye tu evento” hecho; falta la galería · 6 ⏳ · 7 ◐ `data-*`, GA4 por delegación, `<details>`, scrollspy; **Clarity no está cargado** (por indicación); falta `gallery_navigate` · 8 ◐ `tools/optimizar-imagenes.cjs` y derivados del hero; faltan fondos y favicons · 9, 10, 11 ⏳.
 
 Criterio de “hecho” por bloque: validación HTML, sin errores en consola, sin `www.` en el repo, Lighthouse no empeora respecto al bloque anterior.
 

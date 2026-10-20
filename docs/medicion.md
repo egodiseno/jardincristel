@@ -42,6 +42,8 @@
 | **`click_maps`** | clic en el mapa enlazado a Google Maps | `link_location` | `contacto` |
 | **`click_facebook`** | clic en el enlace a Facebook | `link_location` | `header` · `galeria` · `pie` (donde existan) |
 
+**Implementación (piloto):** “Cotizar” existe dos veces en el DOM —el botón central de la barra inferior móvil (`barra-movil`) y el botón del header en tablet y escritorio (`header`)— y el CSS oculta el que no corresponde (`display: none`); así cada elemento lleva un `data-track-location` fijo.
+
 `event_type` en `click_whatsapp`: `boda`, `xv`, `bautizo`, `comunion`, `graduacion`, `empresarial` en las tarjetas de evento; **`general`** en todos los demás CTA (hero, “Qué incluye”, barra móvil, header, contacto).
 
 ### 1.3 Eventos de interacción
