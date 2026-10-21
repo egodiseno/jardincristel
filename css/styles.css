@@ -106,7 +106,7 @@ section[id] { scroll-margin-top: 0; }
 .hero .btn--secundario:active { background: var(--marfil-50); color: var(--lavanda-900); }
 
 /* ---------- Adornos acuarelados (docs/diseno.md §9): decorativos, detrás del contenido, sin puntero ---------- */
-.nosotros, .eventos, .incluye, #galeria { position: relative; isolation: isolate; overflow: hidden; overflow: clip; }
+.nosotros, .eventos, .incluye, #galeria, .contacto { position: relative; isolation: isolate; overflow: hidden; overflow: clip; }
 section > picture { display: contents; }
 .adorno { position: absolute; z-index: -1; display: none; max-width: none; height: auto; pointer-events: none; user-select: none; }
 .divisor { display: block; width: 10rem; height: auto; margin: .75rem auto 0; pointer-events: none; }
@@ -176,6 +176,22 @@ section > picture { display: contents; }
 .galeria__contador { margin-top: .5rem; color: var(--malva-600); font-weight: 700; text-align: center; }
 .galeria__mas { display: grid; justify-items: center; margin-top: 1.5rem; }
 
+/* ---------- Ubicación (mapa bajo demanda) y Contacto ---------- */
+.ubicacion { background: var(--marfil-50); }
+.ubicacion__cuerpo { display: grid; gap: 2rem; max-width: 74rem; margin: 0 auto; }
+.ubicacion__info { display: grid; gap: 1.25rem; justify-items: center; text-align: center; align-content: center; }
+.ubicacion address { font-style: normal; }
+.mapa { position: relative; width: min(100%, 33rem); margin-inline: auto; }
+.mapa__vista { overflow: hidden; background: var(--malva-50); border-radius: 0 7.3125rem 0 7.3125rem; border-radius: 0 22cqw 0 22cqw; box-shadow: var(--sombra-lavanda); }
+.mapa__vista img, .mapa__vista iframe { display: block; width: 100%; aspect-ratio: 530 / 386; border: 0; object-fit: cover; }
+.mapa__ver { position: absolute; left: 50%; bottom: 14%; transform: translateX(-50%); background: var(--marfil-50); }
+.contacto { background: var(--marfil-200); padding-bottom: 8.5rem; }
+.contacto__acciones { display: grid; gap: .9rem; justify-items: stretch; max-width: 24rem; margin: 0 auto; }
+.contacto__acciones .btn { width: 100%; }
+.contacto .adorno--contacto-inf-izq { display: block; left: 0; bottom: 0; width: 11rem; }
+.contacto .adorno--contacto-inf-izq { -webkit-mask-image: linear-gradient(to right, #000 55%, transparent); mask-image: linear-gradient(to right, #000 55%, transparent); }   /* la franja original es continua: el borde interior se desvanece */
+.contacto .adorno--contacto-inf-der { -webkit-mask-image: linear-gradient(to left, #000 55%, transparent); mask-image: linear-gradient(to left, #000 55%, transparent); }
+
 /* ---------- Pie ---------- */
 .pie { padding: 1.5rem var(--gutter); background: var(--malva-500); color: var(--marfil-50); font-size: .875rem; text-align: center; }
 .pie p + p { margin-top: .25rem; }
@@ -201,6 +217,14 @@ section > picture { display: contents; }
 
   .seccion { padding-block: 5rem; }
   .divisor { width: 13rem; }
+  .ubicacion__cuerpo { grid-template-columns: 1fr 1fr; align-items: center; gap: 2.5rem; }
+  .ubicacion__info { justify-items: start; text-align: left; }
+  .mapa { margin-inline: 0 0; }
+  .contacto { padding-bottom: 10rem; }
+  .contacto__acciones { grid-auto-flow: column; max-width: none; justify-content: center; }
+  .contacto__acciones .btn { width: auto; }
+  .contacto .adorno--contacto-inf-izq { width: 18rem; }
+  .contacto .adorno--contacto-inf-der { display: block; right: 0; bottom: 0; width: 18rem; }
   .galeria__carril { margin-inline: 0; padding-inline: 0; }
   .galeria__lista { grid-auto-columns: calc(50% - .5rem); }
   .galeria__contador { display: none; }
@@ -232,6 +256,8 @@ section > picture { display: contents; }
   .seccion { padding-block: 6rem; }
   .divisor { width: 15.4375rem; }                                   /* 247 px = tamaño nativo */
   .nosotros__grid { grid-template-columns: minmax(0, 27rem) 1fr; gap: 4.5rem; }
+  .contacto { padding-bottom: 11rem; }
+  .contacto .adorno--contacto-inf-izq, .contacto .adorno--contacto-inf-der { width: 27.5rem; }
   .galeria { max-width: 52rem; margin-inline: auto; }
   .galeria__principal { display: block; margin-bottom: 1.5rem; overflow: hidden; border-radius: 0 7.3125rem 0 7.3125rem; background: var(--malva-50); box-shadow: var(--sombra-lavanda); }
   .galeria__principal img { width: 100%; aspect-ratio: 530 / 386; object-fit: cover; }

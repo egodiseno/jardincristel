@@ -130,6 +130,22 @@
     pintar();
   }
 
+  /* ---------- Mapa bajo demanda: el iframe de Google Maps se crea solo al pulsar "Ver mapa" ---------- */
+  const mapa = document.querySelector('[data-mapa]');
+  const verMapa = mapa && mapa.querySelector('.mapa__ver');
+  if (verMapa) {
+    verMapa.hidden = false;      // sin JS el botón no existe y queda el enlace "Abrir en Google Maps"
+    verMapa.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = mapa.dataset.mapa;
+      f.title = 'Mapa de Google Maps con la ubicación de Jardín Cristel';
+      f.loading = 'lazy'; f.referrerPolicy = 'no-referrer-when-downgrade'; f.allowFullscreen = true;
+      mapa.querySelector('.mapa__vista').replaceChildren(f);
+      verMapa.remove();
+      f.focus();
+    });
+  }
+
   /* ---------- Navegación: sección activa ---------- */
   const enlaces = new Map();
   document.querySelectorAll('.nav__enlace').forEach((a) => enlaces.set(a.getAttribute('href').slice(1), a));
