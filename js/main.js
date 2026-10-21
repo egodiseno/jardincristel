@@ -146,12 +146,24 @@
     });
   }
 
-  /* ---------- Navegación: sección activa ---------- */
-  const enlaces = new Map();
-  document.querySelectorAll('.nav__enlace').forEach((a) => enlaces.set(a.getAttribute('href').slice(1), a));
-  const marcar = (id) => enlaces.forEach((a, k) => (k === id ? a.setAttribute('aria-current', 'location') : a.removeAttribute('aria-current')));
+  /* ---------- Navegación: sección activa (menú de escritorio y barra móvil) ---------- */
+  const enlaces = new Map();                 // id de sección -> enlaces que apuntan a ella
+  document.querySelectorAll('.menu__enlace, .barra__enlace').forEach((a) => {
+    const h = a.getAttribute('href');
+    if (!h || h[0] !== '#') return;
+    if (!enlaces.has(h.slice(1))) enlaces.set(h.slice(1), []);
+    enlaces.get(h.slice(1)).push(a);
+  });
+  const secciones = [...document.querySelectorAll('main > section[id]')];
+  const marcar = (id) => enlaces.forEach((as, k) => as.forEach((a) => (k === id ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current'))));
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) marcar(e.target.id); }), { rootMargin: '-35% 0px -55% 0px' });
-    enlaces.forEach((_, id) => { const s = document.getElementById(id); if (s) io.observe(s); });
+    secciones.forEach((sec) => io.observe(sec));
+    let pendiente = false;                   // al llegar al final de la página, la última sección queda marcada
+    addEventListener('scroll', () => {
+      if (pendiente) return;
+      pendiente = true;
+      requestAnimationFrame(() => { pendiente = false; if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) marcar(secciones[secciones.length - 1].id); });
+    }, { passive: true });
   }
 })();
