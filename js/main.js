@@ -1,8 +1,8 @@
 /* Jardín Cristel — piloto. JS mínimo, sin dependencias.
    - <details> de "Qué incluye": cerrados salvo el primero en móvil; abiertos en tablet y escritorio.
    - Navegación: aria-current con IntersectionObserver.
-   - Medición GA4 por delegación con data-* (docs/medicion.md). Solo se mide en jardincristel.mx
-     (o con ?medicion=debug). Microsoft Clarity NO está cargado todavía. */
+   - Medición GA4 y Clarity (carga diferida) por delegación con data-* (docs/medicion.md). Solo se mide en
+     jardincristel.mx (o con ?medicion=debug). */
 (() => {
   'use strict';
 
@@ -21,6 +21,9 @@
   }
   const enviar = (nombre, params) => { if (MEDIR) gtag('event', nombre, params); };
 
+  // Carga diferida (docs/medicion.md §1-2): nada se solicita antes de "load"; luego, en un momento ocioso,
+  // con un límite de 3 s para que gtag.js y Clarity no compitan con el LCP ni con el TBT.
+  const CLARITY_ID = 'z0uyber2t9';          // ID público del proyecto; si queda vacío o como 'CLARITY_ID', no se carga
   function cargarGtag() {
     if (!MEDIR) return;
     const s = document.createElement('script');
@@ -28,9 +31,16 @@
     s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
     document.head.appendChild(s);
   }
-  addEventListener('load', () => ('requestIdleCallback' in window
-    ? requestIdleCallback(cargarGtag, { timeout: 4000 })
-    : setTimeout(cargarGtag, 2500)));
+  function cargarClarity() {
+    if (!MEDIR || !CLARITY_ID || CLARITY_ID === 'CLARITY_ID') return;
+    (function (c, l, a, r, i, t, y) {        // snippet oficial de Clarity, inyectado desde aquí y no desde el <head>
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+      t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, 'clarity', 'script', CLARITY_ID);
+  }
+  const enIdle = (fn) => ('requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 3000 }) : setTimeout(fn, 3000));
+  addEventListener('load', () => { enIdle(cargarGtag); enIdle(cargarClarity); });
 
   const EVENTOS_CLIC = { whatsapp: 'click_whatsapp', phone: 'click_phone', maps: 'click_maps', facebook: 'click_facebook' };
   document.addEventListener('click', (e) => {
@@ -39,6 +49,7 @@
     const p = { link_location: el.dataset.trackLocation, link_url: el.href, transport_type: 'beacon' };
     if (el.dataset.track === 'whatsapp') p.event_type = el.dataset.eventType || 'general';
     enviar(EVENTOS_CLIC[el.dataset.track], p);
+    if (MEDIR && window.clarity) window.clarity('event', EVENTOS_CLIC[el.dataset.track]);
   }, true);
 
   /* ---------- "Qué incluye tu evento" ---------- */
