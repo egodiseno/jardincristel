@@ -42,6 +42,12 @@ async function derivados(entrada, salidaBase, anchos, extra = (s) => s) {
     fs.copyFileSync(origen(`${e}.webp`), destino('eventos', `${e}.webp`));
   }
 
+  // Nosotros, galería y mapa (provisionales de la referencia): WebP tal cual
+  for (const [dir, archivos] of [['nosotros', ['nosotros']], ['galeria', ['galeria01', 'galeria02', 'galeria03', 'galeria04', 'galeria05', 'galeria06']], ['ubicacion', ['maps']]]) {
+    fs.mkdirSync(destino(dir), { recursive: true });
+    for (const f of archivos) fs.copyFileSync(origen(`${f}.webp`), destino(dir, `${f}.webp`));
+  }
+
   const lista = [...fs.readdirSync(destino('hero')).map((f) => `hero/${f}`), ...fs.readdirSync(destino('eventos')).map((f) => `eventos/${f}`)];
   for (const f of lista) console.log(String(fs.statSync(destino(f)).size).padStart(7), f);
 })();

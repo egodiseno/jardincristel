@@ -27,6 +27,11 @@ const PIEZAS = {
   'eventos-inf-der': ['bg-eventos-bottom.webp', 1358, 1412, 532, 590, 270],
   'incluye-izq':    ['bg-gallery-left.webp', 0, 19, 358, 990, 180],
   'incluye-der':    ['bg-gallery-right.webp', 1545, 29, 375, 1001, 190],
+  'nosotros-izq':   ['bg-nosotros-left.webp', 0, 359, 318, 583, 170],
+  'galeria-izq':    ['bg-footer-top.webp', 0, 10, 1038, 349, 420],
+  'galeria-der':    ['bg-footer-top.webp', 1656, 0, 264, 655, 150],
+  'contacto-inf-izq': ['bg-footer-bottom.webp', 0, 642, 800, 319, 440],
+  'contacto-inf-der': ['bg-footer-bottom.webp', 1120, 642, 800, 319, 440],
   'divisor':        ['detail.webp', 4, 3, 247, 69, 247],
 };
 const ESCALA = Number(process.env.ESCALA || 1);

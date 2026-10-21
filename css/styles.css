@@ -106,11 +106,12 @@ section[id] { scroll-margin-top: 0; }
 .hero .btn--secundario:active { background: var(--marfil-50); color: var(--lavanda-900); }
 
 /* ---------- Adornos acuarelados (docs/diseno.md §9): decorativos, detrás del contenido, sin puntero ---------- */
-.eventos, .incluye { position: relative; isolation: isolate; overflow: hidden; overflow: clip; }
+.nosotros, .eventos, .incluye { position: relative; isolation: isolate; overflow: hidden; overflow: clip; }
 section > picture { display: contents; }
 .adorno { position: absolute; z-index: -1; display: none; max-width: none; height: auto; pointer-events: none; user-select: none; }
 .divisor { display: block; width: 10rem; height: auto; margin: .75rem auto 0; pointer-events: none; }
 .hero .divisor { margin: 0 0 1.25rem; }
+.divisor--izq { margin: 0 0 .25rem; }
 .eventos .adorno--eventos-sup-der { display: block; top: 0; right: 0; width: 5.25rem; }
 .eventos .adorno--eventos-inf-izq { display: block; bottom: 0; left: 0; width: 9.5rem; }
 
@@ -118,6 +119,14 @@ section > picture { display: contents; }
 .seccion { padding: 4rem var(--gutter); }
 .seccion__cab { margin-bottom: 2rem; text-align: center; }
 .seccion__intro { max-width: 40rem; margin: 1rem auto 0; }
+
+/* ---------- Nosotros ---------- */
+.nosotros { background: var(--marfil-50); }
+.nosotros__grid { display: grid; gap: 2.5rem; max-width: 74rem; margin: 0 auto; }
+.nosotros__foto { width: min(100%, 22rem); margin-inline: auto; }
+.nosotros__foto img { width: 100%; aspect-ratio: 549 / 577; object-fit: cover; }
+.nosotros__texto { display: grid; gap: 1rem; align-content: center; justify-items: start; max-width: 38rem; margin-inline: auto; }
+.nosotros__remate { color: var(--malva-600); font-size: 1.125rem; }
 
 /* ---------- Eventos ---------- */
 .eventos { background: var(--marfil-200); }
@@ -180,6 +189,9 @@ section > picture { display: contents; }
 
   .seccion { padding-block: 5rem; }
   .divisor { width: 13rem; }
+  .nosotros__grid { grid-template-columns: minmax(0, 20rem) 1fr; gap: 2.5rem; align-items: center; }
+  .nosotros__foto { margin-inline: 0; }
+  .nosotros__texto { margin-inline: 0; }
   .eventos .adorno--eventos-sup-izq { display: block; top: 0; left: 0; width: 6.5rem; }
   .eventos .adorno--eventos-sup-der { width: 9rem; }
   .eventos .adorno--eventos-inf-izq { width: 13.75rem; }
@@ -204,6 +216,8 @@ section > picture { display: contents; }
 
   .seccion { padding-block: 6rem; }
   .divisor { width: 15.4375rem; }                                   /* 247 px = tamaño nativo */
+  .nosotros__grid { grid-template-columns: minmax(0, 27rem) 1fr; gap: 4.5rem; }
+  .nosotros .adorno--nosotros-izq { display: block; left: 0; bottom: 0; width: 10.625rem; }
   .hero .adorno--hero-esquina { display: block; right: 0; bottom: 0; width: 26.25rem; }
   .eventos { padding-bottom: 10rem; }                               /* las rosas inferiores se ven en el relleno */
   .incluye { padding-bottom: 9rem; }
