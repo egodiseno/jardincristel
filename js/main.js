@@ -73,6 +73,63 @@
     }
   }
 
+  /* ---------- Carruseles: foco de teclado solo si de verdad se desplazan ---------- */
+  const carruseles = [...document.querySelectorAll('[data-carrusel]')];
+  const ajustarCarruseles = () => carruseles.forEach((c) => { if (c.scrollWidth > c.clientWidth + 1) c.tabIndex = 0; else c.removeAttribute('tabindex'); });
+  ajustarCarruseles();
+  addEventListener('resize', ajustarCarruseles);
+
+  /* ---------- Galería: carrusel (móvil/tablet) o imagen principal + miniaturas (escritorio) ---------- */
+  const galeria = document.querySelector('.galeria');
+  if (galeria) {
+    const carril = galeria.querySelector('.galeria__carril');
+    const botones = [...galeria.querySelectorAll('.galeria__foto')];
+    const principal = galeria.querySelector('.galeria__principal');
+    const contador = galeria.querySelector('[data-actual]');
+    const escritorio = matchMedia('(min-width: 75em) and (hover: hover) and (pointer: fine)');
+    const sinMovimiento = matchMedia('(prefers-reduced-motion: reduce)');
+    let actual = 0, interaccion = 'swipe', espera = 0;
+
+    const paso = () => (botones[1] ? botones[1].parentElement.offsetLeft - botones[0].parentElement.offsetLeft : 1);
+    const indiceVisible = () => Math.max(0, Math.min(botones.length - 1, Math.round(carril.scrollLeft / paso())));
+    const pintar = () => {
+      botones.forEach((b, i) => (escritorio.matches && i === actual ? b.setAttribute('aria-current', 'true') : b.removeAttribute('aria-current')));
+      if (principal) {
+        principal.hidden = !escritorio.matches;
+        const img = botones[actual].querySelector('img'), grande = principal.querySelector('img');
+        grande.src = img.currentSrc || img.src; grande.alt = img.alt;
+      }
+      contador.textContent = actual + 1;
+    };
+    const cambiar = (i, tipo) => {            // un solo evento por cambio asentado; la foto inicial no cuenta
+      if (i === actual) return;
+      actual = i; pintar();
+      enviar('gallery_navigate', { gallery_index: actual + 1, interaction: tipo });
+    };
+
+    carril.addEventListener('scroll', () => {   // carrusel: se mide cuando el desplazamiento se asienta, no en cada píxel
+      if (escritorio.matches) return;
+      clearTimeout(espera);
+      espera = setTimeout(() => { cambiar(indiceVisible(), interaccion); interaccion = 'swipe'; }, 140);
+    }, { passive: true });
+
+    botones.forEach((b, i) => b.addEventListener('click', () => {
+      if (escritorio.matches) { cambiar(i, 'thumbnail'); return; }
+      interaccion = 'thumbnail';
+      carril.scrollTo({ left: i * paso(), behavior: sinMovimiento.matches ? 'auto' : 'smooth' });
+    }));
+
+    galeria.addEventListener('keydown', (e) => {   // escritorio: flechas ← →
+      if (!escritorio.matches || (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft')) return;
+      const i = Math.max(0, Math.min(botones.length - 1, actual + (e.key === 'ArrowRight' ? 1 : -1)));
+      if (i === actual) return;
+      e.preventDefault(); cambiar(i, 'arrow'); botones[i].focus();
+    });
+
+    escritorio.addEventListener('change', () => { pintar(); if (!escritorio.matches) carril.scrollLeft = actual * paso(); });
+    pintar();
+  }
+
   /* ---------- Navegación: sección activa ---------- */
   const enlaces = new Map();
   document.querySelectorAll('.nav__enlace').forEach((a) => enlaces.set(a.getAttribute('href').slice(1), a));

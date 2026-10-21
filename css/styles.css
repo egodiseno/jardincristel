@@ -106,7 +106,7 @@ section[id] { scroll-margin-top: 0; }
 .hero .btn--secundario:active { background: var(--marfil-50); color: var(--lavanda-900); }
 
 /* ---------- Adornos acuarelados (docs/diseno.md §9): decorativos, detrás del contenido, sin puntero ---------- */
-.nosotros, .eventos, .incluye { position: relative; isolation: isolate; overflow: hidden; overflow: clip; }
+.nosotros, .eventos, .incluye, #galeria { position: relative; isolation: isolate; overflow: hidden; overflow: clip; }
 section > picture { display: contents; }
 .adorno { position: absolute; z-index: -1; display: none; max-width: none; height: auto; pointer-events: none; user-select: none; }
 .divisor { display: block; width: 10rem; height: auto; margin: .75rem auto 0; pointer-events: none; }
@@ -164,6 +164,18 @@ section > picture { display: contents; }
 .grupo li::before { content: ""; position: absolute; left: 0; top: .7em; width: .5rem; height: .5rem; border-radius: 50%; background: var(--malva-500); }
 .incluye__cta { display: grid; justify-items: center; margin-top: 2rem; }
 
+/* ---------- Galería (en página, sin lightbox: docs/diseno.md §3.3) ---------- */
+#galeria { background: var(--marfil-200); }
+.galeria__carril { margin-inline: calc(var(--gutter) * -1); padding: .5rem var(--gutter) 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); overscroll-behavior-x: contain; scrollbar-width: none; }
+.galeria__carril::-webkit-scrollbar { display: none; }
+.galeria__lista { display: grid; grid-auto-flow: column; grid-auto-columns: 88%; gap: 1rem; }
+.galeria__lista > li { scroll-snap-align: center; }
+.galeria__foto { display: block; width: 100%; padding: 0; border: 0; background: var(--malva-50); overflow: hidden; border-radius: 0 2.5rem 0 2.5rem; box-shadow: var(--sombra-lavanda); cursor: pointer; font: inherit; }
+.galeria__foto img { width: 100%; aspect-ratio: 530 / 386; object-fit: cover; }
+.galeria__principal { display: none; }
+.galeria__contador { margin-top: .5rem; color: var(--malva-600); font-weight: 700; text-align: center; }
+.galeria__mas { display: grid; justify-items: center; margin-top: 1.5rem; }
+
 /* ---------- Pie ---------- */
 .pie { padding: 1.5rem var(--gutter); background: var(--malva-500); color: var(--marfil-50); font-size: .875rem; text-align: center; }
 .pie p + p { margin-top: .25rem; }
@@ -189,6 +201,9 @@ section > picture { display: contents; }
 
   .seccion { padding-block: 5rem; }
   .divisor { width: 13rem; }
+  .galeria__carril { margin-inline: 0; padding-inline: 0; }
+  .galeria__lista { grid-auto-columns: calc(50% - .5rem); }
+  .galeria__contador { display: none; }
   .nosotros__grid { grid-template-columns: minmax(0, 20rem) 1fr; gap: 2.5rem; align-items: center; }
   .nosotros__foto { margin-inline: 0; }
   .nosotros__texto { margin-inline: 0; }
@@ -217,6 +232,15 @@ section > picture { display: contents; }
   .seccion { padding-block: 6rem; }
   .divisor { width: 15.4375rem; }                                   /* 247 px = tamaño nativo */
   .nosotros__grid { grid-template-columns: minmax(0, 27rem) 1fr; gap: 4.5rem; }
+  .galeria { max-width: 52rem; margin-inline: auto; }
+  .galeria__principal { display: block; margin-bottom: 1.5rem; overflow: hidden; border-radius: 0 7.3125rem 0 7.3125rem; background: var(--malva-50); box-shadow: var(--sombra-lavanda); }
+  .galeria__principal img { width: 100%; aspect-ratio: 530 / 386; object-fit: cover; }
+  .galeria__carril { overflow: visible; scroll-snap-type: none; padding-block: .5rem; }
+  .galeria__lista { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: repeat(6, 1fr); gap: .9rem; }
+  .galeria__foto { border-radius: 0 1.5rem 0 1.5rem; }
+  .galeria__foto[aria-current="true"] { outline: 3px solid var(--malva-500); outline-offset: 3px; }
+  #galeria .adorno--galeria-izq { display: block; top: 0; left: 0; width: 26.25rem; }
+  #galeria .adorno--galeria-der { display: block; top: 0; right: 0; width: 9.375rem; }
   .nosotros .adorno--nosotros-izq { display: block; left: 0; bottom: 0; width: 10.625rem; }
   .hero .adorno--hero-esquina { display: block; right: 0; bottom: 0; width: 26.25rem; }
   .eventos { padding-bottom: 10rem; }                               /* las rosas inferiores se ven en el relleno */
@@ -246,4 +270,6 @@ section > picture { display: contents; }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .evento__foto img { transition: transform 700ms cubic-bezier(.2, .7, .2, 1); }
   .evento:hover .evento__foto img { transform: scale(1.06); }
+  .galeria__foto img, .galeria__principal img { transition: transform 700ms cubic-bezier(.2, .7, .2, 1); }
+  .galeria__foto:hover img { transform: scale(1.06); }
 }

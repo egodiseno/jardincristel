@@ -88,7 +88,7 @@
         <h2 id="t-eventos">Nuestros eventos</h2>
         <picture><source type="image/avif" srcset="img/adornos/divisor.avif"><img class="divisor" src="img/adornos/divisor.webp" width="247" height="69" alt="" aria-hidden="true" loading="lazy" decoding="async" fetchpriority="low"></picture>
       </header>
-      <div class="eventos__carril" role="region" aria-label="Eventos (desliza para ver más)" tabindex="0">
+      <div class="eventos__carril" role="region" aria-label="Eventos (desliza para ver más)" data-carrusel>
         <ul class="eventos__lista">
           <li>
             <article class="evento marco">
@@ -234,6 +234,30 @@
       <p class="incluye__cta">
         <a class="btn btn--primario" href="https://wa.me/5215536476032?text=Hola%2C%20quiero%20informaci%C3%B3n%20y%20fechas%20disponibles%20para%20un%20evento%20en%20Jard%C3%ADn%20Cristel.%20%C2%A1Gracias!" target="_blank" rel="noopener noreferrer" data-track="whatsapp" data-track-location="que-incluye" data-event-type="general">Cotizar mi evento</a>
       </p>
+    </section>
+
+    <section id="galeria" class="seccion galeria" aria-labelledby="t-galeria">
+      <picture><source type="image/avif" srcset="img/adornos/galeria-izq.avif"><img class="adorno adorno--galeria-izq" src="img/adornos/galeria-izq.webp" width="420" height="141" alt="" aria-hidden="true" loading="lazy" decoding="async" fetchpriority="low"></picture>
+      <picture><source type="image/avif" srcset="img/adornos/galeria-der.avif"><img class="adorno adorno--galeria-der" src="img/adornos/galeria-der.webp" width="150" height="372" alt="" aria-hidden="true" loading="lazy" decoding="async" fetchpriority="low"></picture>
+      <header class="seccion__cab">
+        <h2 id="t-galeria">Galería</h2>
+        <picture><source type="image/avif" srcset="img/adornos/divisor.avif"><img class="divisor" src="img/adornos/divisor.webp" width="247" height="69" alt="" aria-hidden="true" loading="lazy" decoding="async" fetchpriority="low"></picture>
+      </header>
+      <div class="galeria">
+        <figure class="galeria__principal" hidden><img src="img/galeria/galeria01.webp" width="530" height="386" alt="" decoding="async"></figure>
+        <div class="galeria__carril" role="region" aria-roledescription="carrusel" aria-label="Fotos del jardín (desliza para ver más)" data-carrusel>
+          <ul class="galeria__lista">
+            <li><button type="button" class="galeria__foto"><span class="sr-only">Foto 1 de 6: </span><img src="img/galeria/galeria01.webp" width="530" height="386" alt="Mesa con camino plateado y centro de mesa azul" loading="lazy" decoding="async"></button></li>
+            <li><button type="button" class="galeria__foto"><span class="sr-only">Foto 2 de 6: </span><img src="img/galeria/galeria02.webp" width="530" height="386" alt="Mesa color miel con arreglo floral amarillo" loading="lazy" decoding="async"></button></li>
+            <li><button type="button" class="galeria__foto"><span class="sr-only">Foto 3 de 6: </span><img src="img/galeria/galeria03.webp" width="530" height="386" alt="Centro de flores azules con menú impreso" loading="lazy" decoding="async"></button></li>
+            <li><button type="button" class="galeria__foto"><span class="sr-only">Foto 4 de 6: </span><img src="img/galeria/galeria04.webp" width="530" height="386" alt="Mesa principal con flores blancas y azules" loading="lazy" decoding="async"></button></li>
+            <li><button type="button" class="galeria__foto"><span class="sr-only">Foto 5 de 6: </span><img src="img/galeria/galeria05.webp" width="530" height="386" alt="Mesas con manteles azules" loading="lazy" decoding="async"></button></li>
+            <li><button type="button" class="galeria__foto"><span class="sr-only">Foto 6 de 6: </span><img src="img/galeria/galeria06.webp" width="530" height="386" alt="Pasteles individuales y globos" loading="lazy" decoding="async"></button></li>
+          </ul>
+        </div>
+        <p class="galeria__contador" aria-live="polite"><span data-actual>1</span> / 6</p>
+      </div>
+      <p class="galeria__mas"><a class="btn btn--secundario" href="https://www.facebook.com/JardinCristel/" target="_blank" rel="noopener noreferrer" data-track="facebook" data-track-location="galeria">Ver más fotos en Facebook</a></p>
     </section>
 
   </main>
