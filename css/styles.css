@@ -98,12 +98,21 @@ section[id] { scroll-margin-top: 0; }
 .hero__contenido { width: 100%; max-width: 42rem; padding: 2.5rem var(--gutter) 2.75rem; }
 .hero__logo { width: 5rem; height: 5rem; margin-bottom: .75rem; }
 .kicker { font: 700 .8rem/1.4 var(--f-texto); letter-spacing: .16em; text-transform: uppercase; }
-.hero h1 { margin: .35rem 0 1rem; color: var(--marfil-50); font-size: clamp(2.75rem, 15vw, 5.75rem); }
+.hero h1 { margin: .35rem 0 .5rem; color: var(--marfil-50); font-size: clamp(2.75rem, 15vw, 5.75rem); }
 .hero__texto { max-width: 34rem; font-size: 1.0625rem; }
 .hero__acciones { display: grid; gap: .75rem; margin-top: 1.5rem; }
 .hero .btn--primario { border-color: var(--marfil-50); }
 .hero .btn--secundario { border-color: var(--marfil-50); color: var(--marfil-50); }
 .hero .btn--secundario:active { background: var(--marfil-50); color: var(--lavanda-900); }
+
+/* ---------- Adornos acuarelados (docs/diseno.md §9): decorativos, detrás del contenido, sin puntero ---------- */
+.eventos, .incluye { position: relative; isolation: isolate; overflow: hidden; overflow: clip; }
+section > picture { display: contents; }
+.adorno { position: absolute; z-index: -1; display: none; max-width: none; height: auto; pointer-events: none; user-select: none; }
+.divisor { display: block; width: 10rem; height: auto; margin: .75rem auto 0; pointer-events: none; }
+.hero .divisor { margin: 0 0 1.25rem; }
+.eventos .adorno--eventos-sup-der { display: block; top: 0; right: 0; width: 5.25rem; }
+.eventos .adorno--eventos-inf-izq { display: block; bottom: 0; left: 0; width: 9.5rem; }
 
 /* ---------- Secciones ---------- */
 .seccion { padding: 4rem var(--gutter); }
@@ -170,6 +179,10 @@ section[id] { scroll-margin-top: 0; }
   .hero__acciones { display: flex; flex-wrap: wrap; }
 
   .seccion { padding-block: 5rem; }
+  .divisor { width: 13rem; }
+  .eventos .adorno--eventos-sup-izq { display: block; top: 0; left: 0; width: 6.5rem; }
+  .eventos .adorno--eventos-sup-der { width: 9rem; }
+  .eventos .adorno--eventos-inf-izq { width: 13.75rem; }
   .eventos__carril { margin-inline: 0; padding: .5rem 0 0; overflow: visible; scroll-snap-type: none; }
   .eventos__lista { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: repeat(2, 1fr); gap: 2rem 1.75rem; max-width: 56rem; margin-inline: auto; }
   .evento__foto img { aspect-ratio: 4 / 5; }
@@ -190,6 +203,17 @@ section[id] { scroll-margin-top: 0; }
   .hero__logo { width: 6rem; height: 6rem; }
 
   .seccion { padding-block: 6rem; }
+  .divisor { width: 15.4375rem; }                                   /* 247 px = tamaño nativo */
+  .hero .adorno--hero-esquina { display: block; right: 0; bottom: 0; width: 26.25rem; }
+  .eventos { padding-bottom: 10rem; }                               /* las rosas inferiores se ven en el relleno */
+  .incluye { padding-bottom: 9rem; }
+  /* Se anclan al bloque de contenido (74 rem), no a la ventana: asoman siempre en el mismo sitio respecto de las tarjetas */
+  .eventos .adorno--eventos-sup-izq { left: max(0px, calc(50% - 40rem)); width: 8.125rem; }
+  .eventos .adorno--eventos-sup-der { right: max(0px, calc(50% - 40rem)); width: 14.375rem; }
+  .eventos .adorno--eventos-inf-izq { left: max(-2rem, calc(50% - 40rem)); width: 25rem; }
+  .eventos .adorno--eventos-inf-der { display: block; right: max(-1.5rem, calc(50% - 38.5rem)); bottom: 0; width: 16.875rem; }
+  .incluye .adorno--incluye-izq { display: block; top: 0; left: max(-1.5rem, calc(50% - 38.5rem)); width: 11.25rem; }
+  .incluye .adorno--incluye-der { display: block; right: max(-1.5rem, calc(50% - 38.5rem)); bottom: 0; width: 11.875rem; }
   .eventos__lista { grid-template-columns: repeat(3, 1fr); gap: 2.5rem 2rem; max-width: 74rem; }
   .evento__cuerpo { padding: 1.4rem 1.5rem 1.75rem; }
   .incluye__grupos { grid-template-columns: repeat(4, 1fr); }

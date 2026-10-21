@@ -415,7 +415,7 @@ Las posiciones se anclan al **bloque de contenido** (74 rem), no al borde de la 
 | Sección | Escritorio (≥ 75 em) | Tablet (48–75 em) | Móvil (< 48 em) |
 |---|---|---|---|
 | **Inicio** | `hero-esquina` en la **esquina inferior derecha** de la foto (sobre el velo, que ahí tiene 0.2–0.3 de opacidad), sin rotación, sin tocar el bloque de texto (que mide 40 rem a la izquierda). `divisor` bajo el H1, alineado a la izquierda. Se cargan sin `lazy` (están en el primer viewport) con `fetchpriority="low"` y `decoding="async"`; en móvil/tablet la esquina ni se descarga (`<source media>` solo de escritorio) | Solo el `divisor` | Solo el `divisor` (160 px) |
-| **Eventos** | `eventos-sup-izq` y `eventos-sup-der` en las **esquinas superiores**, flanqueando el título (que queda centrado y libre); `eventos-inf-izq` y `eventos-inf-der` en las **esquinas inferiores**, parcialmente **detrás de las tarjetas de los extremos** (solapan unos 60–80 px; las tarjetas son opacas y quedan siempre arriba). `divisor` centrado bajo el H2 | `sup-izq` (104 px) y `sup-der` (144 px) y `inf-izq` (220 px) | solo `sup-der` (96 px) y `inf-izq` (150 px), dentro del relleno de la sección |
+| **Eventos** | `eventos-sup-izq` y `eventos-sup-der` en las **esquinas superiores**, flanqueando el título (que queda centrado y libre); `eventos-inf-izq` y `eventos-inf-der` en las **esquinas inferiores**, parcialmente **detrás de las tarjetas de los extremos** (solapan unos 60–80 px; las tarjetas son opacas y quedan siempre arriba). `divisor` centrado bajo el H2 | `sup-izq` (104 px) y `sup-der` (144 px) y `inf-izq` (220 px) | solo `sup-der` (84 px) y `inf-izq` (152 px), dentro del relleno de la sección |
 | **Qué incluye** | `incluye-izq` pegada arriba a la izquierda y `incluye-der` pegada abajo a la derecha, ambas **asomando por los lados de las tarjetas** (parte detrás de las columnas 1 y 4). `divisor` centrado bajo el H2 | ninguna (las tarjetas ocupan todo el ancho) | ninguna |
 
 **Rotación:** ninguna (son recortes de esquina y deben conservar su orientación natural: crecen desde el borde de la sección hacia adentro). **Espejado:** no se usa; cada lado tiene su pieza propia.
@@ -429,7 +429,7 @@ Las posiciones se anclan al **bloque de contenido** (74 rem), no al borde de la 
 ### 9.4 Ajustes de layout que exige la composición (escritorio)
 
 - `#eventos`: `padding-block-end` de 6 rem a **10 rem** para que las rosas inferiores se vean en el relleno y no solo detrás de las tarjetas.
-- `#incluye`: `padding-block` de 6 rem a **7 rem arriba y 9 rem abajo**; el CTA queda centrado y libre.
+- `#incluye`: `padding-block-end` de 6 rem a **9 rem** (arriba se queda en 6 rem); el CTA queda centrado y libre.
 - Ancho máximo del contenido (74 rem) y del texto del hero (40 rem) **no cambian**: los adornos viven en los márgenes y en el solape de las esquinas.
 - Las tres secciones pasan a `position: relative; isolation: isolate; overflow: clip` (con `overflow: hidden` como respaldo): sin desplazamiento horizontal aunque el adorno sobresalga.
 - Se añade `.divisor` (imagen centrada, 160–247 px) bajo los títulos; en el hero va alineado a la izquierda.

@@ -1,0 +1,46 @@
+// Genera los adornos acuarelados (AVIF + WebP con transparencia) recortando racimos de las acuarelas de referencia/.
+// Herramienta manual (NO es un paso de build): sus resultados se versionan en img/adornos/.
+//
+// Uso (sharp no es dependencia del repo; se instala fuera, p. ej. en una carpeta temporal):
+//   NODE_PATH=<carpeta con node_modules/sharp> node tools/optimizar-adornos.cjs
+//
+// Cada pieza es un recorte al racimo (coordenadas medidas por alfa sobre el lienzo original, ver docs/imagenes.md §2)
+// reducido al ancho de render de escritorio (en px CSS) x ESCALA (1 por omisión) para conservar nitidez sin pagar el lienzo completo.
+
+const sharp = require('sharp');
+const fs = require('fs');
+const path = require('path');
+
+const RAIZ = path.resolve(__dirname, '..');
+const origen = (f) => path.join(RAIZ, 'referencia', 'images', f);
+const destino = (...p) => path.join(RAIZ, 'img', 'adornos', ...p);
+
+const AVIF = { quality: 46, effort: 6 };
+const WEBP = { quality: 68, effort: 6, alphaQuality: 80 };
+
+// nombre: [archivo origen, left, top, ancho, alto, ancho de render en px CSS (escritorio)]
+const PIEZAS = {
+  'hero-esquina':   ['bg-nosotros-right.webp', 1216, 362, 704, 579, 420],
+  'eventos-sup-izq': ['bg-eventos-top.webp', 0, 1, 172, 259, 130],
+  'eventos-sup-der': ['bg-eventos-top.webp', 557, 1, 287, 196, 230],
+  'eventos-inf-izq': ['bg-eventos-bottom.webp', 22, 1544, 796, 474, 400],
+  'eventos-inf-der': ['bg-eventos-bottom.webp', 1358, 1412, 532, 590, 270],
+  'incluye-izq':    ['bg-gallery-left.webp', 0, 19, 358, 990, 180],
+  'incluye-der':    ['bg-gallery-right.webp', 1545, 29, 375, 1001, 190],
+  'divisor':        ['detail.webp', 4, 3, 247, 69, 247],
+};
+const ESCALA = Number(process.env.ESCALA || 1);
+
+(async () => {
+  fs.mkdirSync(destino(), { recursive: true });
+  const filas = [];
+  for (const [nombre, [f, left, top, width, height, render]] of Object.entries(PIEZAS)) {
+    const ancho = Math.min(width, Math.round(render * ESCALA));
+    const base = sharp(origen(f)).extract({ left, top, width, height }).resize({ width: ancho });
+    const { height: alto } = await base.clone().toBuffer({ resolveWithObject: true }).then((r) => r.info);
+    await base.clone().avif(AVIF).toFile(destino(`${nombre}.avif`));
+    await base.clone().webp(WEBP).toFile(destino(`${nombre}.webp`));
+    filas.push(`${nombre}: ${ancho}x${alto}  avif ${fs.statSync(destino(`${nombre}.avif`)).size} B  webp ${fs.statSync(destino(`${nombre}.webp`)).size} B`);
+  }
+  console.log(filas.join('\n'));
+})();
