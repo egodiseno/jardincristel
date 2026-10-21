@@ -133,3 +133,45 @@ Los iconos están pegados como `<svg><path …></svg>` en cada uso, sin reutiliz
 | `img/eventos/{bautizo,comunion,xv,boda,graduacion,empresarial}.webp` | copia de las de la referencia (provisionales) | 530×386 | 4.7–23 KB | tarjetas de evento (AVIF no ahorra peso con estos orígenes) |
 
 El hero móvil reemplaza al `hero.webp` de 1728 px (78 KB) que se descargaba en móvil: ahora ≈ 16 KB (AVIF).
+
+## 8. Inventario de adornos acuarelados (para escritorio)
+
+Medido el 2026-10-21 con Sharp sobre cada archivo de `referencia/images/` (alfa real, área con pintura y racimos separados por huecos transparentes). **Todos los adornos son WebP con transparencia** (RGBA; entre 82 % y 97 % de los píxeles son transparentes). No existen adornos en otro formato ni vectoriales: los **arcos de la referencia son CSS** (`border-radius`), no imágenes, y no hay “ramas” sueltas: las ramas de eucalipto, uvas y enredaderas forman parte de las mismas acuarelas. El único ornamento pequeño aparte es `detail.webp`.
+
+**Criterio “≥ 1440 px”:** a 1440–1920 px de ancho un píxel CSS es un píxel de pantalla (1x). Una pieza es **suficiente** si el racimo mide, en su resolución nativa, al menos lo que se muestra (sin ampliar); **holgada** si además llega a 2x (pantallas retina) mostrada al tamaño propuesto en `docs/diseno.md` §9. “Insuficiente” = habría que ampliarla.
+
+### Lienzos de escritorio (se cargaban con ≥ 1024 px)
+
+| Archivo | Formato · px del lienzo | Alfa | Peso | Racimos (px nativos, x·y) | Dónde se usaba (referencia) | ¿≥ 1440 px? |
+|---|---|---|---|---|---|---|
+| `bg-eventos-top.webp` | WebP · 844×893 | Sí | 17,572 B | A: 172×259 (lirio rosa, esquina sup. izq.) · B: 287×196 (eucalipto, esquina sup. der.) | `#eventos`, `left top`, cover | **A suficiente** (1x hasta 172 px; chica) · **B suficiente** (hasta 287 px) |
+| `bg-eventos-bottom.webp` | WebP · 1920×2030 | Sí | 185,128 B | A: 796×474 (rosa antigua + hojas y zarcillo) · B: 532×590 (rosa magenta + gipsófila) | `#eventos`, `center bottom`, cover | **Holgada** (A hasta 796 px, B hasta 532 px) |
+| `bg-gallery-left.webp` | WebP · 1920×1030 | Sí | 98,462 B | 358×990 (lirio + uvas moradas, columna izq.) | `#galeria`, `left top`, cover | **Suficiente** (hasta 358 px de ancho; 2x a ≈ 180 px) |
+| `bg-gallery-right.webp` | WebP · 1920×1030 | Sí | 162,444 B | 375×1001 (peonía + flor azul + enredadera) | `#galeria`, `right bottom`, cover | **Suficiente** (hasta 375 px; 2x a ≈ 190 px) |
+| `bg-nosotros-left.webp` | WebP · 1920×942 | Sí | 41,642 B | 318×583 (uvas + rosa + nomeolvides, borde izq.) | `#nosotros`, `left bottom`, cover | Suficiente solo hasta ≈ 320 px; el racimo es mínimo |
+| `bg-nosotros-right.webp` | WebP · 1920×942 | Sí | 101,728 B | 704×579 (eucalipto, nomeolvides y uvas, esquina inf. der.) | `#nosotros`, `right bottom`, cover | **Holgada** (hasta 704 px) |
+| `bg-footer-top.webp` | WebP · 1920×965 | Sí | 164,184 B | A: 1038×349 (peonía + ramas con zarcillo) · B: 264×655 (lirio + uvas, columna der.) | `#contacto`, `right top`, cover | **A holgada** · **B suficiente** (hasta 264 px) |
+| `bg-footer-bottom.webp` | WebP · 1920×961 | Sí | 204,630 B | 1920×319 (franja continua de flores) | `#contacto`, `center bottom`, cover | **Suficiente a 1x en 1920 px** (es la única que cubre todo el ancho); la más pesada y no es holgada |
+
+### Lienzos de móvil (se cargaban con < 1024 px)
+
+| Archivo | Formato · px | Alfa | Peso | Área con pintura | Dónde se usaba | ¿≥ 1440 px? |
+|---|---|---|---|---|---|---|
+| `bg-eventos-top-mobile.webp` | WebP · 495×1109 | Sí | 12,806 B | 495×183 (tira superior) | `#eventos`, `center top`, contain | **Insuficiente** (ampliar ≥ 3x) |
+| `bg-eventos-bottom-mobile.webp` | WebP · 495×1109 | Sí | 20,390 B | 495×236 | `#eventos`, `center bottom` | **Insuficiente** |
+| `bg-footer-bottom-mobile.webp` | WebP · 495×1155 | Sí | 20,302 B | 495×200 | `#contacto`, `center bottom`, cover | **Insuficiente** |
+| `bg-nosotros-mobile.webp` | WebP · 1125×3164 | Sí | 54,410 B | 1125×281 (franja inferior) | `#nosotros`, `center bottom`, contain | Suficiente a 1x hasta 1125 px; no cubre 1440 sin ampliar |
+| `bg-gallery-top-mobile.webp` | WebP · 1125×2379 | Sí | 60,716 B | esquinas sueltas en todo el lienzo | `#galeria`, `center top`, contain | Insuficiente como pieza única (lienzo casi vacío) |
+| `bg-gallery-bottom-mobile.webp` | WebP · 1125×2379 | Sí | 60,384 B | 909×718 (racimo inf. der.) | `#galeria`, `right bottom` | Suficiente hasta ≈ 900 px |
+| `bg-footer-top-mobile.webp` | WebP · 1125×2625 | Sí | 52,494 B | 881×579 (racimo sup. izq.) | `#contacto`, `left top` | Suficiente hasta ≈ 880 px |
+
+No se usan en escritorio: **los 7 de móvil se pueden retirar del despliegue** cuando el sitio nuevo cubra móvil con los mismos recortes de escritorio reducidos (ver `docs/diseno.md` §9); se conservan en `referencia/` hasta que lo apruebes.
+
+### Otros
+
+| Archivo | Formato · px | Alfa | Peso | Dónde se usaba | ¿≥ 1440 px? |
+|---|---|---|---|---|---|
+| `detail.webp` | WebP · 252×72 | Sí (46 % transparente, 27 % parcial) | 9,434 B | Divisor floral bajo el título de **Inicio** y de **Nosotros** (`w-6/12 lg:w-2/12`, `w-7/12 lg:w-4/12`) | **Insuficiente** salvo a ≤ 250 px de ancho y 1x; se ve blando en retina |
+| `bg-modal.webp` / `bg-modal-mobile.webp` | WebP · 1920×881 / 495×1002 | Sí | 59,536 / 62,890 B | Fondo del modal “paquete” y del menú móvil | No aplica: el modal desaparece (decisión de `docs/diseno.md` §3) |
+
+**Conclusión:** para pantallas ≥ 1440 px **sirven los 8 lienzos de escritorio**, recortados al racimo; las mejores (holgadas) son `bg-eventos-bottom`, `bg-nosotros-right` y el racimo A de `bg-footer-top`. Los lienzos de móvil de 495 px y `detail.webp` **no** sirven para escritorio. No hay arte en menor calidad que se deba descartar por borroso: la limitación es la resolución nativa de los racimos chicos (`eventos-top`, `gallery-*`), que se muestran por debajo de su tamaño nativo.
