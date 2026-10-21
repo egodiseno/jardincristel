@@ -72,10 +72,10 @@ Un solo `<h1>`. Landmarks nativos (`header`, `nav`, `main`, `section`, `footer`)
         <h3>Menú a elegir</h3>
     <section id="galeria">
       <h2>Galería</h2>  carrusel scroll-snap (móvil) / imagen principal + miniaturas (desktop), en página
+    <section id="ubicacion">   (2026-10-21: separada de Contacto; ver docs/diseno.md §10)
+      <h2>Ubicación</h2>  <address>, “Abrir en Google Maps”, mapa bajo demanda
     <section id="contacto">
-      <h2>Contacto</h2>
-        <address> dirección, teléfono, WhatsApp, Facebook
-        <h3>Cómo llegar</h3> mapa (imagen enlazada o embed diferido)
+      <h2>Contacto</h2>  WhatsApp, teléfono, Facebook
     <section id="faq">  (opcional, §8)  <h2>Preguntas frecuentes</h2> <details>…
   <footer>  © <año> Jardín Cristel · Facebook · (aviso de privacidad)
   CTA “Cotizar” por WhatsApp: botón central de la barra inferior (móvil) o en la barra superior (tablet/desktop); ver §10
@@ -348,6 +348,8 @@ Notas de implementación:
 | **CTA Cotizar** | `<a href="wa.me…" data-track="whatsapp">` | Botón central de la barra | Botón en la barra superior | Botón en el header |
 
 ### 10.3 Móvil (<48em): app web
+
+> **Actualización 2026-10-21:** la barra inferior pasa a **Eventos · Galería · Cotizar · Cómo llegar · Más** (Cotizar siempre al centro); el detalle vigente está en `docs/diseno.md` §10.3.
 
 - **Barra de navegación inferior** (`position: fixed; bottom: 0`, `padding-bottom: env(safe-area-inset-bottom)`): **Inicio · Eventos · [Cotizar] · Galería · Contacto**. Icono SVG inline + etiqueta de texto visible en cada item (no solo iconos). “Nosotros” no aparece en la barra (queda accesible por scroll y por el enlace del hero). Cada item mide ≥ 48×48 px.
   - El botón central **“Cotizar”** es un enlace a WhatsApp (`wa.me`), con diseño destacado (circular, color de acción) y `data-track="whatsapp" data-track-location="nav-inferior"`. Su `aria-label` empieza con el texto visible (“Cotizar por WhatsApp”), por H11.

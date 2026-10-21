@@ -89,3 +89,23 @@ Piloto con los adornos de `docs/diseno.md` §9 (commit `be10067`, deploy de la r
 
 Verificaciones: sin cruces entre adornos y texto sin fondo opaco (Range sobre el texto real) a 320, 360, 768, 1024, 1280, 1440, 1920 y 2560 px; `scrollWidth == innerWidth` en todos; en móvil/tablet no se descarga la esquina del hero (ni las piezas ocultas); contraste del hero con la esquina presente: peor píxel 6.81:1 (kicker), 7.65:1 (H1), 7.61:1 (párrafo) entre 1280 y 1920 px. **No verificado:** retina (las piezas se sirven a 1x), Safari/Firefox, dispositivos reales.
 
+## Sitio completo: todas las secciones, menú y analítica (2026-10-21)
+
+Deploy de la rama (commit `949f4ab`). Reportes: `lighthouse-sitio-movil.report.json`, `lighthouse-sitio-movil-ga4.report.json`, `lighthouse-sitio-escritorio.report.json`. Capturas: `sitio-{360,768,1280}.png` (página completa) y `sitio-{360,768,1280}-vista.png` (primera pantalla); en las de página completa el encabezado fijo y el “Saltar al contenido” aparecen donde cae el viewport (artefacto de la captura).
+
+| Lighthouse 12.8.2, mediana de 3 | Móvil sin analítica | **Móvil con GA4 + Clarity** (`?medicion=debug`) | Escritorio sin analítica |
+|---|---|---|---|
+| Performance | 97 (100 / 97 / 97) | **94** (97 / 92 / 94) | 100 |
+| Accessibility | 100 | 100 | 100 |
+| Best Practices | 100 | **79** | 100 |
+| LCP | 1.57 s | **1.76 s** | 0.47 s |
+| TBT | 21 ms | **256 ms** (163–284) | 0 ms |
+| CLS | 0.000 | 0.000 | 0.001 |
+| Peso transferido | 198 KiB | **388 KiB** | 329 KiB |
+
+**Metas de analítica (TBT ≤ 50 ms, peso ≤ 300 KiB): NO se cumplen.** gtag.js pesa 162 KiB y 243 ms de CPU; Clarity (tag + clarity.js) ≈ 26 KiB y 191 ms; juntos producen las tareas largas (135 + 135 + 99 ms) que llevan el TBT a 256 ms. El sitio sin analítica ya pesa 198 KiB (con todas las secciones), de modo que 300 KiB es inalcanzable con gtag.js cargado (198 + 162 > 300). **Best Practices cae a 79 por las 8 cookies de terceros que escribe Clarity** (auditoría `third-party-cookies`), lo que además toca la decisión #20 (consentimiento). El LCP sí se mantiene bajo 2.0 s (1.76 s). La carga diferida funciona (ninguna petición de analítica antes de `load`; verificado), pero diferir no reduce el costo, solo lo desplaza.
+
+Las corridas bloquearon los endpoints de envío (`*/g/collect*`, `google-analytics.com`, `analytics.google.com`, `clarity.ms/collect`), incluido el `www.google.com/g/collect` que se coló en la medición anterior; en esta ronda esas peticiones salieron con estado −1 (bloqueadas), pero **no hay forma de confirmar desde aquí que ningún dato llegó a GA4/Clarity**: conviene revisar DebugView y descartar el tráfico del 2026-10-21 si aparece.
+
+Pruebas locales (Playwright/Chrome): galería (clic en miniatura, flechas, deslizamiento y toque en el carrusel; eventos `gallery_navigate` con `gallery_index` e `interaction` correctos, nada por la foto inicial); mapa (0 peticiones a Google antes de “Ver mapa”; el iframe se crea con `loading="lazy"` y `title`); menú (una sola fila de 768 a 1440 px; scroll-spy con `aria-current="true"` en menú y barra; anclas a 64–69 px del borde bajo el encabezado de 57 px); barra móvil (zonas ≥ 56 px de alto y ≥ 59 de ancho desde 320 px, “Cotizar” al centro, `body` con padding inferior); `scrollWidth == innerWidth` a 320–2560 px.
+

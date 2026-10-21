@@ -443,3 +443,46 @@ Anclaje: las piezas que conservan un **borde plano del lienzo original** (`event
 - No se reintroduce `detail.webp` como SVG hasta tener el vector (§4.1); el `divisor` en AVIF/WebP es el puente.
 - Las piezas de **Nosotros**, **Galería** y **Contacto** (`bg-nosotros-left`, `bg-footer-top/bottom`, etc.) se recortan al construir esas secciones, con el mismo método.
 - Con las fotos de eventos definitivas se debe revisar de nuevo el solape de las rosas inferiores con las tarjetas.
+
+---
+
+## 10. Sitio completo: secciones, menú y barra inferior (2026-10-21)
+
+### 10.1 Secciones (orden de la página)
+
+| `id` | `<h2>` | Fondo | Contenido e imagen | Adornos (escritorio · tablet · móvil) |
+|---|---|---|---|---|
+| `inicio` | (h1) Jardín Cristel | foto + velo | `hero.webp` | esquina + divisor · divisor · divisor |
+| `nosotros` | Una celebración inolvidable en Tepotzotlán | marfil-50 | `nosotros.webp` en arco + 4 párrafos + “Solicita tu presupuesto” | `nosotros-izq` · — · — |
+| `eventos` | Nuestros eventos | marfil-200 | 6 tarjetas | 4 esquinas · 3 · 2 |
+| `incluye` | Qué incluye tu evento | marfil-50 | 4 `<details>` | 2 laterales · — · — |
+| `galeria` | Galería | marfil-200 | 6 fotos (marcador 530 px) | `galeria-izq`, `galeria-der` · — · — |
+| `ubicacion` | Ubicación | marfil-50 | dirección, “Abrir en Google Maps”, mapa bajo demanda | — |
+| `contacto` | Contacto | marfil-200 | WhatsApp, teléfono, Facebook | `contacto-inf-izq` y `-der` (franja inferior) · 2 · 1 |
+
+Cada sección tiene `id` para anclas y `aria-labelledby`. `scroll-margin-top` es `calc(var(--alto-header) + .5rem)` desde 48 em (encabezado fijo de 57 px; medido: la sección queda a 64–69 px del borde tras pulsar un enlace) y 0 en móvil, donde el encabezado no es fijo. Ninguna sección quedó sin imagen, pero la galería y el mapa usan marcadores (ver `docs/imagenes.md` §10).
+
+### 10.2 Menú de tablet y escritorio
+
+`<nav aria-label="Principal">` en el encabezado: Inicio · Nosotros · Eventos · Qué incluye · Galería · Ubicación · Contacto y, **al final, “Cotizar”** (botón principal, WhatsApp con mensaje prellenado, `data-track-location="header"`). Sección activa con `aria-current="true"` (subrayado) mediante `IntersectionObserver` (banda 35–45 % del alto de la ventana) más una regla para marcar la última sección al llegar al final. En **tablet (48–75 em)** el enlace “Inicio” se oculta (el logo ya lo es) para que quepa en una fila desde 768 px (medido: 768, 820, 1024, 1180, 1280 y 1440 px, una sola fila, sin desbordar). Desde 75 em con mouse el menú tiene los 7 enlaces. Hover solo bajo `@media (hover: hover)`.
+
+### 10.3 Barra inferior móvil (< 48 em)
+
+`<nav aria-label="Navegación rápida">` fija abajo, **5 elementos**: **Eventos · Galería · COTIZAR · Cómo llegar · Más**. “Cotizar” siempre al centro, más grande y elevado, botón de acción (WhatsApp prellenado, `barra-movil`). “Cómo llegar” abre Google Maps (ver §10.4). “Más” lleva a `#contacto`, y **el pie de página trae el índice de todas las secciones** (`<nav aria-label="Secciones del sitio">`): así Inicio, Nosotros, Qué incluye y Ubicación siguen a un toque sin menús desplegables ni modales. Zonas táctiles medidas: 59×56 px (320 px de ancho) a 79×56 px (430); Cotizar 78×66. Foco visible (anillo marfil sobre malva), `padding-bottom: env(safe-area-inset-bottom)` en la barra y `padding-bottom` de 4.5 rem + safe-area en `body` para no tapar contenido. Desde 48 em la barra desaparece (`display: none`, fuera del árbol de accesibilidad) y “Cotizar” vive en el menú: en el DOM hay dos “Cotizar”, cada uno con su `data-track-location`.
+
+### 10.4 “Cómo llegar” y mapa bajo demanda
+
+- **Enlace universal:** `https://www.google.com/maps/search/?api=1&query=<nombre y dirección codificados>`, con la consulta “Jardín Cristel, Av. Lic. Benito Juárez 24, San Martín, 54600 Tepotzotlán, Estado de México” (dirección de `docs/inventario.md`; **no existe un `place_id` en el repositorio**, y no se inventa uno). El enlace corto de la referencia (`maps.app.goo.gl/GREPvSYNPcgL9c8D8`) resuelve a la ficha “Jardín Cristel” en 19.714825, −99.225371; ese dato queda documentado como respaldo (`query=19.714825,-99.225371`) por si la búsqueda por texto no apuntara a la ficha. Con `target="_blank" rel="noopener noreferrer"`; en móvil el sistema decide si abre la app de Maps (ver lo no verificado en la BITACORA).
+- **Sección Ubicación:** dirección (`<address>`), botón “Abrir en Google Maps” (`data-track="maps" data-track-location="ubicacion"`) y un mapa **bajo demanda**: la imagen `maps.webp` no es un enlace; el botón “Ver mapa” (se muestra solo con JS) crea el `<iframe>` de Google Maps (`output=embed`, `loading="lazy"`, `title`, `referrerpolicy`) **solo al pulsarlo**. Verificado: cero peticiones a Google antes del clic.
+
+### 10.5 Galería
+
+Implementa §3.3: carrusel con scroll-snap y contador “n / 6” en móvil; carrusel de 2 fotos en tablet (sin contador); imagen principal + 6 miniaturas con `aria-current="true"`, clic y flechas ← → en escritorio con mouse. `gallery_navigate` (`gallery_index`, `interaction` = `swipe`/`thumbnail`/`arrow`) se envía cuando el desplazamiento se asienta (140 ms) o al cambiar la selección; la foto inicial no cuenta. Las regiones desplazables solo reciben `tabindex="0"` cuando de verdad desbordan (también el carril de eventos). Botón “Ver más fotos en Facebook”.
+
+### 10.6 Desviaciones respecto de `docs/propuesta.md`
+
+- **Ubicación separada de Contacto** (la propuesta tenía “Cómo llegar” como `<h3>` dentro de Contacto): el encargo nombra una sección Ubicación y un `link_location=ubicacion`.
+- **Sin FAQ:** es opcional en la propuesta y no hay contenido real; no se inventó.
+- **Barra:** Eventos · Galería · Cotizar · Cómo llegar · Más (antes Inicio · Eventos · Cotizar · Galería · Contacto).
+- **Menú:** una sola nav no sirve a ambos layouts (los elementos difieren), así que hay dos `<nav>` (menú y barra) y una tercera en el pie; solo una se muestra por ancho.
+

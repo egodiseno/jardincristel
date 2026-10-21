@@ -1,6 +1,6 @@
 # Plan de medición — Jardín Cristel
 
-**Estado: plan documentado, sin implementar.** Se integra en el **bloque 7** de `docs/propuesta.md` (§8): `js/main.js` con tracking GA4 por delegación y Microsoft Clarity diferido. Complementa `docs/propuesta.md` §7 (en caso de diferencia, **manda este documento**) y se apoya en el sistema de diseño de `docs/diseno.md` (§3: sección “Qué incluye tu evento”, CTA por tarjeta y galería en página).
+**Estado (2026-10-21): implementado en el piloto** (`js/main.js`): GA4 por delegación, `gallery_navigate`, `click_maps` y carga diferida de gtag.js **y de Clarity** (tras `load`, `requestIdleCallback` con límite de 3 s; solo en `jardincristel.mx` o con `?medicion=debug`). Falta lo que depende del cliente (consentimiento #20, conexión Clarity↔GA4, registrar dimensiones en GA4). Plan original: Se integra en el **bloque 7** de `docs/propuesta.md` (§8): `js/main.js` con tracking GA4 por delegación y Microsoft Clarity diferido. Complementa `docs/propuesta.md` §7 (en caso de diferencia, **manda este documento**) y se apoya en el sistema de diseño de `docs/diseno.md` (§3: sección “Qué incluye tu evento”, CTA por tarjeta y galería en página).
 
 **Objetivo de negocio:** saber cuántas personas intentan contactar (WhatsApp y teléfono), desde qué parte de la página y para qué tipo de evento, de dónde llegan (búsqueda, Google Maps, Facebook) y qué partes del sitio se usan o se ignoran, **sin empeorar el LCP**.
 
@@ -37,10 +37,10 @@
 
 | Evento GA4 | Se dispara con | Parámetros | Valores de `link_location` |
 |---|---|---|---|
-| **`click_whatsapp`** | clic en cualquier enlace `wa.me` | `link_location`, `event_type`, `link_url` | `hero` (CTA principal) · `tarjeta` (“Cotizar mi <evento>”) · `que-incluye` (CTA de la sección) · `barra-movil` (botón central de la barra inferior) · `header` (“Cotizar” de la barra superior en tablet y desktop) · `contacto` (botón de la sección Contacto) |
+| **`click_whatsapp`** | clic en cualquier enlace `wa.me` | `link_location`, `event_type`, `link_url` | `hero` (CTA principal) · `tarjeta` (“Cotizar mi <evento>”) · `que-incluye` (CTA de la sección) · `barra-movil` (botón central de la barra inferior) · `header` (“Cotizar” al final del menú en tablet y desktop) · `nosotros` (“Solicita tu presupuesto”) · `contacto` (botón de la sección Contacto) |
 | **`click_phone`** | clic en `tel:` | `link_location` | `contacto` (y cualquier otro lugar donde se añada) |
-| **`click_maps`** | clic en el mapa enlazado a Google Maps | `link_location` | `contacto` |
-| **`click_facebook`** | clic en el enlace a Facebook | `link_location` | `header` · `galeria` · `pie` (donde existan) |
+| **`click_maps`** | clic en un enlace a Google Maps (“Cómo llegar” de la barra inferior móvil, “Abrir en Google Maps” de la sección Ubicación) | `link_location` | `barra-movil` · `ubicacion` |
+| **`click_facebook`** | clic en el enlace a Facebook | `link_location` | `galeria` (“Ver más fotos en Facebook”) · `contacto` · `pie` |
 
 **Implementación (piloto):** “Cotizar” existe dos veces en el DOM —el botón central de la barra inferior móvil (`barra-movil`) y el botón del header en tablet y escritorio (`header`)— y el CSS oculta el que no corresponde (`display: none`); así cada elemento lleva un `data-track-location` fijo.
 

@@ -191,3 +191,17 @@ No se usan en escritorio: **los 7 de móvil se pueden retirar del despliegue** c
 
 Suma AVIF: 116 KB (114 KiB transferidos en Lighthouse). Se sirven a 1x: el racimo nativo es 1.3–2x mayor (ver §8), pero las piezas aún no tienen variantes 2x.
 
+## 10. Sitio completo: imágenes por sección y pendientes (2026-10-21)
+
+| Sección | Imagen | Estado | Pendiente |
+|---|---|---|---|
+| Inicio | `hero.webp` (derivados AVIF/WebP) | Usada | Foto final del cliente (el contraste del velo se revisa con la nueva) |
+| Nosotros | `nosotros.webp` 549×577 (`img/nosotros/`) | Usada, con alt corregido (“Salón del jardín con mesas decoradas”) | Confirmar que la foto sigue vigente; hoy es WebP sin AVIF |
+| Eventos | 6 fotos de 530×386 | Usadas (provisionales) | **Pendiente:** imágenes finales (≥ 1000 px) de las notas de Emmanuel |
+| Qué incluye | — (solo texto y adornos) | — | — |
+| Galería | `galeria01–06.webp` 530×386 (`img/galeria/`) | Usadas como **marcador**; en escritorio la imagen principal se muestra a ≈ 830 px (ampliada 1.6x, se ve blanda) | **Pendiente:** fotos originales ≥ 1200 px (diseno.md §3.3) y descripciones reales; los alt actuales los redactó Claude mirando la foto |
+| Ubicación | `maps.webp` 530×386 (`img/ubicacion/`) | Usada como **marcador** (captura de Google Maps con su marca) | **Pendiente:** mapa propio estilizado (SVG) o captura con permiso de uso; mientras tanto el iframe real se carga bajo demanda |
+| Contacto | — | — | — |
+
+Adornos de las secciones nuevas (generados con `tools/optimizar-adornos.cjs`, ver §9): `nosotros-izq` (bg-nosotros-left, 7 KB AVIF), `galeria-izq` (racimo A de bg-footer-top, 14 KB), `galeria-der` (racimo B, 12 KB), `contacto-inf-izq` / `contacto-inf-der` (mitades de la franja de bg-footer-bottom, 15 / 13 KB; con máscara que desvanece el borde interior porque la franja original es continua). Suma de adornos en escritorio: **≈ 176 KB AVIF** (116 del piloto + 60 nuevos); con `loading="lazy"` solo se descargan al acercarse a su sección.
+

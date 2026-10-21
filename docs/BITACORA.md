@@ -264,6 +264,37 @@ Ver lista de nuevos arriba; editados `docs/propuesta.md`, `docs/diseno.md`, `doc
 - Aprobación para retirar del despliegue los 7 lienzos de móvil y los 2 del modal (siguen en `referencia/`).
 - No verificado: ver el reporte de la tarea (retina, Safari/Firefox, dispositivos reales).
 
+## 2026-10-21 — Sitio completo: secciones, menú de escritorio, barra móvil, mapa y analítica diferida
+
+**Qué se hizo**
+1. Secciones nuevas según `docs/propuesta.md` §2: **Nosotros**, **Galería** (carrusel/contador en móvil, 2 fotos en tablet, imagen principal + miniaturas y flechas en escritorio; `gallery_navigate`), **Ubicación** (dirección, “Abrir en Google Maps”, mapa bajo demanda con iframe creado al pulsar “Ver mapa”) y **Contacto** (WhatsApp, teléfono, Facebook). Cada una con `id`, `aria-labelledby`, adornos de `docs/diseno.md` §4/§9 y `scroll-margin-top`.
+2. **Menú de tablet/escritorio** con todas las secciones y “Cotizar” al final; scroll-spy con `aria-current="true"`.
+3. **Barra inferior móvil** de 5 elementos: Eventos · Galería · **Cotizar** (centro) · Cómo llegar · Más (→ `#contacto`; el pie trae el índice de secciones). Sin modales ni menús desplegables.
+4. **Cómo llegar:** enlace universal `https://www.google.com/maps/search/?api=1&query=…` con nombre y dirección; `click_maps` con `link_location` `barra-movil` y `ubicacion`.
+5. **Analítica:** gtag.js y Clarity (`z0uyber2t9`) tras `load`, `requestIdleCallback` con límite de 3 s.
+6. Docs: `docs/diseno.md` §10, `docs/imagenes.md` §10, `docs/medicion.md`, `docs/propuesta.md`, `CLAUDE.md`, `docs/benchmark/piloto/README.md` y capturas a 360/768/1280.
+
+**Por qué:** completar el sitio del piloto con todo el mapa de secciones y una navegación coherente por dispositivo.
+
+**Archivos tocados:** `index.html`, `css/styles.css`, `js/main.js`, `img/{nosotros,galeria,ubicacion,adornos}/`, `tools/optimizar-{imagenes,adornos}.cjs`, `docs/*`.
+
+**Decisiones**
+- Ubicación como sección propia (la propuesta la tenía dentro de Contacto); FAQ omitida (opcional, sin contenido real).
+- “Más” lleva a Contacto y el pie lista todas las secciones, en lugar de un menú.
+- Tablet: el enlace “Inicio” se oculta para que el menú quepa en una fila desde 768 px.
+- Dos `<nav>` (menú y barra) más una tercera en el pie, mostrándose una por ancho; los “Cotizar” duplicados llevan cada uno su `data-track-location`.
+- Clarity se carga (autorizado en esta tarea) con el mismo `MEDIR`: solo en `jardincristel.mx` o con `?medicion=debug`.
+- Fallo corregido en el camino: la sección Galería llevaba la clase `galeria` y heredaba `max-width: 52rem` (la sección se encogía y recortaba sus adornos).
+
+**Resultados:** ver `docs/benchmark/piloto/README.md`. Sin analítica: móvil 97/100/100, LCP 1.57 s, TBT 21 ms, 198 KiB; escritorio 100/100/100, LCP 0.47 s, 329 KiB. **Con GA4 + Clarity (móvil): Perf 94, LCP 1.76 s, TBT 256 ms, 388 KiB, Best Practices 79: las metas TBT ≤ 50 ms y ≤ 300 KiB NO se cumplen** (gtag 162 KiB / 243 ms de CPU; Clarity ≈ 26 KiB / 191 ms y 8 cookies de terceros).
+
+**Pendientes**
+- Decidir la estrategia de analítica (opciones en el reporte: cargarla en la primera interacción, solo gtag y Clarity más tarde, o aceptar el costo) y el consentimiento (#20; Clarity escribe cookies de terceros).
+- Fotos finales: galería (≥ 1200 px), eventos, mapa propio; alt de la galería redactados por Claude, validar.
+- Revisar en DebugView/Clarity si llegó tráfico de las pruebas.
+- Bloques 2 (head/SEO completo), 9 (robots/sitemap/caché), 11 (QA); quitar `noindex` y confirmar licencia/SVG antes de cualquier merge.
+- No verificado: enlace de Maps en iOS y Android (abre o no la app), dispositivos reales, Safari/Firefox, lectores de pantalla.
+
 ## Registro de commits
 
 - 2026-10-20 12:17 `a19da90` docs: configuración inicial, bitácora, baseline Lighthouse y hallazgos
@@ -283,3 +314,9 @@ Ver lista de nuevos arriba; editados `docs/propuesta.md`, `docs/diseno.md`, `doc
 - 2026-10-21 15:53 `d963b03` docs: composición de adornos acuarelados para escritorio (hero, eventos, qué incluye)
 - 2026-10-21 16:00 `a0d8d02` feat: adornos acuarelados en escritorio (hero, eventos, qué incluye) y divisor floral
 - 2026-10-21 16:03 `be10067` fix: anclar al borde de la ventana los adornos con borde plano de lienzo
+- 2026-10-21 16:05 `ae9a26e` docs: mediciones, capturas y bitácora de los adornos acuarelados
+- 2026-10-21 17:20 `6cad8ce` feat: sección Nosotros con foto en arco, adorno acuarelado y CTA de WhatsApp
+- 2026-10-21 17:21 `2fad2ef` feat: sección Galería en página (carrusel con contador y miniaturas en escritorio) y evento gallery_navigate
+- 2026-10-21 17:23 `bccf1de` feat: secciones Ubicación (mapa bajo demanda y enlace universal de Google Maps) y Contacto
+- 2026-10-21 17:25 `e11b075` feat: menú de escritorio con todas las secciones y barra inferior móvil de 5 elementos con Cotizar al centro
+- 2026-10-21 17:26 `949f4ab` perf: gtag.js y Clarity tras load, en requestIdleCallback con límite de 3 s
