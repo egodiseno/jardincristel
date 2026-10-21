@@ -239,16 +239,16 @@ Hoy hay **15 acuarelas de fondo (+2 del modal)** que pesan **953 KiB en escritor
 3. **Se tratan como imágenes decorativas** (`<img alt="" aria-hidden="true" loading="lazy" decoding="async" fetchpriority="low">` absolutas, `pointer-events: none`), no como `background-image`: así no compiten con el LCP ni se descargan antes de necesitarse.
 4. **Una pieza reutilizada y espejada** cuando el diseño lo permita (`transform: scaleX(-1)`), en lugar de dos archivos.
 5. **AVIF con fallback WebP, con transparencia.**
-6. **Sin acuarelas** en el hero (fotografía con degradado), en el header, el footer ni la barra inferior.
+6. **Sin acuarelas sobre el texto ni bajo el velo del texto** del hero, ni en el header, el footer o la barra inferior. *(Revisado el 2026-10-21: el hero admite una esquina acuarelada en el lado de la foto, lejos del texto; ver §9.)*
 7. Versión móvil: piezas más pequeñas, pocas, en las esquinas o el borde inferior.
 
 ### 4.2 Composición por sección
 
 | Sección | Escritorio (≥ 75em) | Móvil | Zona segura (donde no hay texto) |
 |---|---|---|---|
-| **Inicio** | Ninguna | Ninguna | — |
+| **Inicio** | ~~Ninguna~~ → 1 esquina + divisor (§9) | Solo el divisor | — |
 | **Nosotros** | 1 pieza: la derecha (`bg-nosotros-right`, recorte ≈ 704×579) abajo a la derecha, bajo el texto. Se elimina la izquierda | 1 tira pequeña bajo el CTA (recorte de `bg-nosotros-mobile`) | Margen derecho/inferior; el texto mantiene un `max-width` que no llega a la pieza |
-| **Qué incluye tu evento** | Ninguna (la sección es de lectura densa) | Ninguna | — |
+| **Qué incluye tu evento** | ~~Ninguna~~ → 2 laterales + divisor (§9) | Solo el divisor | — |
 | **Eventos** | 2 piezas: tira superior (`bg-eventos-top` recortada) y racimo inferior (`bg-eventos-bottom` recortada) | 2 piezas pequeñas: esquina superior y borde inferior | Sobre el título y bajo las tarjetas, sin pisar las fotos |
 | **Galería** | 2 laterales a partir de **una sola pieza espejada** (`bg-gallery-right` recortada, columna ≈ 375×1001) en los márgenes izquierdo y derecho | 1 esquina inferior derecha | Márgenes laterales: la imagen principal y las miniaturas quedan centradas |
 | **Contacto** | 2 piezas: tira inferior (`bg-footer-bottom` recortada a 1920×319) y un racimo superior reducido (`bg-footer-top`) | 1 tira inferior | Zona inferior/derecha; la dirección, los botones y el mapa quedan por encima de las flores |
@@ -386,3 +386,60 @@ Primera aplicación del sistema (hero, eventos y “Qué incluye tu evento”) e
 - **Imágenes:** las actuales como marcador (`docs/imagenes.md` sin notas del cliente). Las de eventos son de 530×386 px recortadas a cuadrado o 4:5, por lo que se ven blandas en pantallas de alta densidad; se sustituyen por las imágenes finales (§5).
 - **Mensaje de WhatsApp:** el de las tarjetas es el de §3.2; el genérico (hero, “Qué incluye”, barra y header) es provisional hasta resolver la decisión #7.
 - **Medición:** atributos `data-*` y `js/main.js` según `docs/medicion.md`; solo mide en `jardincristel.mx` o con `?medicion=debug`. **Clarity no se carga todavía.**
+
+---
+
+## 9. Adornos acuarelados en escritorio (piloto)
+
+Propuesta del 2026-10-21, escrita **antes** de implementarla. Motivo: las acuarelas de la referencia son lo que personaliza el sitio y el piloto las había omitido. Inventario y calidad de cada pieza: `docs/imagenes.md` §8. Reglas de §4.1 siguen vigentes (recortes al racimo, nunca sobre texto, `<img alt="" aria-hidden="true">`, `pointer-events: none`, AVIF/WebP con alfa), con dos ajustes: el hero admite una esquina (lejos del texto) y “Qué incluye” admite dos laterales (la lectura densa queda en las tarjetas, que son opacas).
+
+### 9.1 Piezas (todas recortadas de `referencia/images/`, generadas con `tools/optimizar-adornos.cjs` en `img/adornos/`)
+
+| Pieza | Origen (racimo) | Render escritorio | Peso AVIF (1x) |
+|---|---|---|---|
+| `hero-esquina` | `bg-nosotros-right` (eucalipto, nomeolvides y uvas) | 420 px de ancho | ≈ 23 KB |
+| `eventos-sup-izq` | `bg-eventos-top` A (lirio rosa) | 130 px | ≈ 4 KB |
+| `eventos-sup-der` | `bg-eventos-top` B (eucalipto) | 230 px | ≈ 7.6 KB |
+| `eventos-inf-izq` | `bg-eventos-bottom` A (rosa antigua y zarcillo) | 400 px | ≈ 14 KB |
+| `eventos-inf-der` | `bg-eventos-bottom` B (rosa magenta y gipsófila) | 270 px | ≈ 16 KB |
+| `incluye-izq` | `bg-gallery-left` (lirio y uvas) | 180 px | ≈ 15 KB |
+| `incluye-der` | `bg-gallery-right` (peonía y enredadera) | 190 px | ≈ 30 KB |
+| `divisor` | `detail.webp` (guirnalda rosa) | 247 px (nativo) | ≈ 4–9 KB |
+
+Meta: **suma < 150 KiB en escritorio** (≈ 115 KiB esperados). Cada pieza se reduce al ancho de render (1x); como el racimo nativo es 1.3–2x mayor, se ve bien en pantallas 1x y aceptable en retina (acuarela, sin bordes duros).
+
+### 9.2 Composición por sección
+
+Las posiciones se anclan al **bloque de contenido** (74 rem), no al borde de la ventana, para que a 1280 y a 1920 px el adorno asome siempre en el mismo lugar respecto de las tarjetas: `left/right: max(-1.5rem, calc(50% - 38.5rem))`.
+
+| Sección | Escritorio (≥ 75 em) | Tablet (48–75 em) | Móvil (< 48 em) |
+|---|---|---|---|
+| **Inicio** | `hero-esquina` en la **esquina inferior derecha** de la foto (sobre el velo, que ahí tiene 0.2–0.3 de opacidad), sin rotación, sin tocar el bloque de texto (que mide 40 rem a la izquierda). `divisor` bajo el H1, alineado a la izquierda. Se cargan sin `lazy` (están en el primer viewport) con `fetchpriority="low"` y `decoding="async"`; en móvil/tablet la esquina ni se descarga (`<source media>` solo de escritorio) | Solo el `divisor` | Solo el `divisor` (160 px) |
+| **Eventos** | `eventos-sup-izq` y `eventos-sup-der` en las **esquinas superiores**, flanqueando el título (que queda centrado y libre); `eventos-inf-izq` y `eventos-inf-der` en las **esquinas inferiores**, parcialmente **detrás de las tarjetas de los extremos** (solapan unos 60–80 px; las tarjetas son opacas y quedan siempre arriba). `divisor` centrado bajo el H2 | `sup-izq` (104 px) y `sup-der` (144 px) y `inf-izq` (220 px) | solo `sup-der` (96 px) y `inf-izq` (150 px), dentro del relleno de la sección |
+| **Qué incluye** | `incluye-izq` pegada arriba a la izquierda y `incluye-der` pegada abajo a la derecha, ambas **asomando por los lados de las tarjetas** (parte detrás de las columnas 1 y 4). `divisor` centrado bajo el H2 | ninguna (las tarjetas ocupan todo el ancho) | ninguna |
+
+**Rotación:** ninguna (son recortes de esquina y deben conservar su orientación natural: crecen desde el borde de la sección hacia adentro). **Espejado:** no se usa; cada lado tiene su pieza propia.
+
+### 9.3 Capas y contraste
+
+1. Orden de pila dentro de cada sección (`isolation: isolate`): fondo de la sección → adornos (`z-index: -1`) → contenido. El contenido **siempre** queda por encima; las tarjetas (`--malva-50`, opacas) y los botones tapan lo que haya detrás.
+2. **No hay texto sin fondo opaco sobre un adorno**: los adornos se ubican en las esquinas, fuera de la caja del H2, el `p.seccion__intro` y el bloque de texto del hero. Se verifica por geometría (ninguna caja de texto se cruza con un adorno) y, donde un adorno queda cerca, por medición de píxeles (mismo método que el hero).
+3. El texto del hero sigue midiéndose **≥ 6.5:1** (kicker, H1, párrafo): la esquina está bajo ninguno de ellos.
+
+### 9.4 Ajustes de layout que exige la composición (escritorio)
+
+- `#eventos`: `padding-block-end` de 6 rem a **10 rem** para que las rosas inferiores se vean en el relleno y no solo detrás de las tarjetas.
+- `#incluye`: `padding-block` de 6 rem a **7 rem arriba y 9 rem abajo**; el CTA queda centrado y libre.
+- Ancho máximo del contenido (74 rem) y del texto del hero (40 rem) **no cambian**: los adornos viven en los márgenes y en el solape de las esquinas.
+- Las tres secciones pasan a `position: relative; isolation: isolate; overflow: clip` (con `overflow: hidden` como respaldo): sin desplazamiento horizontal aunque el adorno sobresalga.
+- Se añade `.divisor` (imagen centrada, 160–247 px) bajo los títulos; en el hero va alineado a la izquierda.
+
+### 9.5 Movimiento
+
+**No se añade parallax ni animación** (los adornos son estáticos). Así `prefers-reduced-motion` no requiere reglas nuevas y no hay JS ni capas que promover a GPU.
+
+### 9.6 Pendiente
+
+- No se reintroduce `detail.webp` como SVG hasta tener el vector (§4.1); el `divisor` en AVIF/WebP es el puente.
+- Las piezas de **Nosotros**, **Galería** y **Contacto** (`bg-nosotros-left`, `bg-footer-top/bottom`, etc.) se recortan al construir esas secciones, con el mismo método.
+- Con las fotos de eventos definitivas se debe revisar de nuevo el solape de las rosas inferiores con las tarjetas.
