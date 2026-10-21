@@ -238,6 +238,32 @@ Ver lista de nuevos arriba; editados `docs/propuesta.md`, `docs/diseno.md`, `doc
 - Emmanuel: notas de `docs/imagenes.md`, imágenes finales, licencia/SVG del logo, mensaje de WhatsApp (#7) y demás decisiones pendientes.
 - No verificado: dispositivos reales, Safari/Firefox, lectores de pantalla/axe, recepción real en GA4 (ver `docs/benchmark/piloto/README.md`).
 
+## 2026-10-21 — Adornos acuarelados en el piloto de escritorio
+
+**Qué se hizo**
+1. Inventario de todas las acuarelas de `referencia/` (formato, píxeles, alfa, peso, uso y calidad para ≥ 1440 px): `docs/imagenes.md` §8. Las 17 son WebP con alfa; sirven para escritorio los 8 lienzos de 1920 px (recortados al racimo); los de móvil de 495 px y `detail.webp` (252 px) no.
+2. Composición por sección y por dispositivo escrita **antes** de implementar: `docs/diseno.md` §9 (y ajustes a §4.1/§4.2: el hero admite una esquina; “Qué incluye”, dos laterales).
+3. Implementación: `tools/optimizar-adornos.cjs` genera 8 piezas AVIF/WebP con alfa en `img/adornos/`; `<img alt="" aria-hidden="true">` posicionadas con CSS (`pointer-events: none`, `z-index: -1` dentro de secciones `isolation: isolate; overflow: clip`), `loading="lazy"` + `decoding="async"` + `fetchpriority="low"` (la esquina del hero y el divisor del hero sin `lazy`; la esquina solo se descarga en escritorio vía `<source media>`). Divisor floral (`detail.webp`) bajo el H1 y los H2.
+4. Mediciones y capturas (1280 y 1920 px) en `docs/benchmark/piloto/`.
+
+**Por qué:** las acuarelas son lo que personaliza el sitio y el piloto las había omitido.
+
+**Archivos tocados:** `index.html`, `css/styles.css`, `img/adornos/*` (nuevo), `tools/optimizar-adornos.cjs` (nuevo), `docs/{imagenes,diseno,BITACORA}.md`, `docs/benchmark/piloto/*`.
+
+**Decisiones**
+- Sin parallax ni movimiento: `prefers-reduced-motion` no necesita reglas nuevas.
+- Piezas con borde plano de lienzo (esquinas superiores de Eventos, laterales de “Qué incluye”) pegadas al borde de la ventana; las rosas inferiores ancladas al bloque de contenido (se probó anclar todo al contenido y a 1920 px quedaba cortado en seco).
+- Ajustes de layout de escritorio: `#eventos` relleno inferior 6→10 rem; `#incluye` relleno inferior 6→9 rem. Ancho de contenido (74 rem) y del texto del hero (40 rem) sin cambios.
+- Tablet: esquinas de Eventos (3 piezas); móvil: 2 piezas pequeñas; en ambos, divisor.
+
+**Resultados (deploy de la rama, Lighthouse 12.8.2, mediana de 3)**: escritorio 100/100/100, LCP 0.57 s, CLS 0, TBT 0, 299 KiB (antes 184); móvil 100/100/100, LCP 1.47 s, CLS 0, TBT 19 ms, 146 KiB. **Peso de los adornos: 114 KiB en escritorio (meta < 150) y 27 KiB en móvil.** Contraste del hero medido sobre píxeles con la esquina presente: peor píxel ≥ 6.8:1 (1280–1920 px). Sin cruces entre adornos y texto sin fondo opaco de 360 a 2560 px; sin desplazamiento horizontal.
+
+**Pendientes**
+- Nosotros, galería y contacto: recortar sus piezas (`bg-nosotros-*`, `bg-footer-*`) con el mismo método.
+- Revisar el solape de las rosas con las tarjetas cuando haya fotos de eventos definitivas.
+- Aprobación para retirar del despliegue los 7 lienzos de móvil y los 2 del modal (siguen en `referencia/`).
+- No verificado: ver el reporte de la tarea (retina, Safari/Firefox, dispositivos reales).
+
 ## Registro de commits
 
 - 2026-10-20 12:17 `a19da90` docs: configuración inicial, bitácora, baseline Lighthouse y hallazgos
@@ -252,3 +278,8 @@ Ver lista de nuevos arriba; editados `docs/propuesta.md`, `docs/diseno.md`, `doc
 - 2026-10-20 15:07 `189eb98` docs: registrar ID de Clarity en el plan de medición
 - 2026-10-20 15:25 `a0aa9c9` feat: logo SVG marcador, Pinyon Script temporal y retiro de Berthold-Script.ttf del despliegue
 - 2026-10-20 16:05 `3ae5cba` feat: piloto (hero, eventos y qué incluye tu evento) con tokens de docs/diseno.md
+- 2026-10-20 16:16 `ef9b8a9` docs: mediciones y capturas del piloto, estado por bloque y notas de implementación
+- 2026-10-21 15:53 `3fb44e8` docs: inventario de adornos acuarelados (formato, alfa, peso, uso y calidad para ≥1440 px)
+- 2026-10-21 15:53 `d963b03` docs: composición de adornos acuarelados para escritorio (hero, eventos, qué incluye)
+- 2026-10-21 16:00 `a0d8d02` feat: adornos acuarelados en escritorio (hero, eventos, qué incluye) y divisor floral
+- 2026-10-21 16:03 `be10067` fix: anclar al borde de la ventana los adornos con borde plano de lienzo

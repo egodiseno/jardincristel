@@ -175,3 +175,19 @@ No se usan en escritorio: **los 7 de móvil se pueden retirar del despliegue** c
 | `bg-modal.webp` / `bg-modal-mobile.webp` | WebP · 1920×881 / 495×1002 | Sí | 59,536 / 62,890 B | Fondo del modal “paquete” y del menú móvil | No aplica: el modal desaparece (decisión de `docs/diseno.md` §3) |
 
 **Conclusión:** para pantallas ≥ 1440 px **sirven los 8 lienzos de escritorio**, recortados al racimo; las mejores (holgadas) son `bg-eventos-bottom`, `bg-nosotros-right` y el racimo A de `bg-footer-top`. Los lienzos de móvil de 495 px y `detail.webp` **no** sirven para escritorio. No hay arte en menor calidad que se deba descartar por borroso: la limitación es la resolución nativa de los racimos chicos (`eventos-top`, `gallery-*`), que se muestran por debajo de su tamaño nativo.
+
+## 9. Derivados de adornos (generados con `tools/optimizar-adornos.cjs`)
+
+| Archivo (`img/adornos/`) | Origen | px | AVIF / WebP |
+|---|---|---|---|
+| `hero-esquina` | `bg-nosotros-right` | 420×345 | 23,421 / 36,422 B |
+| `eventos-sup-izq` | `bg-eventos-top` (A) | 130×196 | 4,257 / 6,458 B |
+| `eventos-sup-der` | `bg-eventos-top` (B) | 230×157 | 7,597 / 10,774 B |
+| `eventos-inf-izq` | `bg-eventos-bottom` (A) | 400×238 | 13,902 / 21,808 B |
+| `eventos-inf-der` | `bg-eventos-bottom` (B) | 270×299 | 16,221 / 24,416 B |
+| `incluye-izq` | `bg-gallery-left` | 180×498 | 15,001 / 24,234 B |
+| `incluye-der` | `bg-gallery-right` | 190×507 | 29,743 / 45,930 B |
+| `divisor` | `detail.webp` | 247×69 | 5,766 / 8,482 B |
+
+Suma AVIF: 116 KB (114 KiB transferidos en Lighthouse). Se sirven a 1x: el racimo nativo es 1.3–2x mayor (ver §8), pero las piezas aún no tienen variantes 2x.
+

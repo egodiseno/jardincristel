@@ -71,3 +71,21 @@ El bloqueo de red que se aplicó (`google-analytics.com`, `analytics.google.com`
 - **Imágenes finales**: las de eventos son las provisionales de 530×386 px (se ven blandas a alta densidad); no se evaluó el aspecto con las imágenes definitivas.
 - **Variabilidad de Lighthouse**: 3 corridas en una sola máquina y red; los números reales en producción (CDN, GA4, Clarity, fotos finales) serán distintos.
 - **Alto contraste de Windows / modo oscuro / impresión**: no revisados.
+
+## Adornos acuarelados (2026-10-21)
+
+Piloto con los adornos de `docs/diseno.md` §9 (commit `be10067`, deploy de la rama). Reportes: `lighthouse-movil-adornos.report.json`, `lighthouse-escritorio-adornos.report.json`; capturas: `adornos-{1280,1920}.png` (página completa) y `adornos-{1280,1920}-vista.png` (primera pantalla).
+
+| Métrica (mediana de 3) | Piloto sin adornos | **Con adornos** |
+|---|---|---|
+| Móvil: Perf / A11y / BP | 100 / 100 / 100 | **100 / 100 / 100** |
+| Móvil: LCP · CLS · TBT | 1.41 s · 0 · 19 ms | **1.47 s · 0 · 19 ms** |
+| Móvil: peso | 161 KiB | **146 KiB** (los adornos suman 27 KiB; la diferencia con la corrida anterior es variación de la medición) |
+| Escritorio: Perf / A11y / BP | 100 / 100 / 100 | **100 / 100 / 100** |
+| Escritorio: LCP · CLS · TBT | 0.41 s · 0 · 0 ms | **0.57 s · 0 · 0 ms** |
+| Escritorio: peso | 184 KiB | **299 KiB** (+115 KiB) |
+
+**Peso de los adornos (AVIF, transferido): 114 KiB en escritorio** (esquina del hero 23 · eventos 4 + 7.6 + 14 + 16 · incluye 15 + 30 · divisor 5.7) y **27 KiB en móvil** (divisor + 2 piezas); meta < 150 KiB cumplida. En escritorio una corrida de Lighthouse (d2) bajó a Perf 95 por un LCP de 1.12 s y CLS 0.007 (variación de red de esa corrida; las otras dos fueron 100).
+
+Verificaciones: sin cruces entre adornos y texto sin fondo opaco (Range sobre el texto real) a 320, 360, 768, 1024, 1280, 1440, 1920 y 2560 px; `scrollWidth == innerWidth` en todos; en móvil/tablet no se descarga la esquina del hero (ni las piezas ocultas); contraste del hero con la esquina presente: peor píxel 6.81:1 (kicker), 7.65:1 (H1), 7.61:1 (párrafo) entre 1280 y 1920 px. **No verificado:** retina (las piezas se sirven a 1x), Safari/Firefox, dispositivos reales.
+
