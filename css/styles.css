@@ -207,13 +207,13 @@ section > picture { display: contents; }
   .hero .adorno--hero-esquina { display: block; right: 0; bottom: 0; width: 26.25rem; }
   .eventos { padding-bottom: 10rem; }                               /* las rosas inferiores se ven en el relleno */
   .incluye { padding-bottom: 9rem; }
-  /* Se anclan al bloque de contenido (74 rem), no a la ventana: asoman siempre en el mismo sitio respecto de las tarjetas */
-  .eventos .adorno--eventos-sup-izq { left: max(0px, calc(50% - 40rem)); width: 8.125rem; }
-  .eventos .adorno--eventos-sup-der { right: max(0px, calc(50% - 40rem)); width: 14.375rem; }
+  /* Las piezas con borde plano de lienzo (esquinas superiores, laterales de "Qué incluye") van pegadas al borde de la ventana; las rosas inferiores, que están completas, se anclan al bloque de contenido (74 rem) */
+  .eventos .adorno--eventos-sup-izq { left: 0; width: 8.125rem; }
+  .eventos .adorno--eventos-sup-der { right: 0; width: 14.375rem; }
   .eventos .adorno--eventos-inf-izq { left: max(-2rem, calc(50% - 40rem)); width: 25rem; }
   .eventos .adorno--eventos-inf-der { display: block; right: max(-1.5rem, calc(50% - 38.5rem)); bottom: 0; width: 16.875rem; }
-  .incluye .adorno--incluye-izq { display: block; top: 0; left: max(-1.5rem, calc(50% - 38.5rem)); width: 11.25rem; }
-  .incluye .adorno--incluye-der { display: block; right: max(-1.5rem, calc(50% - 38.5rem)); bottom: 0; width: 11.875rem; }
+  .incluye .adorno--incluye-izq { display: block; top: 0; left: 0; width: 11.25rem; }
+  .incluye .adorno--incluye-der { display: block; right: 0; bottom: 0; width: 11.875rem; }
   .eventos__lista { grid-template-columns: repeat(3, 1fr); gap: 2.5rem 2rem; max-width: 74rem; }
   .evento__cuerpo { padding: 1.4rem 1.5rem 1.75rem; }
   .incluye__grupos { grid-template-columns: repeat(4, 1fr); }

@@ -410,7 +410,7 @@ Meta: **suma < 150 KiB en escritorio** (≈ 115 KiB esperados). Cada pieza se re
 
 ### 9.2 Composición por sección
 
-Las posiciones se anclan al **bloque de contenido** (74 rem), no al borde de la ventana, para que a 1280 y a 1920 px el adorno asome siempre en el mismo lugar respecto de las tarjetas: `left/right: max(-1.5rem, calc(50% - 38.5rem))`.
+Anclaje: las piezas que conservan un **borde plano del lienzo original** (`eventos-sup-izq`, `eventos-sup-der`, `incluye-izq`, `incluye-der`) van **pegadas al borde de la ventana** (`left/right: 0`), donde ese corte es natural; anclarlas al bloque de contenido las deja cortadas en seco a 1920 px (se probó). Las rosas inferiores y la esquina del hero están completas: las rosas se anclan al bloque de contenido (74 rem, `left/right: max(-2rem, calc(50% - 40rem))`) para que asomen siempre en el mismo sitio respecto de las tarjetas.
 
 | Sección | Escritorio (≥ 75 em) | Tablet (48–75 em) | Móvil (< 48 em) |
 |---|---|---|---|
