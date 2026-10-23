@@ -203,7 +203,11 @@ section > picture { display: contents; }
 /* ============ MÓVIL (< 48em): ajustes solo de móvil (tablet y escritorio no cambian) ============ */
 @media (max-width: 47.99em) {
   .top { display: none; }                                          /* en móvil la navegación es la barra inferior */
-  .hero { min-height: min(calc(100svh - var(--alto-barra)), 44rem); }
+  .hero { min-height: calc(100svh - var(--alto-barra)); align-items: center; }
+  .hero__logo { display: none; }                                   /* el logo solo se muestra en tablet y escritorio */
+  .hero__contenido { display: flex; flex-direction: column; align-items: center; text-align: center; padding-block: 2.5rem; }
+  .hero .divisor { margin: 0 auto 1.25rem; }
+  .hero__acciones { width: 100%; max-width: 22rem; }
 }
 
 /* ============ TABLET (>= 48em) ============ */
