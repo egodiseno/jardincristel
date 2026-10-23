@@ -208,6 +208,14 @@ section > picture { display: contents; }
   .hero__contenido { display: flex; flex-direction: column; align-items: center; text-align: center; padding-block: 2.5rem; }
   .hero .divisor { margin: 0 auto 1.25rem; }
   .hero__acciones { width: 100%; max-width: 22rem; }
+
+  .nosotros__texto { justify-items: center; text-align: center; }
+  .nosotros .divisor--izq { display: block; margin-inline: auto; }
+  .nosotros__remate { text-wrap: balance; }
+}
+/* Respaldo sin text-wrap: balance: ancho máximo en ch para que las dos líneas queden parejas */
+@supports not (text-wrap: balance) {
+  @media (max-width: 47.99em) { .nosotros__remate { max-inline-size: 24ch; margin-inline: auto; } }
 }
 
 /* ============ TABLET (>= 48em) ============ */
