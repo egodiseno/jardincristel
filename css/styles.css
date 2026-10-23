@@ -245,6 +245,7 @@ section > picture { display: contents; }
 
   .top { position: sticky; top: 0; justify-content: flex-start; gap: 1rem; padding-inline: 1.5rem; }
   .barra { display: none; }
+  .ubicacion__perfil { display: none; }                            /* «Ver en Google»: por ahora solo en móvil (alcance del ajuste); quitar esta regla para mostrarlo también aquí */
   .menu { display: block; margin-left: auto; }
   .menu__lista { display: flex; align-items: center; gap: .1rem; }
   .menu__inicio { display: none; }                                 /* en tablet el logo ya lleva a Inicio; el menú completo cabe desde 75em */
