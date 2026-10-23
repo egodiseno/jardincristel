@@ -215,6 +215,8 @@ section > picture { display: contents; }
   .galeria__lista > li { flex: 0 0 88%; }
   .eventos__lista::after, .galeria__lista::after { content: ""; flex: 0 0 calc(var(--gutter) - 1rem); }   /* gap de 1 rem + espaciador = margen lateral del inicio */
 
+  .galeria__foto { box-shadow: none; }                              /* la sombra se veía cortada por el overflow del carril */
+
   .nosotros__texto { justify-items: center; text-align: center; }
   .nosotros .divisor--izq { display: block; margin-inline: auto; }
   .nosotros__remate { text-wrap: balance; }
