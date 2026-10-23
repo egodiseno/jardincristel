@@ -209,6 +209,12 @@ section > picture { display: contents; }
   .hero .divisor { margin: 0 auto 1.25rem; }
   .hero__acciones { width: 100%; max-width: 22rem; }
 
+  /* Carriles con scroll: el padding derecho de un contenedor con overflow no siempre se respeta, así que el margen final es un espaciador (::after) igual al inicial */
+  .eventos__lista, .galeria__lista { display: flex; gap: 1rem; }
+  .eventos__lista > li { flex: 0 0 min(82%, 21rem); }
+  .galeria__lista > li { flex: 0 0 88%; }
+  .eventos__lista::after, .galeria__lista::after { content: ""; flex: 0 0 calc(var(--gutter) - 1rem); }   /* gap de 1 rem + espaciador = margen lateral del inicio */
+
   .nosotros__texto { justify-items: center; text-align: center; }
   .nosotros .divisor--izq { display: block; margin-inline: auto; }
   .nosotros__remate { text-wrap: balance; }
