@@ -200,6 +200,12 @@ section > picture { display: contents; }
 .pie__nav ul { display: flex; flex-wrap: wrap; justify-content: center; gap: .25rem 1rem; margin-bottom: .75rem; }
 .pie__nav a, .pie__fb { display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: .25rem; }
 
+/* ============ MÓVIL (< 48em): ajustes solo de móvil (tablet y escritorio no cambian) ============ */
+@media (max-width: 47.99em) {
+  .top { display: none; }                                          /* en móvil la navegación es la barra inferior */
+  .hero { min-height: min(calc(100svh - var(--alto-barra)), 44rem); }
+}
+
 /* ============ TABLET (>= 48em) ============ */
 @media (min-width: 48em) {
   :root { --gutter: 2rem; }
