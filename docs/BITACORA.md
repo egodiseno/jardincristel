@@ -295,6 +295,25 @@ Ver lista de nuevos arriba; editados `docs/propuesta.md`, `docs/diseno.md`, `doc
 - Bloques 2 (head/SEO completo), 9 (robots/sitemap/caché), 11 (QA); quitar `noindex` y confirmar licencia/SVG antes de cualquier merge.
 - No verificado: enlace de Maps en iOS y Android (abre o no la app), dispositivos reales, Safari/Firefox, lectores de pantalla.
 
+## 2026-10-23 — Ajustes de la versión móvil (< 48 em)
+
+**Qué se hizo** (detalle en `docs/diseno.md` §11): sin encabezado ni logo del hero en móvil; hero y Nosotros centrados; remate balanceado con respaldo en `ch`; carriles de Eventos y Galería con el mismo margen al inicio y al final (espaciador `::after`); sin sombra en las fotos de la galería; en Ubicación, «Ver en Google» con `click_perfil_google`; acuarelas florales más grandes y en más secciones.
+
+**Por qué:** pulir la experiencia móvil (el escritorio y la tablet no debían cambiar).
+
+**Archivos tocados:** `css/styles.css` (bloque `@media (max-width: 47.99em)`), `index.html`, `js/main.js`, `docs/{diseno,medicion}.md`, `docs/benchmark/piloto/*`.
+
+**Decisiones**
+- El HTML no tenía un botón llamado «Google Maps»: había «Abrir en Google Maps» y «Ver mapa» (este carga el iframe, otra función). Se **añadió** «Ver en Google» junto a «Abrir en Google Maps» y se dejó «Ver mapa».
+- «Ver en Google» se oculta desde 48 em para respetar «solo móvil» (con el botón visible, la captura a 1280 cambiaba); quitar `.ubicacion__perfil { display: none }` lo muestra en todos los anchos.
+- El mismo defecto del carril (último card pegado al borde) existía en la Galería: se corrigió igual.
+- Los ajustes 2 y 3, y 4–6, comparten reglas y se hicieron en un commit cada grupo.
+- Se añadió `preload` de Merriweather 700 por un salto de CLS (0.052) en una corrida con el hero centrado.
+
+**Resultados:** Lighthouse móvil mediana de 5: Perf 99, A11y 100, BP 100, LCP 1.56 s, TBT 4 ms, CLS 0, 224.9 KiB (antes 198 KiB). Adornos en móvil +49.6 KiB (tope 60). Contraste mínimo medido 4.72:1. 1280 y 768 sin diferencias.
+
+**Pendientes / no verificado:** dispositivos reales (iOS Safari: `100svh` y barra), `text-wrap: balance` solo comprobado en Chrome (el respaldo se probó forzándolo), si «Ver en Google» debe ir también en tablet y escritorio, el significado exacto del botón «Google Maps» que mencionaba el encargo, y posible limpieza de las capturas «antes».
+
 ## Registro de commits
 
 - 2026-10-20 12:17 `a19da90` docs: configuración inicial, bitácora, baseline Lighthouse y hallazgos
@@ -320,3 +339,13 @@ Ver lista de nuevos arriba; editados `docs/propuesta.md`, `docs/diseno.md`, `doc
 - 2026-10-21 17:23 `bccf1de` feat: secciones Ubicación (mapa bajo demanda y enlace universal de Google Maps) y Contacto
 - 2026-10-21 17:25 `e11b075` feat: menú de escritorio con todas las secciones y barra inferior móvil de 5 elementos con Cotizar al centro
 - 2026-10-21 17:26 `949f4ab` perf: gtag.js y Clarity tras load, en requestIdleCallback con límite de 3 s
+- 2026-10-21 17:31 `9032c1d` docs: sitio completo (secciones, menú, barra móvil, mapa, analítica), mediciones y capturas a 360/768/1280
+- 2026-10-23 17:26 `20f5397` feat: quita el encabezado en móvil (la navegación es la barra inferior) y ajusta la altura del hero
+- 2026-10-23 17:27 `705e0cf` feat: hero móvil sin logo y con el contenido centrado (texto, H1 y botones)
+- 2026-10-23 17:27 `da00396` style: sección Nosotros centrada en móvil (texto, divisor, botón) y remate balanceado con respaldo en ch
+- 2026-10-23 17:28 `e140a8f` fix: carriles móviles de Eventos y Galería con el mismo margen al inicio y al final (espaciador ::after)
+- 2026-10-23 17:28 `fbd2d94` style: sin sombra en las fotos del carril de la galería en móvil
+- 2026-10-23 17:29 `2e47a27` feat: botón «Ver en Google» en Ubicación con el evento click_perfil_google, documentado aparte de click_maps
+- 2026-10-23 17:32 `4f909b4` feat: acuarelas florales más presentes en móvil (tamaño y posición; +49.6 KiB, contraste del texto >= 4.7:1)
+- 2026-10-23 17:32 `57747f8` fix: «Ver en Google» solo en móvil para no cambiar tablet ni escritorio
+- 2026-10-23 17:34 `4475152` perf: precarga Merriweather 700 para evitar el salto del hero móvil centrado al cargar la fuente

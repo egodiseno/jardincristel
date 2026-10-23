@@ -486,3 +486,37 @@ Implementa §3.3: carrusel con scroll-snap y contador “n / 6” en móvil; car
 - **Barra:** Eventos · Galería · Cotizar · Cómo llegar · Más (antes Inicio · Eventos · Cotizar · Galería · Contacto).
 - **Menú:** una sola nav no sirve a ambos layouts (los elementos difieren), así que hay dos `<nav>` (menú y barra) y una tercera en el pie; solo una se muestra por ancho.
 
+---
+
+## 11. Ajustes de la versión móvil (< 48 em) — 2026-10-23
+
+Todo vive en un bloque `@media (max-width: 47.99em)` de `css/styles.css`; tablet y escritorio no cambian (verificado: capturas de 768 y 1280 px, página completa, idénticas píxel a píxel antes y después).
+
+| # | Ajuste | Implementación |
+|---|---|---|
+| 1 | Sin encabezado en móvil | `.top { display: none }`; la navegación es la barra inferior. El `<h1>` es el primer encabezado, el skip link recibe foco y el hero empieza en 0 px. |
+| 2 | Sin logo en el hero | `.hero__logo { display: none }`; el hero ocupa `calc(100svh - var(--alto-barra))` (sin tope de 44 rem, para no dejar una franja vacía sobre la barra) y centra su contenido en vertical. |
+| 3 | Hero centrado | `.hero__contenido` en columna, `align-items: center; text-align: center`; botones a ancho completo (máx. 22 rem). |
+| 4–5 | Nosotros centrado | `justify-items: center; text-align: center`; divisor con `margin-inline: auto`. |
+| 6 | Remate y botón | `text-wrap: balance` (dos líneas de 237 y 212 px a 360, 390 y 412) con respaldo `@supports not` de `max-inline-size: 24ch` (mismo resultado). |
+| 7 | Carriles de Eventos y Galería | `display: flex` + `::after` de `flex: 0 0 calc(var(--gutter) - 1rem)` (gap de 1 rem + espaciador = 20 px, igual que el margen inicial). El padding derecho de un contenedor con `overflow` no se respeta. Medido: 20 px a cada lado, gap 16 px; con `scroll-snap` el último card queda con el mismo margen que el primero. |
+| 8 | Sin sombra en la galería | `.galeria__foto { box-shadow: none }` (sin contorno ni recortes). |
+| 9 | Dos botones en Ubicación | «Abrir en Google Maps» (`click_maps`) y nuevo «Ver en Google» (`google.com/search?q=jardin+cristel`, `click_perfil_google`, `link_location: ubicacion`, ver `docs/medicion.md`). Este último se oculta desde 48 em (`.ubicacion__perfil`) para respetar el alcance solo móvil. |
+
+### 11.1 Acuarelas florales en móvil
+
+Se muestran más piezas y más grandes; las de borde plano de lienzo van pegadas al borde de la ventana. Ninguna tiene opacidad reducida (se ven al 100 %); ninguna cruza texto salvo la zona inferior de Nosotros.
+
+| Sección | Pieza | Posición | Ancho (antes → ahora) |
+|---|---|---|---|
+| Eventos | `eventos-sup-izq` | arriba-izquierda | — → 5 rem |
+| Eventos | `eventos-sup-der` | arriba-derecha | 5.25 → 6.5 rem |
+| Eventos | `eventos-inf-izq` | abajo-izquierda | 9.5 → 12 rem |
+| Nosotros | `nosotros-izq` | abajo-izquierda (`padding-bottom` 4 → 7 rem) | — → 7 rem |
+| Qué incluye | `incluye-izq` | abajo-izquierda (tras los grupos, que son opacos) | — → 5.5 rem |
+| Galería | `galeria-der` | arriba-derecha | — → 5 rem |
+| Contacto | `contacto-inf-izq` / `-der` | franja inferior (máscara en el borde interior) | 11 rem → 13 rem (la derecha, nueva) |
+
+**Peso:** adornos descargados en móvil 41.8 KB → 92.6 KB (**+49.6 KiB**; tope +60 KiB). Todas siguen con `loading="lazy"`.
+**Contraste con píxeles reales** (se oculta el texto, se captura el fondo con los adornos y se compara con el peor píxel bajo cada línea; 360, 390 y 412 px): mínimo **4.72:1** (H1 blanco sobre la foto del hero, sin cambios); texto oscuro sobre marfil/adornos ≥ 5.95:1. **Sin scroll horizontal** (`scrollWidth == innerWidth` a 360, 390 y 412).
+

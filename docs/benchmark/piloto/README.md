@@ -109,3 +109,17 @@ Las corridas bloquearon los endpoints de envío (`*/g/collect*`, `google-analyti
 
 Pruebas locales (Playwright/Chrome): galería (clic en miniatura, flechas, deslizamiento y toque en el carrusel; eventos `gallery_navigate` con `gallery_index` e `interaction` correctos, nada por la foto inicial); mapa (0 peticiones a Google antes de “Ver mapa”; el iframe se crea con `loading="lazy"` y `title`); menú (una sola fila de 768 a 1440 px; scroll-spy con `aria-current="true"` en menú y barra; anclas a 64–69 px del borde bajo el encabezado de 57 px); barra móvil (zonas ≥ 56 px de alto y ≥ 59 de ancho desde 320 px, “Cotizar” al centro, `body` con padding inferior); `scrollWidth == innerWidth` a 320–2560 px.
 
+## Ajustes de la versión móvil (2026-10-23)
+
+Capturas (antes → después): `movil-antes-{360,390,412}.png` / `movil-despues-{360,390,412}.png` (página completa) y `…-vista.png` (primera pantalla). Escritorio: `movil-antes-1280.png` y `movil-despues-1280.png` son **idénticas píxel a píxel** (0 diferencias, página completa y vista); también se comparó 768 px contra el commit `9032c1d`: 0 diferencias.
+
+| Lighthouse móvil, deploy de la rama (12.8.2) | Antes (`9032c1d`, mediana de 3) | Después (mediana de 5) |
+|---|---|---|
+| Performance / A11y / BP | 97 / 100 / 100 | **99** / 100 / 100 |
+| LCP | 1.57 s | 1.56 s |
+| TBT | 21 ms | 4 ms |
+| CLS | 0 | 0 |
+| Peso transferido | 198 KiB | **224.9 KiB (+26.9)** |
+
+Reporte: `lighthouse-movil-ajustes-movil.report.json`. Las mediciones son sin analítica. En una primera ronda de 3 corridas el CLS salió 0.052 en una: el hero, ahora centrado en vertical, se movía al cargar Merriweather 700 (kicker y botones); se añadió su `preload` y las 5 corridas siguientes dan CLS 0. La diferencia de peso en Lighthouse (+27 KiB) es menor que la de los adornos descargados al recorrer toda la página (+49.6 KiB) porque Lighthouse no desplaza la página y las imágenes `lazy` lejanas no se piden.
+
