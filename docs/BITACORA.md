@@ -334,6 +334,23 @@ Ver lista de nuevos arriba; editados `docs/propuesta.md`, `docs/diseno.md`, `doc
 
 **Pendientes / no verificado:** iOS Safari real (`100svh`, `mask` con SVG externo, barra), Firefox/Safari, lectores de pantalla en la sección de reseñas, permiso de Alex Gama y María Espejel para mostrar sus reseñas (decisión #15), nombre completo o abreviado, mapa propio en SVG, recorte vertical de la foto del hero para móvil, y que la reseña se mantenga igual en Google (el texto está copiado a mano).
 
+## 2026-10-23 — Carriles con swipe centrado en móvil
+
+**Qué se hizo** (detalle en `docs/diseno.md` §13): `.eventos__carril` y `.galeria__carril` (< 48 em) con `scroll-snap-type: x mandatory`, `scroll-snap-stop: always`, elementos centrados (`scroll-snap-align: center`) con un solo ancho (`--ancho-carril: min(82vw, 22rem)`), mismo gap y una variable compartida `--pad-carril` para el padding de la lista y el `scroll-padding-inline` del carril; `overscroll-behavior-x: contain` y `touch-action: pan-x pan-y`. Sustituye al espaciador `::after` del arreglo anterior.
+
+**Por qué:** que cada swipe avance una tarjeta y quede centrada, con un fragmento de las vecinas, incluidas la primera y la última.
+
+**Archivos tocados:** `css/styles.css`, `docs/diseno.md`, `docs/benchmark/piloto/carril-*.png`.
+
+**Decisiones**
+- El padding va en la lista (hija del carril) y no en el carril: contiene a todos los elementos y no depende de que el contenedor con scroll respete su padding final.
+- No se añadió JS ni botones/puntos nuevos.
+- `touch-action: pan-x pan-y` deshabilita el pellizco de zoom sobre los carriles.
+
+**Resultados:** centrado ≤ 0.48 px a 360, 390 y 412 (6 elementos por carril, ambos carriles). Swipes sintéticos: una tarjeta por gesto, salvo gestos extremos (≥ 250 px en ≤ 40 ms o 300 px en ≤ 100 ms), que avanzaron dos en Chrome 155; sin `stop: always` avanzan 2–3 con muchos gestos. Tablet y escritorio sin cambios (DOM idéntico a 768–1440). El contador y los eventos `gallery_navigate` siguen bien.
+
+**Pendientes / no verificado:** inercia real en iOS y Android; Safari/Firefox; decidir si se acepta el avance doble en gestos extremos o se añade un límite en JS.
+
 ## Registro de commits
 
 - 2026-10-20 12:17 `a19da90` docs: configuración inicial, bitácora, baseline Lighthouse y hallazgos
@@ -378,3 +395,5 @@ Ver lista de nuevos arriba; editados `docs/propuesta.md`, `docs/diseno.md`, `doc
 - 2026-10-23 18:20 `409c18b` feat: adornos acuarelados de Reseñas (racimos de los lienzos móviles, volteados) e icono person-fill (Bootstrap Icons, MIT) con su licencia
 - 2026-10-23 18:21 `bc4733d` feat: sección Reseñas (dos reseñas de Google, dos columnas desde tablet) con click_resenas_google
 - 2026-10-23 18:21 `219ec9b` feat: «Reseñas» en el menú de escritorio y en el índice del pie (accesible desde «Más» en móvil); menú de tablet algo más compacto para que quepa a 768 px
+- 2026-10-23 18:28 `67e84e4` docs: ajustes móviles (2.ª ronda) y sección Reseñas (diseno §12, mediciones, capturas y bitácora)
+- 2026-10-23 18:42 `871288c` feat: carriles móviles de Eventos y Galería con snap centrado (una tarjeta por swipe, scroll-snap-stop y padding de lista compartido); sustituye al espaciador ::after

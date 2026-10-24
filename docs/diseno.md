@@ -570,3 +570,48 @@ Se muestran más piezas y más grandes; las de borde plano de lienzo van pegadas
 
 «Reseñas» entra al menú de escritorio y tablet entre Galería y Ubicación, y al índice del pie. En móvil la barra sigue siendo Eventos · Galería · **Cotizar** · Cómo llegar · Más; «Reseñas» se alcanza desde «Más» (→ Contacto, cuyo pie lista todas las secciones). Con ocho enlaces el menú de tablet desbordaba 8 px a 768 px, así que el relleno lateral de cada enlace en tablet baja de 0.55 a 0.4 rem (una fila de 768 a 1440; el escritorio con mouse no cambia).
 
+---
+
+## 13. Carriles con swipe en móvil (< 48 em) — 2026-10-23
+
+Aplica a `.eventos__carril` y `.galeria__carril`; tablet y escritorio no cambian (comprobado por DOM a 768, 820, 1024, 1280 y 1440 px: 0 diferencias). **Sustituye** al espaciador `::after` de §11 (una sola solución).
+
+```css
+:root { --ancho-carril: min(82vw, 22rem); --pad-carril: calc((100% - var(--ancho-carril)) / 2); }
+.eventos__carril, .galeria__carril { padding-inline: 0; scroll-snap-type: x mandatory; scroll-padding-inline: var(--pad-carril); overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
+.eventos__lista, .galeria__lista   { display: flex; gap: 1rem; inline-size: max-content; min-inline-size: 100%; padding-inline: var(--pad-carril); }
+.eventos__lista > li, .galeria__lista > li { flex: 0 0 var(--ancho-carril); scroll-snap-align: center; scroll-snap-stop: always; }
+```
+
+- **Un solo token de ancho** (`--ancho-carril`, 82 vw hasta 22 rem) y un mismo `gap` de 1 rem: a 360 / 390 / 412 px cada elemento mide 295 / 320 / 338 px y asoma un fragmento de 16 / 19 / 21 px de cada vecino.
+- **Desviación respecto del enunciado:** el `padding-inline` va en **la lista** (`ul`, hija del carril y contenedora de todos los elementos), no en el carril. Así el margen final forma parte de la caja de la lista y el último elemento puede centrarse en cualquier navegador, sin depender de que el contenedor con scroll respete su padding final. Como la lista mide `max-content` y su contenedor es el carril, el porcentaje de `--pad-carril` se mide sobre el mismo ancho (el del carril) tanto en `padding-inline` como en `scroll-padding-inline`: una sola variable compartida para ambos.
+- `touch-action: pan-x pan-y` permite el gesto diagonal sin atorar el scroll vertical (efecto colateral: deshabilita el pellizco de zoom sobre los carriles, no sobre el resto de la página). `overscroll-behavior-x: contain` evita que el borde del carril arrastre la navegación del navegador.
+- **Movimiento reducido:** el carril no define `scroll-behavior`; el único `smooth` es el de `html` (solo con `prefers-reduced-motion: no-preference`) y el JS de la galería usa `behavior: auto` si el usuario lo prefiere.
+- **Botones/contador:** la galería móvil tiene un contador «n / 6» y las fotos son botones; ambos siguen funcionando con el snap (clic en una foto la centra, dif. −0.21 px; el contador marca 3, 6 y 1 al llegar a esas fotos y se emiten los `gallery_navigate` correspondientes). No se agregaron botones ni puntos.
+
+### Verificación (Chrome 155 con emulación táctil, `docs/benchmark/piloto/carril-*.png`)
+
+**Centrado** (centro del elemento − centro del viewport, `getBoundingClientRect`, tras `scrollIntoView({ inline: 'center' })` en cada uno de los 6 elementos; el desfase es la cuantización de subpíxel del snap):
+
+| Ancho | Eventos: máx. \|dif.\| | Galería: máx. \|dif.\| |
+|---|---|---|
+| 360 px | 0.45 px | 0.45 px |
+| 390 px | 0.41 px | 0.41 px |
+| 412 px | 0.48 px | 0.48 px |
+
+Todos ≤ 1 px, incluidos el primero y el último; `scrollWidth == innerWidth` (sin scroll horizontal de la página).
+
+**Swipe rápido** (toques sintéticos con `Input.dispatchTouchEvent`, 10 movimientos; tarjetas avanzadas desde la primera con `scroll-snap-stop: always`; entre paréntesis, lo mismo sin `stop: always`):
+
+| Duración \ Arrastre | 100 px | 150 px | 200 px | 250 px | 300 px |
+|---|---|---|---|---|---|
+| 40 ms | 1 (2) | 1 (2) | 1 (2) | **2** (2) | **2** (2) |
+| 60 ms | 1 (1) | 1 (1) | 1 (3) | 1 (2) | **2** (2) |
+| 100 ms | 1 (1) | 1 (1) | 1 (2) | 1 (3) | **2** (3) |
+| 150 ms | 1 (1) | 1 (1) | 1 (1) | 1 (2) | 1 (2) |
+| 250 ms | 1 (1) | 1 (1) | 1 (1) | 1 (1) | 1 (1) |
+
+(Eventos y Galería dan la misma tabla.) El paso de una tarjeta a la siguiente es de 336 px (390 de ancho). **Con `stop: always` cada swipe avanza una sola tarjeta salvo en los gestos extremos** (≥ 250 px de arrastre en ≤ 40 ms o 300 px en ≤ 100 ms, es decir, casi el ancho de una tarjeta a más de 3 000 px/s), donde Chrome dejó pasar una segunda. Sin `stop: always` los gestos rápidos avanzan 2–3. No hay propiedad CSS adicional que lo impida; si se exige una tarjeta exacta también en esos casos haría falta una pequeña lógica en JS (por ejemplo, limitar el destino a la tarjeta siguiente al soltar). No se añadió porque el encargo pedía la solución en CSS.
+
+**No verificado:** la inercia real del dedo en iOS (Safari) y Android (Chrome); el emulador no reproduce la física del fling. Safari: `scroll-snap-stop` se admite desde 15.
+
