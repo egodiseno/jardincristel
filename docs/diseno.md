@@ -615,3 +615,13 @@ Todos ≤ 1 px, incluidos el primero y el último; `scrollWidth == innerWidth` (
 
 **No verificado:** la inercia real del dedo en iOS (Safari) y Android (Chrome); el emulador no reproduce la física del fling. Safari: `scroll-snap-stop` se admite desde 15.
 
+---
+
+## 14. Barra inferior: «Cómo llegar» y aviso de salida — 2026-10-24
+
+Solo móvil (< 48 em); tablet y escritorio no cambian.
+
+- **Motivo:** evitar salidas del sitio sin aviso. «Cómo llegar» abría Google Maps directamente desde la barra; ahora es un ancla a `#ubicacion` (scroll suave salvo `prefers-reduced-motion`) con `aria-current="true"` por scroll-spy, igual que Eventos y Galería.
+- **Posición:** `scroll-margin-top` de `#ubicacion` queda en 0 en móvil (no hay header): dirección, imagen del mapa, botón y aviso caben sobre la barra a 360, 390 y 412 px (`docs/benchmark/piloto/ubicacion-barra-{360,390,412}.png`).
+- **«Abrir en Google Maps» (sobre la imagen):** icono de enlace externo (flecha diagonal), línea visible «Se abre en la app de Google Maps» bajo la imagen (`.mapa__aviso`), `aria-label="Abrir en Google Maps (se abre en la app o en una pestaña nueva)"`, `target="_blank"` y `rel="noopener noreferrer"`. Sin modal ni confirmación.
+- **Medición:** la barra ya no emite `click_maps`; `barra-movil` deja de ser valor de `link_location` en `click_maps` (ver `docs/medicion.md`). No se añadió evento de navegación genérico.

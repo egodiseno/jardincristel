@@ -39,7 +39,7 @@
 |---|---|---|---|
 | **`click_whatsapp`** | clic en cualquier enlace `wa.me` | `link_location`, `event_type`, `link_url` | `hero` (CTA principal) · `tarjeta` (“Cotizar mi <evento>”) · `que-incluye` (CTA de la sección) · `barra-movil` (botón central de la barra inferior) · `header` (“Cotizar” al final del menú en tablet y desktop) · `nosotros` (“Solicita tu presupuesto”) · `contacto` (botón de la sección Contacto) |
 | **`click_phone`** | clic en `tel:` | `link_location` | `contacto` (y cualquier otro lugar donde se añada) |
-| **`click_maps`** | clic en un enlace a Google Maps (“Cómo llegar” de la barra inferior móvil, “Abrir en Google Maps” de la sección Ubicación: sobre la imagen en móvil, en la columna de texto en tablet y escritorio) | `link_location` | `barra-movil` · `ubicacion` |
+| **`click_maps`** | clic en “Abrir en Google Maps” de la sección Ubicación (sobre la imagen en móvil, en la columna de texto en tablet y escritorio). Desde 2026-10-24 el “Cómo llegar” de la barra móvil ya no abre Maps (es un ancla a `#ubicacion`) y **no emite `click_maps`** | `link_location` | `ubicacion` |
 | **`click_resenas_google`** | clic en “Ver todas las reseñas en Google” de la sección Reseñas (búsqueda `google.com/search?q=jardin+cristel`, que muestra el perfil y las reseñas). **No es `click_maps`**: no abre Maps ni da indicaciones, así que se mide aparte | `link_location` | `resenas` |
 | **`click_facebook`** | clic en el enlace a Facebook | `link_location` | `galeria` (“Ver más fotos en Facebook”) · `contacto` · `pie` |
 

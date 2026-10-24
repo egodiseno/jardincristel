@@ -351,6 +351,15 @@ Ver lista de nuevos arriba; editados `docs/propuesta.md`, `docs/diseno.md`, `doc
 
 **Pendientes / no verificado:** inercia real en iOS y Android; Safari/Firefox; decidir si se acepta el avance doble en gestos extremos o se añade un límite en JS.
 
+## 2026-10-24 — Barra móvil: «Cómo llegar» ancla a Ubicación y aviso de salida a Maps
+
+- **Qué:** «Cómo llegar» de la barra inferior (< 48 em) pasa de abrir Google Maps a un ancla `#ubicacion` con scroll-spy; «Abrir en Google Maps» sobre la imagen lleva icono de enlace externo, línea «Se abre en la app de Google Maps» y `aria-label` coherente.
+- **Por qué:** evitar salidas del sitio sin aviso.
+- **Archivos:** `index.html`, `css/styles.css`, `docs/medicion.md`, `docs/diseno.md` (§14), capturas `docs/benchmark/piloto/ubicacion-barra-*.png`.
+- **Decisiones:** `click_maps` solo en el botón de la sección (`link_location: ubicacion`); sin evento genérico para la barra; `scroll-margin-top` ya era 0 en móvil y basta.
+- **Verificado:** Chromium (Playwright, emulación móvil, movimiento reducido) a 360/390/412 px: ancla, `aria-current` y todo el bloque sobre la barra; sin desborde horizontal.
+- **No verificado:** scroll suave animado (se probó con movimiento reducido), dispositivos reales iOS/Android, apertura en la app de Maps, ni eventos en GA4 real.
+
 ## Registro de commits
 
 - 2026-10-20 12:17 `a19da90` docs: configuración inicial, bitácora, baseline Lighthouse y hallazgos
@@ -397,3 +406,4 @@ Ver lista de nuevos arriba; editados `docs/propuesta.md`, `docs/diseno.md`, `doc
 - 2026-10-23 18:21 `219ec9b` feat: «Reseñas» en el menú de escritorio y en el índice del pie (accesible desde «Más» en móvil); menú de tablet algo más compacto para que quepa a 768 px
 - 2026-10-23 18:28 `67e84e4` docs: ajustes móviles (2.ª ronda) y sección Reseñas (diseno §12, mediciones, capturas y bitácora)
 - 2026-10-23 18:42 `871288c` feat: carriles móviles de Eventos y Galería con snap centrado (una tarjeta por swipe, scroll-snap-stop y padding de lista compartido); sustituye al espaciador ::after
+- 2026-10-23 18:43 `fcd41b7` docs: carriles con swipe centrado en móvil (diseno §13, verificación y bitácora)
