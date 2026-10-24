@@ -42,7 +42,7 @@
   const enIdle = (fn) => ('requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 3000 }) : setTimeout(fn, 3000));
   addEventListener('load', () => { enIdle(cargarGtag); enIdle(cargarClarity); });
 
-  const EVENTOS_CLIC = { whatsapp: 'click_whatsapp', phone: 'click_phone', maps: 'click_maps', facebook: 'click_facebook', 'perfil-google': 'click_perfil_google' };
+  const EVENTOS_CLIC = { whatsapp: 'click_whatsapp', phone: 'click_phone', maps: 'click_maps', facebook: 'click_facebook' };
   document.addEventListener('click', (e) => {
     const el = e.target.closest('[data-track]');
     if (!el || !EVENTOS_CLIC[el.dataset.track]) return;
@@ -147,6 +147,7 @@
   if (verMapa) {
     verMapa.hidden = false;      // sin JS el botón no existe y queda el enlace "Abrir en Google Maps"
     verMapa.addEventListener('click', () => {
+      if (movil.matches) return;   // en móvil no se carga el iframe: solo la imagen y «Abrir en Google Maps»
       const f = document.createElement('iframe');
       f.src = mapa.dataset.mapa;
       f.title = 'Mapa de Google Maps con la ubicación de Jardín Cristel';

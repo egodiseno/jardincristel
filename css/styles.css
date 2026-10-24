@@ -186,6 +186,7 @@ section > picture { display: contents; }
 .mapa { position: relative; width: min(100%, 33rem); margin-inline: auto; }
 .mapa__vista { overflow: hidden; background: var(--malva-50); border-radius: 0 7.3125rem 0 7.3125rem; border-radius: 0 22cqw 0 22cqw; box-shadow: var(--sombra-lavanda); }
 .mapa__vista img, .mapa__vista iframe { display: block; width: 100%; aspect-ratio: 530 / 386; border: 0; object-fit: cover; }
+.mapa__abrir { position: absolute; left: 50%; bottom: 8%; transform: translateX(-50%); white-space: nowrap; box-shadow: var(--sombra-lavanda); }
 .mapa__ver { position: absolute; left: 50%; bottom: 14%; transform: translateX(-50%); background: var(--marfil-50); }
 .contacto { background: var(--marfil-200); padding-bottom: 8.5rem; }
 .contacto__acciones { display: grid; gap: .9rem; justify-items: stretch; max-width: 24rem; margin: 0 auto; }
@@ -212,6 +213,8 @@ section > picture { display: contents; }
   .hero .divisor { margin: 0 auto 1.25rem; }
   .hero__acciones { width: 100%; max-width: 22rem; }
   .hero__foto img { object-position: 50% 35%; }                    /* foto centrada en X; con cover se ve ~58 % del ancho de la imagen (800x1000) */
+  /* Ubicación en móvil: dirección, luego la imagen con «Abrir en Google Maps» encima; sin «Ver mapa» ni iframe */
+  .ubicacion__abrir, .mapa__ver { display: none; }
   .hero__wa, .t-esc { display: none; }                              /* la barra inferior ya trae Cotizar: en el hero queda solo «Ver eventos» */
 
   /* Carriles con scroll: el padding derecho de un contenedor con overflow no siempre se respeta, así que el margen final es un espaciador (::after) igual al inicial */
@@ -255,7 +258,7 @@ section > picture { display: contents; }
   .top { position: sticky; top: 0; justify-content: flex-start; gap: 1rem; padding-inline: 1.5rem; }
   .barra { display: none; }
   .t-mov { display: none; }
-  .ubicacion__perfil { display: none; }                            /* «Ver en Google»: por ahora solo en móvil (alcance del ajuste); quitar esta regla para mostrarlo también aquí */
+  .mapa__abrir { display: none; }
   .menu { display: block; margin-left: auto; }
   .menu__lista { display: flex; align-items: center; gap: .1rem; }
   .menu__inicio { display: none; }                                 /* en tablet el logo ya lleva a Inicio; el menú completo cabe desde 75em */
