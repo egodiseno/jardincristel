@@ -66,7 +66,7 @@ Un solo `<h1>`. Landmarks nativos (`header`, `nav`, `main`, `section`, `footer`)
       texto + foto
     <section id="eventos">
       <h2>Nuestros eventos</h2>
-        <article><h3>Boda</h3>…  × 6 (Bautizo, 1a Comunión, XV Años, Boda, Graduación, Empresarial)
+        <article><h3>Boda</h3>…  × 5 (Bautizo, 1a Comunión, XV Años, Boda, Graduación; Empresarial eliminada 2026-10-24)
     <section id="incluye">                   “Qué incluye tu evento”: sin modal (ver docs/diseno.md §3)
       <h2>Qué incluye tu evento</h2>  4 categorías (<details> en móvil)
         <h3>Menú a elegir</h3>

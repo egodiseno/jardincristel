@@ -20,7 +20,7 @@
 |---|---|---|
 | `data-track` | `whatsapp` · `phone` · `maps` · `facebook` | Identifica el tipo de clic y decide el evento |
 | `data-track-location` | ver tablas siguientes | Dónde está el enlace en la página (parámetro `link_location`) |
-| `data-event-type` | `boda` · `xv` · `bautizo` · `comunion` · `graduacion` · `empresarial` · `general` | Solo en WhatsApp (parámetro `event_type`) |
+| `data-event-type` | `boda` · `xv` · `bautizo` · `comunion` · `graduacion` · `general` | Solo en WhatsApp (parámetro `event_type`) |
 | `data-categoria` | `espacio-y-tiempo` · `mobiliario-y-decoracion` · `servicio-y-musica` · `banquete-y-bebidas` | En cada `<details>` de “Qué incluye tu evento” |
 
 ```html
@@ -45,7 +45,7 @@
 
 **Implementación (piloto):** “Cotizar” existe dos veces en el DOM —el botón central de la barra inferior móvil (`barra-movil`) y el botón del header en tablet y escritorio (`header`)— y el CSS oculta el que no corresponde (`display: none`); así cada elemento lleva un `data-track-location` fijo.
 
-`event_type` en `click_whatsapp`: `boda`, `xv`, `bautizo`, `comunion`, `graduacion`, `empresarial` en las tarjetas de evento; **`general`** en todos los demás CTA (hero, “Qué incluye”, barra móvil, header, contacto).
+`event_type` en `click_whatsapp`: `boda`, `xv`, `bautizo`, `comunion`, `graduacion` en las tarjetas de evento; **`general`** en todos los demás CTA (hero, “Qué incluye”, barra móvil, header, contacto).
 
 ### 1.3 Eventos de interacción
 

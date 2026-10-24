@@ -183,7 +183,6 @@ Cada tarjeta lleva un **CTA principal “Cotizar mi <evento>”** con mensaje de
 | xv | Cotizar mis XV años | Hola, quiero cotizar mis XV años en Jardín Cristel. ¿Me pueden dar información y fechas disponibles? ¡Gracias! | `https://wa.me/5215536476032?text=Hola%2C%20quiero%20cotizar%20mis%20XV%20a%C3%B1os%20en%20Jard%C3%ADn%20Cristel.%20%C2%BFMe%20pueden%20dar%20informaci%C3%B3n%20y%20fechas%20disponibles%3F%20%C2%A1Gracias!` |
 | boda | Cotizar mi boda | Hola, quiero cotizar una boda en Jardín Cristel. ¿Me pueden dar información y fechas disponibles? ¡Gracias! | `https://wa.me/5215536476032?text=Hola%2C%20quiero%20cotizar%20una%20boda%20en%20Jard%C3%ADn%20Cristel.%20%C2%BFMe%20pueden%20dar%20informaci%C3%B3n%20y%20fechas%20disponibles%3F%20%C2%A1Gracias!` |
 | graduacion | Cotizar mi graduación | Hola, quiero cotizar una graduación en Jardín Cristel. ¿Me pueden dar información y fechas disponibles? ¡Gracias! | `https://wa.me/5215536476032?text=Hola%2C%20quiero%20cotizar%20una%20graduaci%C3%B3n%20en%20Jard%C3%ADn%20Cristel.%20%C2%BFMe%20pueden%20dar%20informaci%C3%B3n%20y%20fechas%20disponibles%3F%20%C2%A1Gracias!` |
-| empresarial | Cotizar mi evento empresarial | Hola, quiero cotizar un evento empresarial en Jardín Cristel. ¿Me pueden dar información y fechas disponibles? ¡Gracias! | `https://wa.me/5215536476032?text=Hola%2C%20quiero%20cotizar%20un%20evento%20empresarial%20en%20Jard%C3%ADn%20Cristel.%20%C2%BFMe%20pueden%20dar%20informaci%C3%B3n%20y%20fechas%20disponibles%3F%20%C2%A1Gracias!` |
 
 ```html
 <article class="evento">
@@ -270,7 +269,7 @@ Son metas de diseño: se validan al generar las piezas (AVIF q ≈ 45–55 sobre
 
 ## 5. Dirección de arte para imágenes de eventos generadas con IA
 
-Las 6 tarjetas de evento (bautizo, comunión, XV años, boda, graduación, empresarial) se renuevan con imágenes **simbólicas** generadas con IA, con calidad consistente. Las fotos de la **galería** y las del **lugar** siguen siendo reales.
+Las 5 tarjetas de evento (bautizo, comunión, XV años, boda, graduación; la de Empresarial se eliminó el 2026-10-24) se renuevan con imágenes **simbólicas** generadas con IA, con calidad consistente. Las fotos de la **galería** y las del **lugar** siguen siendo reales.
 
 ### 5.1 Reglas
 
@@ -296,7 +295,6 @@ Las 6 tarjetas de evento (bautizo, comunión, XV años, boda, graduación, empre
 | XV Años | Corona o tiara y letras luminosas “XV”, con rosas malva y listones |
 | Boda | Dos anillos sobre una peonía rosa empolvada y hojas verdes |
 | Graduación | Birrete y diploma enrollado con listón malva |
-| Empresarial | Mesa puesta minimalista con copas y arreglo floral sobrio (**o conservar la foto real de la carreta del jardín**, ver `docs/imagenes.md`) |
 
 Las sugerencias son punto de partida; Emmanuel puede preferir otros símbolos.
 
@@ -625,3 +623,9 @@ Solo móvil (< 48 em); tablet y escritorio no cambian.
 - **Posición:** `scroll-margin-top` de `#ubicacion` queda en 0 en móvil (no hay header): dirección, imagen del mapa, botón y aviso caben sobre la barra a 360, 390 y 412 px (`docs/benchmark/piloto/ubicacion-barra-{360,390,412}.png`).
 - **«Abrir en Google Maps» (sobre la imagen):** icono de enlace externo (flecha diagonal), línea visible «Se abre en la app de Google Maps» bajo la imagen (`.mapa__aviso`), `aria-label="Abrir en Google Maps (se abre en la app o en una pestaña nueva)"`, `target="_blank"` y `rel="noopener noreferrer"`. Sin modal ni confirmación.
 - **Medición:** la barra ya no emite `click_maps`; `barra-movil` deja de ser valor de `link_location` en `click_maps` (ver `docs/medicion.md`). No se añadió evento de navegación genérico.
+
+---
+
+## 15. Tarjeta «Empresarial» eliminada — 2026-10-24
+
+Eventos queda con 5 tarjetas en todos los dispositivos. Móvil: carril de 5 con snap centrado (desfase medido ≤ 0.41 px en las cinco posiciones a 390 px). Tablet y escritorio: `.eventos__lista` pasa de grid a `flex-wrap` con `justify-content: center`; cada tarjeta conserva el ancho y el gap de antes (`calc((100% - gap) / 2)` y `/ 3`), así la última fila queda centrada (768 px: 2+2+1; 1280 y 1920 px: 3+2). Capturas en `docs/benchmark/piloto/eventos-5-{768,1280,1920}.png`.

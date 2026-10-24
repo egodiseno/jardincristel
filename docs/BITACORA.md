@@ -360,6 +360,14 @@ Ver lista de nuevos arriba; editados `docs/propuesta.md`, `docs/diseno.md`, `doc
 - **Verificado:** Chromium (Playwright, emulación móvil, movimiento reducido) a 360/390/412 px: ancla, `aria-current` y todo el bloque sobre la barra; sin desborde horizontal.
 - **No verificado:** scroll suave animado (se probó con movimiento reducido), dispositivos reales iOS/Android, apertura en la app de Maps, ni eventos en GA4 real.
 
+## 2026-10-24 — Tarjeta «Empresarial» eliminada
+
+- **Qué:** se quita la tarjeta (HTML) en todos los dispositivos; quedan 5. Tablet/escritorio: `flex-wrap` centrado con el mismo ancho y gap por tarjeta; móvil: carril de 5 con snap centrado (desfase ≤ 0.41 px).
+- **Archivos:** `index.html`, `css/styles.css`, `docs/{medicion,diseno,propuesta,imagenes}.md`, capturas `eventos-5-{768,1280,1920}.png` y `carril-eventos-ultimo-390.png`.
+- **Decisiones:** `img/eventos/empresarial.webp` no se borra (marcado «sin uso» en `docs/imagenes.md`; ninguna página lo carga ni precarga). `event_type=empresarial` se quita de `medicion.md`. `docs/inventario.md` (descripción del sitio de referencia) y `tools/optimizar-imagenes.cjs` no se tocan.
+- **Lighthouse móvil (local):** antes y después 99 de rendimiento, LCP 2.1 s, CLS 0; el HTML baja 1.4 KB. El peso total no baja porque la imagen era lazy y fuera del primer viewport, así que Lighthouse nunca la descargaba; el ahorro es real solo para quien llega a Eventos.
+- **Pendiente (decidir con el cliente):** menciones generales de «eventos empresariales» en `index.html` (meta description), `CLAUDE.md`, `docs/propuesta.md` (pregunta de paquetes), `docs/inventario.md` y `docs/benchmark/competencia.md`.
+
 ## Registro de commits
 
 - 2026-10-20 12:17 `a19da90` docs: configuración inicial, bitácora, baseline Lighthouse y hallazgos
@@ -407,3 +415,4 @@ Ver lista de nuevos arriba; editados `docs/propuesta.md`, `docs/diseno.md`, `doc
 - 2026-10-23 18:28 `67e84e4` docs: ajustes móviles (2.ª ronda) y sección Reseñas (diseno §12, mediciones, capturas y bitácora)
 - 2026-10-23 18:42 `871288c` feat: carriles móviles de Eventos y Galería con snap centrado (una tarjeta por swipe, scroll-snap-stop y padding de lista compartido); sustituye al espaciador ::after
 - 2026-10-23 18:43 `fcd41b7` docs: carriles con swipe centrado en móvil (diseno §13, verificación y bitácora)
+- 2026-10-24 11:21 `34309c5` feat: «Cómo llegar» de la barra móvil ancla a #ubicacion; aviso de salida en «Abrir en Google Maps» y click_maps solo en la sección
