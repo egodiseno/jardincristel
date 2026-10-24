@@ -210,6 +210,7 @@ section > picture { display: contents; }
   .hero__contenido { display: flex; flex-direction: column; align-items: center; text-align: center; padding-block: 2.5rem; }
   .hero .divisor { margin: 0 auto 1.25rem; }
   .hero__acciones { width: 100%; max-width: 22rem; }
+  .hero__foto img { object-position: 50% 35%; }                    /* foto centrada en X; con cover se ve ~58 % del ancho de la imagen (800x1000) */
   .hero__wa, .t-esc { display: none; }                              /* la barra inferior ya trae Cotizar: en el hero queda solo «Ver eventos» */
 
   /* Carriles con scroll: el padding derecho de un contenedor con overflow no siempre se respeta, así que el margen final es un espaciador (::after) igual al inicial */
