@@ -19,6 +19,10 @@
   --malva-600: #8f4752;  --malva-900: #49242a;
   --lavanda-700: #855185; --lavanda-800: #6c426c; --lavanda-900: #482c48;
   --pizarra-900: #3d464f;
+  --lavanda-50: #f5eff5;                  /* fondo de Reseñas */
+  --avatar-fondo: #e9dcea;                /* círculo del avatar: lavanda suave */
+  --avatar-icono: var(--lavanda-800);     /* icono del avatar */
+  --estrella: var(--malva-500);
   --foco: #a0505c;
   --sombra-lavanda: 0 12px 32px -8px rgb(108 66 108 / .28), 0 2px 6px rgb(108 66 108 / .12);
 
@@ -108,7 +112,7 @@ section[id] { scroll-margin-top: 0; }
 .hero .btn--secundario:active { background: var(--marfil-50); color: var(--lavanda-900); }
 
 /* ---------- Adornos acuarelados (docs/diseno.md §9): decorativos, detrás del contenido, sin puntero ---------- */
-.nosotros, .eventos, .incluye, #galeria, .contacto { position: relative; isolation: isolate; overflow: hidden; overflow: clip; }
+.nosotros, .eventos, .incluye, #galeria, .resenas, .contacto { position: relative; isolation: isolate; overflow: hidden; overflow: clip; }
 section > picture { display: contents; }
 .adorno { position: absolute; z-index: -1; display: none; max-width: none; height: auto; pointer-events: none; user-select: none; }
 .divisor { display: block; width: 10rem; height: auto; margin: .75rem auto 0; pointer-events: none; }
@@ -177,6 +181,23 @@ section > picture { display: contents; }
 .galeria__principal { display: none; }
 .galeria__contador { margin-top: .5rem; color: var(--malva-600); font-weight: 700; text-align: center; }
 .galeria__mas { display: grid; justify-items: center; margin-top: 1.5rem; }
+
+/* ---------- Reseñas (testimonios de Google, sin datos estructurados: propuesta #15) ---------- */
+.resenas { background: var(--lavanda-50); padding-bottom: 8rem; }
+.resenas__lista { display: grid; gap: 1.5rem; max-width: 28rem; margin: 0 auto; }
+.resena { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 1.75rem 1.5rem; background: var(--marfil-50); border-radius: 1.25rem; box-shadow: var(--sombra-lavanda); text-align: center; }
+.resena__estrellas { width: 5.5rem; height: 1rem; fill: var(--estrella); }
+.resena__valor { display: flex; justify-content: center; }
+.resena blockquote { margin: 0; flex: 1; }
+.resena blockquote p { text-wrap: pretty; font-size: 1.0625rem; }
+.resena figcaption { display: flex; flex-direction: column; align-items: center; gap: .6rem; }
+.resena__avatar { width: 3rem; height: 3rem; border-radius: 50%; background-color: var(--avatar-fondo); position: relative; }
+.resena__avatar::after { content: ""; position: absolute; inset: 0; background-color: var(--avatar-icono); -webkit-mask: url("../img/resenas/person-fill.svg") center / 58% no-repeat; mask: url("../img/resenas/person-fill.svg") center / 58% no-repeat; }
+.resena__autor { display: grid; gap: .1rem; text-wrap: balance; }
+.resena__fuente { font-size: .875rem; color: var(--malva-600); }
+.resenas__mas { display: grid; justify-items: center; margin-top: 2rem; }
+.resenas .adorno--resenas-sup-der { display: block; top: 0; right: 0; width: 5rem; }
+.resenas .adorno--resenas-inf-izq { display: block; bottom: 0; left: 0; width: 9rem; }
 
 /* ---------- Ubicación (mapa bajo demanda) y Contacto ---------- */
 .ubicacion { background: var(--marfil-50); }
@@ -277,6 +298,10 @@ section > picture { display: contents; }
   .ubicacion__info { justify-items: start; text-align: left; }
   .mapa { margin-inline: 0 0; }
   .contacto { padding-bottom: 10rem; }
+  .resenas { padding-bottom: 9rem; }
+  .resenas__lista { grid-template-columns: 1fr 1fr; max-width: 56rem; gap: 2rem; }
+  .resenas .adorno--resenas-sup-der { width: 7rem; }
+  .resenas .adorno--resenas-inf-izq { width: 13rem; }
   .contacto__acciones { grid-auto-flow: column; max-width: none; justify-content: center; }
   .contacto__acciones .btn { width: auto; }
   .contacto .adorno--contacto-inf-izq { width: 18rem; }
@@ -317,6 +342,10 @@ section > picture { display: contents; }
   .divisor { width: 15.4375rem; }                                   /* 247 px = tamaño nativo */
   .nosotros__grid { grid-template-columns: minmax(0, 27rem) 1fr; gap: 4.5rem; }
   .contacto { padding-bottom: 11rem; }
+  .resenas { padding-bottom: 11rem; }
+  .resena { padding: 2.25rem 2rem; }
+  .resenas .adorno--resenas-sup-der { width: 9.375rem; }
+  .resenas .adorno--resenas-inf-izq { width: 23.75rem; }
   .contacto .adorno--contacto-inf-izq, .contacto .adorno--contacto-inf-der { width: 27.5rem; }
   .galeria { max-width: 52rem; margin-inline: auto; }
   .galeria__principal { display: block; margin-bottom: 1.5rem; overflow: hidden; border-radius: 0 7.3125rem 0 7.3125rem; background: var(--malva-50); box-shadow: var(--sombra-lavanda); }

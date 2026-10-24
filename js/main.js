@@ -42,7 +42,7 @@
   const enIdle = (fn) => ('requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 3000 }) : setTimeout(fn, 3000));
   addEventListener('load', () => { enIdle(cargarGtag); enIdle(cargarClarity); });
 
-  const EVENTOS_CLIC = { whatsapp: 'click_whatsapp', phone: 'click_phone', maps: 'click_maps', facebook: 'click_facebook' };
+  const EVENTOS_CLIC = { whatsapp: 'click_whatsapp', phone: 'click_phone', maps: 'click_maps', facebook: 'click_facebook', 'resenas-google': 'click_resenas_google' };
   document.addEventListener('click', (e) => {
     const el = e.target.closest('[data-track]');
     if (!el || !EVENTOS_CLIC[el.dataset.track]) return;

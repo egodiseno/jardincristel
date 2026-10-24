@@ -40,6 +40,7 @@
 | **`click_whatsapp`** | clic en cualquier enlace `wa.me` | `link_location`, `event_type`, `link_url` | `hero` (CTA principal) · `tarjeta` (“Cotizar mi <evento>”) · `que-incluye` (CTA de la sección) · `barra-movil` (botón central de la barra inferior) · `header` (“Cotizar” al final del menú en tablet y desktop) · `nosotros` (“Solicita tu presupuesto”) · `contacto` (botón de la sección Contacto) |
 | **`click_phone`** | clic en `tel:` | `link_location` | `contacto` (y cualquier otro lugar donde se añada) |
 | **`click_maps`** | clic en un enlace a Google Maps (“Cómo llegar” de la barra inferior móvil, “Abrir en Google Maps” de la sección Ubicación: sobre la imagen en móvil, en la columna de texto en tablet y escritorio) | `link_location` | `barra-movil` · `ubicacion` |
+| **`click_resenas_google`** | clic en “Ver todas las reseñas en Google” de la sección Reseñas (búsqueda `google.com/search?q=jardin+cristel`, que muestra el perfil y las reseñas). **No es `click_maps`**: no abre Maps ni da indicaciones, así que se mide aparte | `link_location` | `resenas` |
 | **`click_facebook`** | clic en el enlace a Facebook | `link_location` | `galeria` (“Ver más fotos en Facebook”) · `contacto` · `pie` |
 
 **Implementación (piloto):** “Cotizar” existe dos veces en el DOM —el botón central de la barra inferior móvil (`barra-movil`) y el botón del header en tablet y escritorio (`header`)— y el CSS oculta el que no corresponde (`display: none`); así cada elemento lleva un `data-track-location` fijo.
@@ -68,7 +69,7 @@ function gtag() { dataLayer.push(arguments); }           // cola: ningún evento
 gtag('js', new Date());
 if (MEDIR) gtag('config', GA_ID, { debug_mode: DEBUG });   // sin 'config' no se envía nada (ni en previews ni en localhost)
 
-const EVENTOS = { whatsapp: 'click_whatsapp', phone: 'click_phone', maps: 'click_maps', facebook: 'click_facebook' };
+const EVENTOS = { whatsapp: 'click_whatsapp', phone: 'click_phone', maps: 'click_maps', facebook: 'click_facebook', 'resenas-google': 'click_resenas_google' };
 
 document.addEventListener('click', (e) => {
   const el = e.target.closest('[data-track]');
@@ -88,7 +89,7 @@ Los parámetros solo se pueden analizar en informes si se registran como **dimen
 
 | Nombre de la dimensión | Parámetro del evento | Alcance | Eventos que lo usan |
 |---|---|---|---|
-| `link_location` | `link_location` | Evento | `click_whatsapp`, `click_phone`, `click_maps`, `click_facebook` |
+| `link_location` | `link_location` | Evento | `click_whatsapp`, `click_phone`, `click_maps`, `click_resenas_google`, `click_facebook` |
 | `event_type` | `event_type` | Evento | `click_whatsapp` |
 | `categoria` | `categoria` | Evento | `open_categoria_incluye` |
 
@@ -110,7 +111,7 @@ Marcar **`click_whatsapp`** y **`click_phone`**.
 1. **Administrar** → **Visualización de datos** → **Eventos**.
 2. Cuando `click_whatsapp` y `click_phone` ya aparezcan en la lista (se disparan al menos una vez en producción o en DebugView), activar el interruptor **Marcar como evento clave** de cada uno.
 3. Si aún no aparecen: botón **Nuevo evento clave**, escribir el nombre exacto del evento (`click_whatsapp`, `click_phone`) y guardar; empezará a contarse desde su creación.
-4. No marcar `click_maps`, `click_facebook`, `view_que_incluye`, `open_categoria_incluye` ni `gallery_navigate`: son de comportamiento, no de contacto.
+4. No marcar `click_maps`, `click_resenas_google`, `click_facebook`, `view_que_incluye`, `open_categoria_incluye` ni `gallery_navigate`: son de comportamiento, no de contacto.
 
 ### 1.7 Otros ajustes recomendados de la propiedad
 
