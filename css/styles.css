@@ -205,10 +205,12 @@ section > picture { display: contents; }
   .top { display: none; }                                          /* en móvil la navegación es la barra inferior */
   /* Hero: ocupa toda la pantalla (svh, por la barra de URL de iOS) y compensa la barra inferior con padding, así el contenido queda centrado en el espacio visible */
   .hero { display: flex; flex-direction: column; justify-content: center; min-block-size: 100svh; padding-block-end: calc(var(--alto-barra) + env(safe-area-inset-bottom)); }
+  .hero__foto img { object-position: 50% 35%; }
   .hero__logo { display: none; }                                   /* el logo solo se muestra en tablet y escritorio */
   .hero__contenido { display: flex; flex-direction: column; align-items: center; text-align: center; padding-block: 2.5rem; }
   .hero .divisor { margin: 0 auto 1.25rem; }
   .hero__acciones { width: 100%; max-width: 22rem; }
+  .hero__wa, .t-esc { display: none; }                              /* la barra inferior ya trae Cotizar: en el hero queda solo «Ver eventos» */
 
   /* Carriles con scroll: el padding derecho de un contenedor con overflow no siempre se respeta, así que el margen final es un espaciador (::after) igual al inicial */
   .eventos__lista, .galeria__lista { display: flex; gap: 1rem; }
@@ -246,6 +248,7 @@ section > picture { display: contents; }
 
   .top { position: sticky; top: 0; justify-content: flex-start; gap: 1rem; padding-inline: 1.5rem; }
   .barra { display: none; }
+  .t-mov { display: none; }
   .ubicacion__perfil { display: none; }                            /* «Ver en Google»: por ahora solo en móvil (alcance del ajuste); quitar esta regla para mostrarlo también aquí */
   .menu { display: block; margin-left: auto; }
   .menu__lista { display: flex; align-items: center; gap: .1rem; }
