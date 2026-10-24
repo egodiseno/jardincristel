@@ -26,7 +26,7 @@
   --f-texto: "Merriweather", Georgia, "Times New Roman", serif;
   --gutter: 1.25rem;
   --alto-header: 3.5rem;
-  --alto-barra: 4.5rem;
+  --alto-barra: 3.5rem;                   /* altura real de la barra inferior móvil (medida 56 px) */
 }
 
 /* ---------- Base ---------- */
@@ -82,7 +82,7 @@ section[id] { scroll-margin-top: 0; }
 /* Móvil: barra inferior tipo app, 5 elementos con "Cotizar" al centro (zonas táctiles >= 56 px de alto) */
 .barra { position: fixed; z-index: 40; inset: auto 0 0 0; background: var(--malva-500); color: var(--marfil-50); padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 -8px 24px -8px rgb(72 44 72 / .4); }
 .barra__lista { display: grid; grid-template-columns: 1fr 1fr 1.35fr 1fr 1fr; align-items: center; max-width: 34rem; margin: 0 auto; padding: 0 .15rem; }
-.barra__enlace { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .15rem; min-height: 3.5rem; padding: .4rem .1rem; color: inherit; text-decoration: none; font: 700 .68rem/1.15 var(--f-texto); text-align: center; }
+.barra__enlace { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .15rem; min-height: 3.5rem; padding: .4rem .1rem; color: inherit; text-decoration: none; font: 700 clamp(.6rem, 2.9vw, .68rem)/1.15 var(--f-texto); text-align: center; white-space: nowrap; }
 .barra__enlace[aria-current="true"]::after { content: ""; position: absolute; top: 0; left: 28%; right: 28%; height: 3px; background: var(--marfil-50); }
 .barra__cta { display: flex; justify-content: center; }
 .barra__cotizar { flex-direction: column; gap: .15rem; width: 4.9rem; min-height: 4.1rem; margin-top: -1.3rem; padding: .4rem .25rem; border-color: var(--marfil-50); border-radius: 1.25rem; font-size: .82rem; box-shadow: 0 8px 18px -6px rgb(72 44 72 / .55); }
@@ -203,7 +203,8 @@ section > picture { display: contents; }
 /* ============ MÓVIL (< 48em): ajustes solo de móvil (tablet y escritorio no cambian) ============ */
 @media (max-width: 47.99em) {
   .top { display: none; }                                          /* en móvil la navegación es la barra inferior */
-  .hero { min-height: calc(100svh - var(--alto-barra)); align-items: center; }
+  /* Hero: ocupa toda la pantalla (svh, por la barra de URL de iOS) y compensa la barra inferior con padding, así el contenido queda centrado en el espacio visible */
+  .hero { display: flex; flex-direction: column; justify-content: center; min-block-size: 100svh; padding-block-end: calc(var(--alto-barra) + env(safe-area-inset-bottom)); }
   .hero__logo { display: none; }                                   /* el logo solo se muestra en tablet y escritorio */
   .hero__contenido { display: flex; flex-direction: column; align-items: center; text-align: center; padding-block: 2.5rem; }
   .hero .divisor { margin: 0 auto 1.25rem; }
