@@ -238,11 +238,14 @@ section > picture { display: contents; }
   .ubicacion__abrir, .mapa__ver { display: none; }
   .hero__wa, .t-esc { display: none; }                              /* la barra inferior ya trae Cotizar: en el hero queda solo «Ver eventos» */
 
-  /* Carriles con scroll: el padding derecho de un contenedor con overflow no siempre se respeta, así que el margen final es un espaciador (::after) igual al inicial */
-  .eventos__lista, .galeria__lista { display: flex; gap: 1rem; }
-  .eventos__lista > li { flex: 0 0 min(82%, 21rem); }
-  .galeria__lista > li { flex: 0 0 88%; }
-  .eventos__lista::after, .galeria__lista::after { content: ""; flex: 0 0 calc(var(--gutter) - 1rem); }   /* gap de 1 rem + espaciador = margen lateral del inicio */
+  /* Carriles con swipe (Eventos y Galería): una tarjeta por gesto y siempre centrada.
+     --ancho-carril es el ancho de cada elemento; --pad-carril = (ancho del carril - elemento) / 2 y se usa de padding de la lista y de scroll-padding del carril
+     (ambos porcentajes se miden sobre el ancho del carril), así el primero y el último también se centran. El margen final lo da el padding de la lista, que contiene
+     a todos los elementos, y no el del contenedor con scroll, que no todos los navegadores respetan. */
+  :root { --ancho-carril: min(82vw, 22rem); --pad-carril: calc((100% - var(--ancho-carril)) / 2); }
+  .eventos__carril, .galeria__carril { padding-inline: 0; scroll-snap-type: x mandatory; scroll-padding-inline: var(--pad-carril); overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
+  .eventos__lista, .galeria__lista { display: flex; gap: 1rem; inline-size: max-content; min-inline-size: 100%; padding-inline: var(--pad-carril); }
+  .eventos__lista > li, .galeria__lista > li { flex: 0 0 var(--ancho-carril); scroll-snap-align: center; scroll-snap-stop: always; }
 
   /* Acuarelas florales en móvil (docs/diseno.md §9.4): más grandes y más cerca de la zona visible; las piezas con borde plano de lienzo van pegadas al borde de la ventana */
   .eventos .adorno--eventos-sup-izq { display: block; top: 0; left: 0; width: 5rem; }
