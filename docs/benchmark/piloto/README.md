@@ -123,3 +123,19 @@ Capturas (antes → después): `movil-antes-{360,390,412}.png` / `movil-despues-
 
 Reporte: `lighthouse-movil-ajustes-movil.report.json`. Las mediciones son sin analítica. En una primera ronda de 3 corridas el CLS salió 0.052 en una: el hero, ahora centrado en vertical, se movía al cargar Merriweather 700 (kicker y botones); se añadió su `preload` y las 5 corridas siguientes dan CLS 0. La diferencia de peso en Lighthouse (+27 KiB) es menor que la de los adornos descargados al recorrer toda la página (+49.6 KiB) porque Lighthouse no desplaza la página y las imágenes `lazy` lejanas no se piden.
 
+## Ajustes móviles (2.ª ronda) y sección Reseñas (2026-10-23)
+
+Capturas: `movil-r2-antes-{360,390,412,1280}[-vista].png` / `movil-r2-despues-…` (página completa y primera pantalla) y la sección nueva en `resenas-{360,390,412,768,1280}.png`.
+
+**Escritorio sin cambios (salvo menú y sección nueva):** el encabezado difiere solo en el enlace «Reseñas». La comparación píxel a píxel de las capturas completas da diferencias de antialiasing en la parte baja porque Reseñas mide 843.4 px (fraccionario) y desplaza todo; por eso se comparó **a nivel de DOM** contra el commit anterior (`2adf17a`): posición, ancho, alto, color, color de fondo y tamaño de fuente de los 246–254 elementos existentes de `main` a 360, 390, 412, 768 y 1280 px: **0 diferencias** (los de debajo de Reseñas solo se desplazan por su altura). Dos capturas del mismo build dan 0 diferencias entre sí.
+
+| Lighthouse móvil, deploy (12.8.2) | Antes (`5c6d629`, mediana de 5) | Después (mediana de 5) |
+|---|---|---|
+| Performance / A11y / BP | 99 / 100 / 100 | 99 / 100 / 100 |
+| LCP | 1.56 s | 1.52 s |
+| TBT | 4 ms | 0 ms |
+| CLS | 0 | 0 |
+| Peso transferido | 224.9 KiB | **226.7 KiB (+1.8)** |
+
+Reporte: `lighthouse-movil-resenas.report.json` (sin analítica). Lighthouse no desplaza la página, por eso casi no ve las imágenes `lazy`; recorriendo toda la página en móvil se descargan **+22.8 KB de adornos** (92.6 → 115.4 KB; total 336.4 → 367.5 KB, que incluye el SVG del avatar y el CSS).
+

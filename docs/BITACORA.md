@@ -314,6 +314,26 @@ Ver lista de nuevos arriba; editados `docs/propuesta.md`, `docs/diseno.md`, `doc
 
 **Pendientes / no verificado:** dispositivos reales (iOS Safari: `100svh` y barra), `text-wrap: balance` solo comprobado en Chrome (el respaldo se probó forzándolo), si «Ver en Google» debe ir también en tablet y escritorio, el significado exacto del botón «Google Maps» que mencionaba el encargo, y posible limpieza de las capturas «antes».
 
+## 2026-10-23 — Móvil (2.ª ronda) y sección Reseñas
+
+**Qué se hizo** (detalle en `docs/diseno.md` §12): hero centrado en vertical con `100svh` y compensación de la barra; «Ver eventos» en lugar de «Cotizar por WhatsApp» en el hero móvil; foto del hero centrada en X; botones de Nosotros y Qué incluye con el mismo espacio arriba y abajo (token `--aire-boton`); Ubicación móvil con el botón sobre la imagen y sin «Ver mapa»/«Ver en Google»/iframe; **nueva sección Reseñas** (todos los dispositivos) con dos reseñas de Google, acuarelas propias, avatar con máscara CSS (Bootstrap Icons, MIT) y `click_resenas_google`; «Reseñas» en el menú y el pie.
+
+**Por qué:** afinar la experiencia móvil y añadir prueba social antes de Ubicación.
+
+**Archivos tocados:** `index.html`, `css/styles.css`, `js/main.js`, `img/adornos/resenas-*`, `img/resenas/*`, `tools/optimizar-adornos.cjs`, `docs/{diseno,medicion}.md`, `docs/benchmark/piloto/*`.
+
+**Decisiones**
+- Barra inferior: `--alto-barra` 4.5 → 3.5 rem (altura real) y etiquetas sin salto de línea, para que el centrado del hero sea exacto; el pie de página móvil queda 16 px más corto.
+- «Cotizar por WhatsApp» del hero se oculta en móvil y el secundario muestra «Ver eventos» (mismo enlace a `#eventos`; en tablet/escritorio sigue «Conoce nuestros eventos»).
+- «Ver en Google» (de la ronda anterior) se eliminó; su evento `click_perfil_google` se sustituye por `click_resenas_google`.
+- El nombre mostrado de los autores va en el HTML (comentario `EDITAR`), no en una constante de JS: la sección no usa JS.
+- Menú de tablet: relleno lateral de los enlaces 0.55 → 0.4 rem para que quepan ocho enlaces a 768 px.
+- Adornos: racimos de los lienzos móviles, volteados en el recurso; diagonal opuesta a Qué incluye.
+
+**Resultados:** Lighthouse móvil (mediana de 5): Perf 99, A11y 100, BP 100, LCP 1.52 s, TBT 0, CLS 0, 226.7 KiB (+1.8 KiB; +22.8 KB de adornos recorriendo la página). Contraste mínimo medido ≥ 4.99:1. Espacio sobre/bajo los botones: 48 / 48 px. Escritorio sin cambios (DOM idéntico).
+
+**Pendientes / no verificado:** iOS Safari real (`100svh`, `mask` con SVG externo, barra), Firefox/Safari, lectores de pantalla en la sección de reseñas, permiso de Alex Gama y María Espejel para mostrar sus reseñas (decisión #15), nombre completo o abreviado, mapa propio en SVG, recorte vertical de la foto del hero para móvil, y que la reseña se mantenga igual en Google (el texto está copiado a mano).
+
 ## Registro de commits
 
 - 2026-10-20 12:17 `a19da90` docs: configuración inicial, bitácora, baseline Lighthouse y hallazgos
@@ -349,3 +369,12 @@ Ver lista de nuevos arriba; editados `docs/propuesta.md`, `docs/diseno.md`, `doc
 - 2026-10-23 17:32 `4f909b4` feat: acuarelas florales más presentes en móvil (tamaño y posición; +49.6 KiB, contraste del texto >= 4.7:1)
 - 2026-10-23 17:32 `57747f8` fix: «Ver en Google» solo en móvil para no cambiar tablet ni escritorio
 - 2026-10-23 17:34 `4475152` perf: precarga Merriweather 700 para evitar el salto del hero móvil centrado al cargar la fuente
+- 2026-10-23 17:37 `5c6d629` docs: ajustes de la versión móvil (diseno §11, mediciones, capturas antes/después y bitácora)
+- 2026-10-23 18:16 `32da927` feat: contenido del hero centrado en vertical en móvil (100svh y compensación de la barra); barra de altura fija de 56 px
+- 2026-10-23 18:17 `3e31eb7` feat: en móvil el hero cambia «Cotizar por WhatsApp» por el botón secundario «Ver eventos» (tablet y escritorio sin cambios)
+- 2026-10-23 18:17 `0940cab` style: foto del hero móvil centrada horizontalmente de forma explícita (50% en X)
+- 2026-10-23 18:17 `cae34c7` style: botones finales de Nosotros y Qué incluye centrados verticalmente en móvil con un solo token de espacio
+- 2026-10-23 18:18 `2adf17a` feat: Ubicación móvil con dirección, imagen del mapa y «Abrir en Google Maps» encima; sin «Ver mapa», «Ver en Google» ni iframe
+- 2026-10-23 18:20 `409c18b` feat: adornos acuarelados de Reseñas (racimos de los lienzos móviles, volteados) e icono person-fill (Bootstrap Icons, MIT) con su licencia
+- 2026-10-23 18:21 `bc4733d` feat: sección Reseñas (dos reseñas de Google, dos columnas desde tablet) con click_resenas_google
+- 2026-10-23 18:21 `219ec9b` feat: «Reseñas» en el menú de escritorio y en el índice del pie (accesible desde «Más» en móvil); menú de tablet algo más compacto para que quepa a 768 px

@@ -520,3 +520,53 @@ Se muestran más piezas y más grandes; las de borde plano de lienzo van pegadas
 **Peso:** adornos descargados en móvil 41.8 KB → 92.6 KB (**+49.6 KiB**; tope +60 KiB). Todas siguen con `loading="lazy"`.
 **Contraste con píxeles reales** (se oculta el texto, se captura el fondo con los adornos y se compara con el peor píxel bajo cada línea; 360, 390 y 412 px): mínimo **4.72:1** (H1 blanco sobre la foto del hero, sin cambios); texto oscuro sobre marfil/adornos ≥ 5.95:1. **Sin scroll horizontal** (`scrollWidth == innerWidth` a 360, 390 y 412).
 
+---
+
+## 12. Ajustes móviles (2.ª ronda) y sección Reseñas — 2026-10-23
+
+### 12.1 Móvil (< 48 em; tablet y escritorio sin cambios)
+
+| # | Ajuste | Implementación |
+|---|---|---|
+| 1 | Hero centrado en vertical | `.hero { display: flex; flex-direction: column; justify-content: center; min-block-size: 100svh; padding-block-end: calc(var(--alto-barra) + env(safe-area-inset-bottom)) }` (`svh`, no `vh`, por la barra de URL de iOS). Para que la compensación sea exacta, `--alto-barra` pasó de 4.5 rem a **3.5 rem (56 px, la altura real)** y las etiquetas de la barra no se parten (`white-space: nowrap`, tamaño `clamp(.6rem, 2.9vw, .68rem)`): a 320 y 360 px «Cómo llegar» ocupaba dos líneas y la barra medía 64 px. Medido a 360, 390 y 412: espacio libre arriba = abajo (123, 176, 209 px). |
+| 2 | Botón del hero | En móvil se oculta «Cotizar por WhatsApp» (`.hero__wa`) y el botón secundario dice «Ver eventos» (`.t-mov`); desde 48 em se conservan «Cotizar por WhatsApp» y «Conoce nuestros eventos» (`.t-esc`) con sus `data-*`. |
+| 3 | Foto del hero | `object-position: 50% 35%` (ya era `center 35%`; ahora explícito). Con `cover` a 360–412 px se ve ≈ 56–58 % del ancho de la imagen (800×1000): el sujeto (pérgola con flores y escalinata) queda centrado, pero **la columna blanca grande del borde izquierdo de la foto se recorta**; si se quiere conservarla hace falta un recorte vertical propio para móvil. |
+| 4 | Botones finales | Token `--aire-boton: 3rem`: mismo espacio entre el contenido anterior y el botón, y entre el botón y el fin de la sección (Nosotros: desde `.nosotros__remate`; Qué incluye: desde `.incluye__grupos`). Medido con `getBoundingClientRect` a 360, 390 y 412: **48 / 48 px en ambos botones (diferencia 0)**. |
+| 5 | Ubicación | Dirección, luego la imagen estática con «Abrir en Google Maps» encima (`.mapa__abrir`, mismo enlace universal y `data-track="maps" data-track-location="ubicacion"`). Se ocultan «Ver mapa» y el botón de la columna de texto; «Ver en Google» se eliminó; el JS no crea el iframe en móvil. Tablet y escritorio conservan el botón de la columna y «Ver mapa». «Cómo llegar» sigue en la barra inferior. |
+
+**Origen de la imagen del mapa y riesgo:** `img/ubicacion/maps.webp` (530×386) es la captura de Google Maps que ya usaba el sitio de `referencia/images/maps.webp` (con la marca «Google» y los textos de Google). Es una captura de un servicio de terceros: **riesgo de términos de uso** (las condiciones de Google Maps restringen reproducir o derivar sus imágenes de mapa sin atribución/permiso). **Alternativa propuesta:** un mapa ilustrado propio en SVG (calle principal, pin, nombre del jardín, referencias locales como la plaza o el Oxxo), de unos 5–10 KB, con el mismo recorte en arco; así no hay captura de terceros y se puede teñir con la paleta. Hasta tenerlo, la imagen se mantiene como marcador.
+
+### 12.2 Sección Reseñas (`#resenas`)
+
+**Posición:** justo antes de Ubicación (después de Galería). `docs/propuesta.md` no fija otra (§2 no la lista; #15 solo aprueba testimonios reales con permiso, sin `AggregateRating`). Razones: tras ver el jardín (Nosotros, Eventos, Qué incluye, Galería) la prueba social refuerza la decisión justo antes de las secciones de acción (cómo llegar y contactar), y Galería → Reseñas → Ubicación → Contacto alterna fondos (marfil-200, lavanda-50, marfil-50, marfil-200) sin dos iguales seguidos.
+
+**Contenido:** dos reseñas de Google con el texto original en español, sin editar ni traducir (Alex G., María E.; el nombre mostrado está en un comentario `EDITAR` del HTML, junto al nombre completo); leyenda «Reseña en Google» (sin fecha relativa), sin logo de Google ni insignias; «Google» solo en texto. Enlace «Ver todas las reseñas en Google» → `https://www.google.com/search?q=jardin+cristel` (`target="_blank" rel="noopener noreferrer"`, `click_resenas_google`, `link_location: resenas`, ver `docs/medicion.md`). **Sin datos estructurados** (decisiones #12–#15 de `propuesta.md`).
+
+**Marcado:** `<section aria-labelledby>` con `<h2>`; cada reseña en `<figure>` con `<blockquote><p>` y `<figcaption>`; estrellas en un SVG decorativo (`aria-hidden`) más el texto accesible «5 de 5 estrellas» (`.sr-only`).
+
+**Tokens nuevos (`:root`):**
+
+| Token | Valor | Uso | Contraste |
+|---|---|---|---|
+| `--lavanda-50` | `#f5eff5` | fondo de la sección | texto `pizarra-900` 8.48:1 |
+| `--avatar-fondo` | `#e9dcea` | círculo del avatar | — |
+| `--avatar-icono` | `var(--lavanda-800)` (#6c426c) | icono del avatar | 6.03:1 sobre el círculo (≥ 3:1 exigido a un gráfico) |
+| `--estrella` | `var(--malva-500)` | estrellas | 5.50:1 sobre marfil-50 |
+
+**Avatar:** `img/resenas/person-fill.svg` aplicado como máscara CSS (`mask`) sobre un `::after` con `background-color: var(--avatar-icono)`: se recolorea con el token sin duplicar el SVG en el HTML. **Licencia:** es el icono `person-fill` de Bootstrap Icons (clase `bi bi-person-fill` en el archivo), **MIT, © The Bootstrap Authors**; se comprobó que el archivo es idéntico al de `github.com/twbs/icons` y la licencia está en `img/resenas/LICENSE-bootstrap-icons.txt`.
+
+**Layout:** móvil, tarjetas apiladas y centradas (máx. 28 rem); desde 48 em, dos columnas (máx. 56 rem). Sin carrusel ni JS (salvo el seguimiento del clic); `text-wrap: pretty` en el texto y `balance` en el autor.
+
+**Acuarelas (composición propia, ver también §9 y §11.1):** Incluye usa arriba-izquierda + abajo-derecha, Eventos las cuatro esquinas, Galería arriba a ambos lados. Reseñas usa la **diagonal opuesta** (arriba-derecha + abajo-izquierda) con **racimos de los lienzos móviles que ninguna otra sección usa**, y volteados en horizontal en el propio recurso (`flop` en `tools/optimizar-adornos.cjs`, así los bordes planos del lienzo quedan contra el borde de la ventana):
+
+| Pieza | Origen | Posición | Ancho móvil · tablet · escritorio |
+|---|---|---|---|
+| `resenas-sup-der` | `bg-gallery-top-mobile` (anémona violeta y ramitas), volteada | arriba-derecha | 5 · 7 · 9.4 rem |
+| `resenas-inf-izq` | `bg-gallery-bottom-mobile` (esquina de follaje, flores azules y blancas), volteada | abajo-izquierda | 9 · 13 · 23.75 rem |
+
+`aria-hidden`, `alt=""`, `pointer-events: none`, `overflow: clip` en la sección, `loading="lazy"`. `padding-bottom` de 8 / 9 / 11 rem para que la pieza inferior quede en el relleno, bajo el botón (que es transparente). **Peso:** 8.3 + 14.5 KB AVIF = **22.8 KB (≈ 22 KiB)** en móvil y escritorio (tope 60 KiB). **Contraste medido con píxeles reales** (mismo método de §11.1): mínimo en Reseñas 5.81:1; en todo el sitio ≥ 4.99:1 a 360, 390, 412, 768 y 1280.
+
+### 12.3 Menú
+
+«Reseñas» entra al menú de escritorio y tablet entre Galería y Ubicación, y al índice del pie. En móvil la barra sigue siendo Eventos · Galería · **Cotizar** · Cómo llegar · Más; «Reseñas» se alcanza desde «Más» (→ Contacto, cuyo pie lista todas las secciones). Con ocho enlaces el menú de tablet desbordaba 8 px a 768 px, así que el relleno lateral de cada enlace en tablet baja de 0.55 a 0.4 rem (una fila de 768 a 1440; el escritorio con mouse no cambia).
+
