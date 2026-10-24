@@ -283,8 +283,8 @@ section > picture { display: contents; }
   .menu { display: block; margin-left: auto; }
   .menu__lista { display: flex; align-items: center; gap: .1rem; }
   .menu__inicio { display: none; }                                 /* en tablet el logo ya lleva a Inicio; el menú completo cabe desde 75em */
-  .menu__enlace { position: relative; display: inline-flex; align-items: center; min-height: 2.75rem; padding: .5rem .55rem; color: inherit; font: 700 .8rem/1.2 var(--f-texto); text-decoration: none; white-space: nowrap; }
-  .menu__enlace[aria-current="true"]::after { content: ""; position: absolute; bottom: 2px; left: .55rem; right: .55rem; height: 2px; background: var(--marfil-50); }
+  .menu__enlace { position: relative; display: inline-flex; align-items: center; min-height: 2.75rem; padding: .5rem .4rem; color: inherit; font: 700 .8rem/1.2 var(--f-texto); text-decoration: none; white-space: nowrap; }
+  .menu__enlace[aria-current="true"]::after { content: ""; position: absolute; bottom: 2px; left: .4rem; right: .4rem; height: 2px; background: var(--marfil-50); }
   .menu__cta { margin-left: .5rem; }
   .top__cotizar { min-height: 2.75rem; padding: .45rem 1.1rem; border-color: var(--marfil-50); font-size: .85rem; white-space: nowrap; }
 
