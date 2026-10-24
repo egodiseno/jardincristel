@@ -26,6 +26,7 @@
   --f-texto: "Merriweather", Georgia, "Times New Roman", serif;
   --gutter: 1.25rem;
   --alto-header: 3.5rem;
+  --aire-boton: 3rem;                     /* móvil: espacio igual sobre y bajo los botones finales de Nosotros y Qué incluye */
   --alto-barra: 3.5rem;                   /* altura real de la barra inferior móvil (medida 56 px) */
 }
 
@@ -223,7 +224,11 @@ section > picture { display: contents; }
   .eventos .adorno--eventos-sup-izq { display: block; top: 0; left: 0; width: 5rem; }
   .eventos .adorno--eventos-sup-der { width: 6.5rem; }
   .eventos .adorno--eventos-inf-izq { width: 12rem; }
-  .nosotros { padding-bottom: 7rem; }
+  /* Botones finales centrados verticalmente: mismo espacio (--aire-boton) entre el contenido anterior y el botón, y entre el botón y el fin de la sección */
+  .nosotros { padding-bottom: var(--aire-boton); }
+  .nosotros__remate + p { margin-top: calc(var(--aire-boton) - 1rem); }   /* el grid ya aporta 1 rem de gap */
+  .incluye { padding-bottom: var(--aire-boton); }
+  .incluye__cta { margin-top: var(--aire-boton); }
   .nosotros .adorno--nosotros-izq { display: block; left: 0; bottom: 0; width: 7rem; }
   .incluye .adorno--incluye-izq { display: block; left: 0; bottom: 0; width: 5.5rem; }
   #galeria .adorno--galeria-der { display: block; right: 0; top: 0; width: 5rem; }
